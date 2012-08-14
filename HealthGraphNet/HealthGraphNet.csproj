@@ -39,7 +39,10 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Client\HealthGraphClient.cs" />
+    <Compile Include="Exceptions\HealthGraphException.cs" />
+    <Compile Include="Models\AccessTokenModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

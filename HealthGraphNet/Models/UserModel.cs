@@ -5,7 +5,7 @@ using System.Text;
 
 namespace HealthGraphNet.Models
 {
-    public class User
+    public class UserModel
     {
         public string StrengthTrainingActivities { get; set; }
         public string Weight { get; set; }
