@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Client\HealthGraphClient.cs" />
     <Compile Include="Exceptions\HealthGraphException.cs" />
+    <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Models\AccessTokenModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
