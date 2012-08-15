@@ -2,7 +2,7 @@
 using RestSharp;
 using System.Net;
 
-namespace HealthGraphNet.Exceptions
+namespace HealthGraphNet
 {
     public class HealthGraphException : Exception
     {

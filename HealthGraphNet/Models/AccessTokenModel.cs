@@ -8,5 +8,6 @@ namespace HealthGraphNet.Models
     public class AccessTokenModel
     {
         public string AccessToken { get; set; }
+        public string TokenType { get; set; }
     }
 }

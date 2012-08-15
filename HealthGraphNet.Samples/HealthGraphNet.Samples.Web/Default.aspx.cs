@@ -59,19 +59,19 @@ namespace HealthGraphNet.Samples.Web
 		/// <value>
 		/// The access token.
 		/// </value>
-		public string AssignedAccessToken
+		public AccessTokenModel Token
 		{
 			get
 			{
-				return Session["AccessToken"] as string;
+                return Session["Token"] as AccessTokenModel;
 			}
 			set
 			{
-				Session["AccessToken"] = value;
+				Session["Token"] = value;
 			}
 		}
 
-        protected HealthGraphClient HealthGraph { get; set; }
+        protected AccessTokenManager TokenManager { get; set; }
 
         #endregion
 
@@ -82,23 +82,22 @@ namespace HealthGraphNet.Samples.Web
 			//Setup the auth url
 			string authUrl = "https://runkeeper.com/apps/authorize?client_id=" + ClientId + "&redirect_uri=" + HttpUtility.UrlEncode(RequestUri) + "&response_type=code";
 			AAuthAnchor.HRef = authUrl;
-			AAuthAnchor.InnerText = "HealthGraph Authorization Endpoint";
 
 			//Initialize the healthgraph api - get a token or use an existing one saved to session
-			HealthGraph = new HealthGraphClient(ClientId, ClientSecret, RequestUri);
+			TokenManager = new AccessTokenManager(ClientId, ClientSecret, RequestUri);
 			if (string.IsNullOrEmpty(Code) == false)
             {
 				//If we set the code in the url string, get a new access token and save it to the session       
-                HealthGraph.InitAccessToken(Code);
-				AssignedAccessToken = HealthGraph.Token.AccessToken;
+                TokenManager.InitAccessToken(Code);
+				Token = TokenManager.Token;
             }
-			else if (string.IsNullOrEmpty(AssignedAccessToken) == false)
+			else if (Token != null)
 			{
 				//Otherwise, if the access code saved in session is present we'll attempt to use that
-				HealthGraph.Token = new AccessTokenModel { AccessToken = AssignedAccessToken };
+                TokenManager.Token = Token;
 			}
 
-			if (string.IsNullOrEmpty(AssignedAccessToken) == false)
+			if (Token != null)
 			{
 				DisplayHealthGraphSamples();
 			}
@@ -111,7 +110,25 @@ namespace HealthGraphNet.Samples.Web
 		protected void DisplayHealthGraphSamples()
 		{
 			PnlTokenSamples.Visible = true;
-			LblAccessToken.Text = AssignedAccessToken;
+            LblAccessToken.Text = Token.AccessToken;
+            LblAccessType.Text = Token.TokenType;
+
+            //User Uri example
+            var users = new Users(TokenManager);
+            var user = users.GetUser();
+            LblUserId.Text = user.UserID;
+            LblUserStrengthTrainingActivities.Text = user.StrengthTrainingActivities;
+            LblUserWeight.Text = user.Weight;
+            LblUserSettings.Text = user.Settings;
+            LblUserDiabetes.Text = user.Diabetes;
+            LblUserTeam.Text = user.Team;
+            LblUserSleep.Text = user.Sleep;
+            LblUserFitnessActivities.Text = user.FitnessActivities;
+            LblUserNutrition.Text = user.Nutrition;
+            LblUserGeneralMeasurements.Text = user.GeneralMeasurements;
+            LblUserBackgroundActivities.Text = user.BackgroundActivities;
+            LblUserRecords.Text = user.Records;
+            LblUserProfile.Text = user.Profile;
 		}
 
 		#endregion

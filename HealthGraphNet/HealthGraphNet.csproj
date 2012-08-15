@@ -39,12 +39,15 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client\HealthGraphClient.cs" />
-    <Compile Include="Exceptions\HealthGraphException.cs" />
-    <Compile Include="Extensions\StringExtension.cs" />
+    <Compile Include="RestSharp\OAuth2Authenticator.cs" />
+    <Compile Include="ServiceWrappers\AccessTokenManager.cs" />
+    <Compile Include="HealthGraphException.cs" />
     <Compile Include="Models\AccessTokenModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceWrappers\AccessTokenManagerBase.cs" />
+    <Compile Include="ServiceWrappers\IUsers.cs" />
+    <Compile Include="ServiceWrappers\Users.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
