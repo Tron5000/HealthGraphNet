@@ -114,8 +114,8 @@ namespace HealthGraphNet.Samples.Web
             LblAccessType.Text = Token.TokenType;
 
             //User Uri example
-            var users = new Users(TokenManager);
-            var user = users.GetUser();
+            var userWrapper = new Users(TokenManager);
+            var user = userWrapper.GetUser();
             LblUserId.Text = user.UserID;
             LblUserStrengthTrainingActivities.Text = user.StrengthTrainingActivities;
             LblUserWeight.Text = user.Weight;
@@ -129,7 +129,22 @@ namespace HealthGraphNet.Samples.Web
             LblUserBackgroundActivities.Text = user.BackgroundActivities;
             LblUserRecords.Text = user.Records;
             LblUserProfile.Text = user.Profile;
-		}
+
+            //User profile
+            var profileWrapper = new Profile(TokenManager, user);
+            var profile = profileWrapper.GetProfile();
+            LblProfileName.Text = !string.IsNullOrEmpty(profile.Name) ? profile.Name : "N/A";
+            LblProfileLocation.Text = !string.IsNullOrEmpty(profile.Location) ? profile.Location : "N/A";
+            LblProfileAthleteType.Text = !string.IsNullOrEmpty(profile.AthleteType) ? profile.AthleteType : "N/A";
+            LblProfileGender.Text = !string.IsNullOrEmpty(profile.Gender) ? profile.Gender : "N/A";
+            LblProfileBirthday.Text = profile.Birthday.HasValue ? profile.Birthday.Value.ToShortDateString() : "N/A";
+            LblProfileElite.Text = profile.Elite.ToString();
+            LblProfileProfile.Text = profile.Profile;
+            LblProfileSmallPicture.Text = !string.IsNullOrEmpty(profile.SmallPicture) ? profile.SmallPicture : "N/A";
+            LblProfileNormalPicture.Text = !string.IsNullOrEmpty(profile.NormalPicture) ? profile.NormalPicture : "N/A";
+            LblProfileMediumPicture.Text = !string.IsNullOrEmpty(profile.MediumPicture) ? profile.MediumPicture : "N/A";
+            LblProfileLargePicture.Text = !string.IsNullOrEmpty(profile.LargePicture) ? profile.LargePicture : "N/A";
+        }
 
 		#endregion
     }

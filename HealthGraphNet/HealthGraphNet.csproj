@@ -39,6 +39,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\ProfileModel.cs" />
     <Compile Include="RestSharp\OAuth2Authenticator.cs" />
     <Compile Include="ServiceWrappers\AccessTokenManager.cs" />
     <Compile Include="HealthGraphException.cs" />
@@ -46,7 +47,9 @@
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceWrappers\AccessTokenManagerBase.cs" />
+    <Compile Include="ServiceWrappers\IProfile.cs" />
     <Compile Include="ServiceWrappers\IUsers.cs" />
+    <Compile Include="ServiceWrappers\Profile.cs" />
     <Compile Include="ServiceWrappers\Users.cs" />
   </ItemGroup>
   <ItemGroup />

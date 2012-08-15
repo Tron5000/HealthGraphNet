@@ -27,6 +27,20 @@
             <li>Background Activities: <asp:Label ID="LblUserBackgroundActivities" runat="server" /></li>
             <li>Records: <asp:Label ID="LblUserRecords" runat="server" /></li>
             <li>Profile: <asp:Label ID="LblUserProfile" runat="server" /></li>        
+        </ul><br />
+        Profile =><ul>
+            <li>Name: <asp:Label ID="LblProfileName" runat="server"></asp:Label></li>              
+            <li>Location: <asp:Label ID="LblProfileLocation" runat="server"></asp:Label></li>              
+            <li>Athlete Type: <asp:Label ID="LblProfileAthleteType" runat="server"></asp:Label></li>              
+            <li>Gender: <asp:Label ID="LblProfileGender" runat="server"></asp:Label></li>  
+            <li>Birthday: <asp:Label ID="LblProfileBirthday" runat="server"></asp:Label></li>                                      
+            <li>Elite: <asp:Label ID="LblProfileElite" runat="server"></asp:Label></li>              
+            <li>Profile Url: <asp:Label ID="LblProfileProfile" runat="server"></asp:Label></li>              
+            <li>Small Picture: <asp:Label ID="LblProfileSmallPicture" runat="server"></asp:Label></li>              
+            <li>Normal Picture: <asp:Label ID="LblProfileNormalPicture" runat="server"></asp:Label></li>              
+            <li>Medium Picture: <asp:Label ID="LblProfileMediumPicture" runat="server"></asp:Label></li>              
+            <li>Large Picture: <asp:Label ID="LblProfileLargePicture" runat="server"></asp:Label></li>                                  
         </ul>
+        <br />
     </asp:Panel>
 </asp:Content>
