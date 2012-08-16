@@ -42,6 +42,19 @@ namespace HealthGraphNet
             _tokenManager.ExecuteAsync<ProfileModel>(request, success, failure);
         }
 
+		public ProfileModel UpdateProfile(ProfileModel profileToUpdate)
+		{
+			var request = new RestRequest(Method.PUT);
+			request.Resource = _user.Profile;
+			request.AddParameter("athlete_type", profileToUpdate.AthleteType);
+			return _tokenManager.Execute<ProfileModel>(request);
+		}
+
+		public void UpdateProfileAsync(Action<ProfileModel> success, Action<HealthGraphException> failure, ProfileModel profileToUpdate)
+		{
+
+		}
+
         #endregion
     }
 }

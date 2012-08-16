@@ -144,6 +144,9 @@ namespace HealthGraphNet.Samples.Web
             LblProfileNormalPicture.Text = !string.IsNullOrEmpty(profile.NormalPicture) ? profile.NormalPicture : "N/A";
             LblProfileMediumPicture.Text = !string.IsNullOrEmpty(profile.MediumPicture) ? profile.MediumPicture : "N/A";
             LblProfileLargePicture.Text = !string.IsNullOrEmpty(profile.LargePicture) ? profile.LargePicture : "N/A";
+
+			//profile.AthleteType = "Hiker";
+			//profile = profileWrapper.UpdateProfile(profile);
         }
 
 		#endregion
