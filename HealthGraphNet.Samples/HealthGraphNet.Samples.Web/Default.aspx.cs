@@ -130,9 +130,13 @@ namespace HealthGraphNet.Samples.Web
             LblUserRecords.Text = user.Records;
             LblUserProfile.Text = user.Profile;
 
-            //User profile
+            //Get user profile
             var profileWrapper = new Profile(TokenManager, user);
             var profile = profileWrapper.GetProfile();
+            //Optionally change and update it here
+            profile.AthleteType = "Hiker";
+            profile = profileWrapper.UpdateProfile(profile);
+            //Display user profile
             LblProfileName.Text = !string.IsNullOrEmpty(profile.Name) ? profile.Name : "N/A";
             LblProfileLocation.Text = !string.IsNullOrEmpty(profile.Location) ? profile.Location : "N/A";
             LblProfileAthleteType.Text = !string.IsNullOrEmpty(profile.AthleteType) ? profile.AthleteType : "N/A";
@@ -144,9 +148,6 @@ namespace HealthGraphNet.Samples.Web
             LblProfileNormalPicture.Text = !string.IsNullOrEmpty(profile.NormalPicture) ? profile.NormalPicture : "N/A";
             LblProfileMediumPicture.Text = !string.IsNullOrEmpty(profile.MediumPicture) ? profile.MediumPicture : "N/A";
             LblProfileLargePicture.Text = !string.IsNullOrEmpty(profile.LargePicture) ? profile.LargePicture : "N/A";
-
-			//profile.AthleteType = "Hiker";
-			//profile = profileWrapper.UpdateProfile(profile);
         }
 
 		#endregion

@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthGraphNet.Samples.Web", "HealthGraphNet.Samples.Web\HealthGraphNet.Samples.Web.csproj", "{D31E5060-D70B-4170-86C5-6C253AAB6261}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthGraphNet", "..\HealthGraphNet\HealthGraphNet.csproj", "{95267C4F-E409-4D06-9988-1C8C3CA5C0B5}"
