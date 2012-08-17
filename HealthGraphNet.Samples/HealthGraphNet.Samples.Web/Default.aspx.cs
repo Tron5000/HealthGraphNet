@@ -114,8 +114,8 @@ namespace HealthGraphNet.Samples.Web
             LblAccessType.Text = Token.TokenType;
 
             //User Uri example
-            var userWrapper = new Users(TokenManager);
-            var user = userWrapper.GetUser();
+            var userRequest = new UsersEndpoint(TokenManager);
+            var user = userRequest.GetUser();
             LblUserId.Text = user.UserID;
             LblUserStrengthTrainingActivities.Text = user.StrengthTrainingActivities;
             LblUserWeight.Text = user.Weight;
@@ -131,11 +131,11 @@ namespace HealthGraphNet.Samples.Web
             LblUserProfile.Text = user.Profile;
 
             //Get user profile
-            var profileWrapper = new Profile(TokenManager, user);
-            var profile = profileWrapper.GetProfile();
+            var profileRequest = new ProfileEndpoint(TokenManager, user);
+            var profile = profileRequest.GetProfile();
             //Optionally change and update it here
-            profile.AthleteType = "Hiker";
-            profile = profileWrapper.UpdateProfile(profile);
+            profile.AthleteType = "Runner";
+            profile = profileRequest.UpdateProfile("Runner");
             //Display user profile
             LblProfileName.Text = !string.IsNullOrEmpty(profile.Name) ? profile.Name : "N/A";
             LblProfileLocation.Text = !string.IsNullOrEmpty(profile.Location) ? profile.Location : "N/A";

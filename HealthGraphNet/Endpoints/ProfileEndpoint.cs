@@ -9,9 +9,9 @@ using HealthGraphNet.Models;
 namespace HealthGraphNet
 {
     /// <summary>
-    /// Wrapper for retrieving and updating a user's profile. http://runkeeper.com/developer/healthgraph/profile
+    /// Endpoint for retrieving and updating a user's profile. http://runkeeper.com/developer/healthgraph/profile
     /// </summary>
-    public class Profile : IProfile
+    public class ProfileEndpoint : IProfileEndpoint
     {
         #region Fields and Properties
 
@@ -24,7 +24,7 @@ namespace HealthGraphNet
         
         #region Constructors
 
-        public Profile(AccessTokenManagerBase tokenManager, UserModel user)
+        public ProfileEndpoint(AccessTokenManagerBase tokenManager, UserModel user)
         {
             _tokenManager = tokenManager;
             _user = user;
@@ -32,7 +32,7 @@ namespace HealthGraphNet
 
         #endregion        
         
-        #region IProfile
+        #region IProfileEndpoint
 
         public ProfileModel GetProfile()
         {
@@ -54,11 +54,21 @@ namespace HealthGraphNet
             return _tokenManager.Execute<ProfileModel>(request);
 		}
 
+        public ProfileModel UpdateProfile(string athleteType)
+        {
+            return UpdateProfile(new ProfileModel { AthleteType = athleteType });
+        }
+
 		public void UpdateProfileAsync(Action<ProfileModel> success, Action<HealthGraphException> failure, ProfileModel profileToUpdate)
 		{
             var request = PrepareUpdateRequest(profileToUpdate);
             _tokenManager.ExecuteAsync<ProfileModel>(request, success, failure);
 		}
+
+        public void UpdateProfileAsync(Action<ProfileModel> success, Action<HealthGraphException> failure, string athleteType)
+        {
+            UpdateProfileAsync(success, failure, new ProfileModel { AthleteType = athleteType });
+        }
 
         #endregion
 

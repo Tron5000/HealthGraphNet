@@ -5,27 +5,27 @@ using HealthGraphNet.Models;
 namespace HealthGraphNet
 {
     /// <summary>
-    /// Wrapper for retrieving the Uri's associated with a user.  http://developer.runkeeper.com/healthgraph/users  
+    /// Endpoint for retrieving the Uri's associated with a user.  http://developer.runkeeper.com/healthgraph/users  
     /// </summary>
-    public class Users : IUsers
+    public class UsersEndpoint : IUsersEndpoint
     {
         #region Fields and Properties
 
-        private AccessTokenManagerBase _tokenManager;
         private const string UriResource = "user"; 
+        private AccessTokenManagerBase _tokenManager;
 
         #endregion
 
         #region Constructors
 
-        public Users(AccessTokenManagerBase tokenManager)
+        public UsersEndpoint(AccessTokenManagerBase tokenManager)
         {
             _tokenManager = tokenManager;
         }
 
         #endregion
 
-        #region IUsers
+        #region IUsersEndpoint
 
         public UserModel GetUser()
         {

@@ -41,16 +41,16 @@
   <ItemGroup>
     <Compile Include="Models\ProfileModel.cs" />
     <Compile Include="RestSharp\OAuth2Authenticator.cs" />
-    <Compile Include="ServiceWrappers\AccessTokenManager.cs" />
+    <Compile Include="AccessTokenManager.cs" />
     <Compile Include="HealthGraphException.cs" />
     <Compile Include="Models\AccessTokenModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceWrappers\AccessTokenManagerBase.cs" />
-    <Compile Include="ServiceWrappers\IProfile.cs" />
-    <Compile Include="ServiceWrappers\IUsers.cs" />
-    <Compile Include="ServiceWrappers\Profile.cs" />
-    <Compile Include="ServiceWrappers\Users.cs" />
+    <Compile Include="AccessTokenManagerBase.cs" />
+    <Compile Include="Endpoints\IProfileEndpoint.cs" />
+    <Compile Include="Endpoints\IUsersEndpoint.cs" />
+    <Compile Include="Endpoints\ProfileEndpoint.cs" />
+    <Compile Include="Endpoints\UsersEndpoint.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

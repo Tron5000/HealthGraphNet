@@ -1,23 +1,37 @@
-## HealthGraphNet - .NET Client Library for the Runkeeper HealthGraph API
+## HealthGraphNet :: A .NET Client Library for the Runkeeper HealthGraph API
 
 ##### Getting Started:
-First, register your application with the HealthGraph API (http://developer.runkeeper.com/healthgraph/getting-started). This will assign you a ClientId & ClientSecret.  Hold onto these values along with the RequestUri you specified during the registration process.  Next, obtain an auth code from the authorization endpoint.  Using this code, the AccessTokenManager will be used to initialize an OAuth2 access token as follows. 
+First, register your application with the HealthGraph API (http://developer.runkeeper.com/healthgraph/getting-started). This will assign you a ClientId & ClientSecret.  Hold onto these values along with the RequestUri you specified during the registration process.  Next, obtain an auth code from the authorization endpoint.  Using this code, the AccessTokenManager will be used to initialize an OAuth2 access token as follows: 
 
 ```csharp
     var tokenManager = new AccessTokenManager(CLIENT_ID, CLIENT_SECRET, REQUEST_URI);
 	tokenManager.InitAccessToken(AUTH_CODE);
 ```
 
-Then, make a call to the Users endpoint to retrieve all available endpoints.
+Then, make a call to the UsersEndpoint to retrieve the endpoints available to the user.
 
 ```csharp
-	var userWrapper = new Users(TokenManager);
-    var user = userWrapper.GetUser();
+	var userRequest = new UsersEndpoint(TokenManager);
+    var user = userRequest.GetUser();
 ```
 
-Now, the available service endpoints may be called as needed.  Here is an example of how to retrieve profile data.
+Now, the endpoints may be called as needed.  Here is an example of how to retrieve profile data.
 
 ```csharp
-	var profileWrapper = new Profile(TokenManager, user);
-    var profile = profileWrapper.GetProfile();
+	var profileRequest = new ProfileEndpoint(TokenManager, user);
+    var profile = profileRequest.GetProfile();
+```
+
+Every endpoint request is synchronous and has a corresponding asynchronous method.  To make the above retrieval of profile data an asynchronous call, we'd change the code to the following:
+
+```csharp
+	var profileRequest = new ProfileEndpoint(TokenManager, user);
+    profileRequest.GetProfileAsync((prof) =>
+	{
+		//ProfileModel was successfully retrieved as prof.
+	}, 
+	(ex) =>
+	{
+		//An exception happened while trying to retrieve the ProfileModel.
+	});
 ```

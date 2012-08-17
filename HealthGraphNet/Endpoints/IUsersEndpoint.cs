@@ -3,7 +3,7 @@ using HealthGraphNet.Models;
 
 namespace HealthGraphNet
 {
-    public interface IUsers
+    public interface IUsersEndpoint
     {
         UserModel GetUser();
         void GetUserAsync(Action<UserModel> success, Action<HealthGraphException> failure);

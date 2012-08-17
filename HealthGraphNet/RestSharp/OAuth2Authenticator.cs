@@ -8,7 +8,7 @@ namespace HealthGraphNet.RestSharp
     /// Used as a replacement for OAuth2AuthorizationRequestHeaderAuthenticator (https://github.com/restsharp/RestSharp/blob/master/RestSharp/Authenticators/OAuth2Authenticator.cs).
     /// Because HealthGraph uses the tokenType instead of the literal "OAuth" as the first part of the _authorizationValue.
     /// </summary>
-    public class OAuth2RequestHeaderAuthenticator : OAuth2Authenticator
+    internal class OAuth2RequestHeaderAuthenticator : OAuth2Authenticator
     {
         /// <summary>
         /// Stores the Authoriztion header value as "OAuth accessToken". used for performance.

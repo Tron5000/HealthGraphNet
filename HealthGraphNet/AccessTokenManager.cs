@@ -8,7 +8,6 @@ namespace HealthGraphNet
 {
     /// <summary>
     /// AccessTokenManager handles creation and management of the OAuth access token.
-    /// Inspiration for this convention of wrapping a rest-based API gleaned from the DropNet project: https://github.com/dkarzon/DropNet
     /// </summary>
     public class AccessTokenManager : AccessTokenManagerBase
     {

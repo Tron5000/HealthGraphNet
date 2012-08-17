@@ -8,7 +8,7 @@ using HealthGraphNet.RestSharp;
 namespace HealthGraphNet
 {
     /// <summary>
-    /// Passed to each service wrapper class to provide token management.  Used an abstract class instead of an interface
+    /// Passed to each service endpoint class to provide token management.  Used an abstract class instead of an interface
     /// to be able to mix internal and public method signatures (we want to expose the AccessToken to the consumer of this library, 
     /// but hide the IRequest, RestClient and other low level restsharp requests associated with the token.  Because it's an abstract class 
     /// it can still be mocked or stubbed rather easily for testing purposes.
