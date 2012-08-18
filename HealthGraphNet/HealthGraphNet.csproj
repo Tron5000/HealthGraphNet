@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\ProfileModel.cs" />
+    <Compile Include="Models\SettingsModel.cs" />
     <Compile Include="RestSharp\OAuth2Authenticator.cs" />
     <Compile Include="AccessTokenManager.cs" />
     <Compile Include="HealthGraphException.cs" />
