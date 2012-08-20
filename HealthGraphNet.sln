@@ -1,7 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthGraphNet", "HealthGraphNet\HealthGraphNet.csproj", "{95267C4F-E409-4D06-9988-1C8C3CA5C0B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthGraphNet.Tests", "HealthGraphNet.Tests\HealthGraphNet.Tests.csproj", "{DE67C16F-DD10-4044-9966-E392A12EEBDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +15,10 @@ Global
 		{95267C4F-E409-4D06-9988-1C8C3CA5C0B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95267C4F-E409-4D06-9988-1C8C3CA5C0B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95267C4F-E409-4D06-9988-1C8C3CA5C0B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE67C16F-DD10-4044-9966-E392A12EEBDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE67C16F-DD10-4044-9966-E392A12EEBDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE67C16F-DD10-4044-9966-E392A12EEBDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE67C16F-DD10-4044-9966-E392A12EEBDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

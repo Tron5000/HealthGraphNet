@@ -16,7 +16,7 @@ namespace HealthGraphNet
         #region Fields and Properties
 
         private const string ContentType = "application/vnd.com.runkeeper.Profile+json";
-        private readonly List<string> ValidAthleteType = new List<string> { "Athlete", "Runner", "Marathoner", "Ultra Marathoner", "Cyclist", "Tri-Athlete, Walker", "Hiker", "Skier", "Snowboarder", "Skater", "Swimmer", "Rower" };
+        public readonly List<string> ValidAthleteType = new List<string> { "Athlete", "Runner", "Marathoner", "Ultra Marathoner", "Cyclist", "Tri-Athlete, Walker", "Hiker", "Skier", "Snowboarder", "Skater", "Swimmer", "Rower" };
         private AccessTokenManagerBase _tokenManager;
         private UserModel _user;
 

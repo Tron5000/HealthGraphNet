@@ -55,7 +55,7 @@ namespace HealthGraphNet
         /// <param name="request"></param>
         /// <param name="baseUrl"></param>
         /// <returns></returns>
-        internal T Execute<T>(IRestRequest request, string baseUrl = null) where T : new()
+        internal virtual T Execute<T>(IRestRequest request, string baseUrl = null) where T : new()
         {
             if (string.IsNullOrEmpty(baseUrl) == false)
             {
@@ -83,7 +83,7 @@ namespace HealthGraphNet
         /// <param name="success"></param>
         /// <param name="failure"></param>
         /// <param name="baseUrl"></param>
-        internal void ExecuteAsync<T>(IRestRequest request, Action<T> success, Action<HealthGraphException> failure, string baseUrl = null) where T : new()
+        internal virtual void ExecuteAsync<T>(IRestRequest request, Action<T> success, Action<HealthGraphException> failure, string baseUrl = null) where T : new()
         {
             #if MONOTOUCH
             //check for network connection
