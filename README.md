@@ -15,7 +15,7 @@ Then, make a call to the UsersEndpoint to retrieve the endpoints available to th
     var user = userRequest.GetUser();
 ```
 
-Now, the endpoints may be called as needed.  Here is an example of how to retrieve profile data.
+Now the endpoints may be called as needed.  Here is an example of how to retrieve profile data.
 
 ```csharp
 	var profileRequest = new ProfileEndpoint(TokenManager, user);
