@@ -10,7 +10,7 @@ namespace HealthGraphNet.Models
         public bool FacebookConnected { get; internal set; }
         public bool TwitterConnected { get; internal set; }
         public bool FoursquareConnected { get; internal set; }
-        public bool ShareFitnessActivities { get; set; }
+        public string ShareFitnessActivities { get; set; }
         public string ShareMap { get; set; }
         public bool PostFitnessActivityFacebook { get; set; }
         public bool PostFitnessActivityTwitter { get; set; }

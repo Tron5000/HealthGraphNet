@@ -39,6 +39,8 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Endpoints\ISettingsEndpoint.cs" />
+    <Compile Include="Endpoints\SettingsEndpoint.cs" />
     <Compile Include="Models\ProfileModel.cs" />
     <Compile Include="Models\SettingsModel.cs" />
     <Compile Include="RestSharp\OAuth2RequestHeaderAuthenticator.cs" />
@@ -52,6 +54,7 @@
     <Compile Include="Endpoints\IUsersEndpoint.cs" />
     <Compile Include="Endpoints\ProfileEndpoint.cs" />
     <Compile Include="Endpoints\UsersEndpoint.cs" />
+    <Compile Include="RestSharp\Validate.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

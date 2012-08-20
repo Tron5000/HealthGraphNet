@@ -31,7 +31,7 @@ namespace HealthGraphNet.Tests.Unit
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             ProfileEndpoint profileRequest = new ProfileEndpoint(tokenManager.Object, new UserModel());
             //Act and Assert
-            Assert.DoesNotThrow(() => { profileRequest.UpdateProfile(profileRequest.ValidAthleteType.First()); });
+            Assert.DoesNotThrow(() => { profileRequest.UpdateProfile(ProfileEndpoint.ValidAthleteType.First()); });
         }
 
         #endregion

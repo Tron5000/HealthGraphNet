@@ -134,8 +134,8 @@ namespace HealthGraphNet.Samples.Web
             var profileRequest = new ProfileEndpoint(TokenManager, user);
             var profile = profileRequest.GetProfile();
             //Optionally change and update it here
-            profile.AthleteType = "Runner";
-            profile = profileRequest.UpdateProfile("Runner");
+            profile.AthleteType = "Hiker";
+            profile = profileRequest.UpdateProfile(profile);
             //Display user profile
             LblProfileName.Text = !string.IsNullOrEmpty(profile.Name) ? profile.Name : "N/A";
             LblProfileLocation.Text = !string.IsNullOrEmpty(profile.Location) ? profile.Location : "N/A";
@@ -148,6 +148,12 @@ namespace HealthGraphNet.Samples.Web
             LblProfileNormalPicture.Text = !string.IsNullOrEmpty(profile.NormalPicture) ? profile.NormalPicture : "N/A";
             LblProfileMediumPicture.Text = !string.IsNullOrEmpty(profile.MediumPicture) ? profile.MediumPicture : "N/A";
             LblProfileLargePicture.Text = !string.IsNullOrEmpty(profile.LargePicture) ? profile.LargePicture : "N/A";
+
+            //var settingsRequest = new SettingsEndpoint(TokenManager, user);
+            //var settings = settingsRequest.GetSettings();
+            //settings.FirstDayOfWeek = "Monday";
+            //settings = settingsRequest.UpdateSettings(settings);
+            //var test = 5;
         }
 
 		#endregion

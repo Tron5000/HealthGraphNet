@@ -2,9 +2,9 @@
 using System.Dynamic;
 using System.Collections.Generic;
 using RestSharp;
-using RestSharp.Validation;
 using RestSharp.Serializers;
 using HealthGraphNet.Models;
+using HealthGraphNet.RestSharp;
 
 namespace HealthGraphNet
 {
@@ -16,7 +16,8 @@ namespace HealthGraphNet
         #region Fields and Properties
 
         private const string ContentType = "application/vnd.com.runkeeper.Profile+json";
-        public readonly List<string> ValidAthleteType = new List<string> { "Athlete", "Runner", "Marathoner", "Ultra Marathoner", "Cyclist", "Tri-Athlete, Walker", "Hiker", "Skier", "Snowboarder", "Skater", "Swimmer", "Rower" };
+        public static readonly List<string> ValidAthleteType = new List<string> { "Athlete", "Runner", "Marathoner", "Ultra Marathoner", "Cyclist", "Tri-Athlete, Walker", "Hiker", "Skier", "Snowboarder", "Skater", "Swimmer", "Rower" };
+        
         private AccessTokenManagerBase _tokenManager;
         private UserModel _user;
 
@@ -83,23 +84,7 @@ namespace HealthGraphNet
         {
             var request = new RestRequest(Method.PUT);
             request.Resource = _user.Profile;
-
-            //Validate AthleteType
-            if (ValidAthleteType.Contains(profileToUpdate.AthleteType) == false)
-            {
-                string exMsg = "The AthleteType is not valid. Valid values are as follows: ";
-                bool first = true;
-                foreach (var validAthleteType in ValidAthleteType)
-                {
-                    if (!first)
-                    {
-                        exMsg += ", ";
-                    }
-                    exMsg += "\"" + validAthleteType + "\"";
-                    first = false;
-                }
-                throw new ArgumentException(exMsg);
-            }
+            Validate.IsValueValid<string>(profileToUpdate.AthleteType, ValidAthleteType, "AthleteType");
             request.AddParameter(ContentType, new { athlete_type = profileToUpdate.AthleteType }, ParameterType.RequestBody);          
             return request;
         }

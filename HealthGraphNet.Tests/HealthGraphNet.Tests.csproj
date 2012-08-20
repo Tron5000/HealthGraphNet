@@ -66,6 +66,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Unit\AccessTokenManagerBaseStub.cs" />
     <Compile Include="Unit\Endpoints\ProfileEndpointTest.cs" />
+    <Compile Include="Unit\Endpoints\SettingsEndpointTest.cs" />
     <Compile Include="Unit\RestSharp\OAuth2RequestHeaderAuthenticatorTest.cs" />
   </ItemGroup>
   <ItemGroup>
