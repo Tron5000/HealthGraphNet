@@ -1,4 +1,4 @@
-## HealthGraphNet :: A .NET Client Library for the Runkeeper HealthGraph API
+## HealthGraphNet :: A .NET Library for the Runkeeper HealthGraph API
 
 ##### Getting Started:
 First, register your application with the HealthGraph API (http://developer.runkeeper.com/healthgraph/getting-started). This will assign you a ClientId & ClientSecret.  Hold onto these values along with the RequestUri you specified during the registration process.  Next, obtain an auth code from the authorization endpoint.  Using this code, the AccessTokenManager will be used to initialize an OAuth2 access token as follows: 
