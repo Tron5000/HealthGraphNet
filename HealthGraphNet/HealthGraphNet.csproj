@@ -39,10 +39,15 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Endpoints\FitnessActivitiesEndpoint.cs" />
+    <Compile Include="Endpoints\IFitnessActivitiesEndpoint.cs" />
     <Compile Include="Endpoints\ISettingsEndpoint.cs" />
     <Compile Include="Endpoints\SettingsEndpoint.cs" />
+    <Compile Include="Models\FitnessActivitiesFeedItemModel.cs" />
     <Compile Include="Models\CaloriesModel.cs" />
     <Compile Include="Models\DistanceModel.cs" />
+    <Compile Include="Models\FitnessActivitiesFeedPageModel.cs" />
+    <Compile Include="Models\FitnessActivitiesModel.cs" />
     <Compile Include="Models\HeartRateModel.cs" />
     <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Models\PathModel.cs" />

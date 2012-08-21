@@ -116,7 +116,7 @@ namespace HealthGraphNet.Samples.Web
             //User Uri example
             var userRequest = new UsersEndpoint(TokenManager);
             var user = userRequest.GetUser();
-            LblUserId.Text = user.UserID;
+            LblUserId.Text = user.UserID.ToString();
             LblUserStrengthTrainingActivities.Text = user.StrengthTrainingActivities;
             LblUserWeight.Text = user.Weight;
             LblUserSettings.Text = user.Settings;
@@ -153,7 +153,9 @@ namespace HealthGraphNet.Samples.Web
             //var settings = settingsRequest.GetSettings();
             //settings.FirstDayOfWeek = "Monday";
             //settings = settingsRequest.UpdateSettings(settings);
-            //var test = 5;
+
+            //var activitiesRequest = new FitnessActivitiesEndpoint(TokenManager, user);
+            //var activitiesFeed = activitiesRequest.GetMostRecentFeedPage(pageSize: 2, noLaterThan: new DateTime(2012, 6, 1));
         }
 
 		#endregion
