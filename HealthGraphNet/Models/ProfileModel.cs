@@ -7,6 +7,8 @@ namespace HealthGraphNet.Models
     /// </summary>
     public class ProfileModel
     {
+        internal const string ContentType = " application/vnd.com.runkeeper.Profile+json";        
+        
         /// <summary>
         /// The user's full name (omitted if not yet specified). Read only.
         /// </summary>

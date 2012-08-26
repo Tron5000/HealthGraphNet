@@ -8,11 +8,14 @@ using HealthGraphNet.RestSharp;
 namespace HealthGraphNet
 {
     /// <summary>
-    /// End point for adding, retrieving and editing a user fitness activities. http://developer.runkeeper.com/healthgraph/fitness-activities
+    /// For  http://developer.runkeeper.com/healthgraph/fitness-activities
     /// </summary>
     public class FitnessActivitiesEndpoint : IFitnessActivitiesEndpoint
     {
         #region Fields and Properties
+
+        public static readonly List<string> ValidType = new List<string> { "Running", "Cycling", "Mountain Biking", "Walking", "Hiking", "Downhill Skiing", "Cross-Country Skiing", "Snowboarding", "Skating", "Swimming", "Wheelchair", "Rowing", "Elliptical", "Other" };
+        public static readonly List<string> ValidEquipment = new List<string> { "None", "Treadmill", "Stationary Bike", "Elliptical", "Row Machine" };
 
         private AccessTokenManagerBase _tokenManager;
         private UserModel _user;
@@ -31,19 +34,19 @@ namespace HealthGraphNet
 
         #region IFitnessActivitiesEndpoint
 
-        public FitnessActivitiesFeedPageModel GetMostRecentFeedPage(int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
+        public FitnessActivitiesFeedModel GetMostRecentFeedPage(int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
         {
             var request = PrepareFeedPageRequest(pageIndex, pageSize, noEarlierThan, noLaterThan, modifiedNoEarlierThan, modifiedNoLaterThan);
-            return _tokenManager.Execute<FitnessActivitiesFeedPageModel>(request);
+            return _tokenManager.Execute<FitnessActivitiesFeedModel>(request);
         }
 
-        public void GetMostRecentFeedPageAsync(Action<FitnessActivitiesFeedPageModel> success, Action<HealthGraphException> failure, int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
+        public void GetMostRecentFeedPageAsync(Action<FitnessActivitiesFeedModel> success, Action<HealthGraphException> failure, int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
         {
             var request = PrepareFeedPageRequest(pageIndex, pageSize, noEarlierThan, noLaterThan, modifiedNoEarlierThan, modifiedNoLaterThan);
-            _tokenManager.ExecuteAsync<FitnessActivitiesFeedPageModel>(request, success, failure);
+            _tokenManager.ExecuteAsync<FitnessActivitiesFeedModel>(request, success, failure);
         }
 
-        public FitnessActivitiesFeedPageModel GetNextFeedPage(FitnessActivitiesFeedPageModel currentFeedPage)
+        public FitnessActivitiesFeedModel GetNextFeedPage(FitnessActivitiesFeedModel currentFeedPage)
         {
             if (string.IsNullOrEmpty(currentFeedPage.Next))
             {
@@ -54,11 +57,11 @@ namespace HealthGraphNet
             {
                 var request = new RestRequest(Method.GET);
                 request.Resource = currentFeedPage.Next;
-                return _tokenManager.Execute<FitnessActivitiesFeedPageModel>(request);
+                return _tokenManager.Execute<FitnessActivitiesFeedModel>(request);
             }
         }
 
-        public void GetNextFeedPageAsync(Action<FitnessActivitiesFeedPageModel> success, Action<HealthGraphException> failure, FitnessActivitiesFeedPageModel currentFeedPage)
+        public void GetNextFeedPageAsync(Action<FitnessActivitiesFeedModel> success, Action<HealthGraphException> failure, FitnessActivitiesFeedModel currentFeedPage)
         {
             if (string.IsNullOrEmpty(currentFeedPage.Next))
             {
@@ -69,11 +72,11 @@ namespace HealthGraphNet
             {
                 var request = new RestRequest(Method.GET);
                 request.Resource = currentFeedPage.Next;
-                _tokenManager.ExecuteAsync<FitnessActivitiesFeedPageModel>(request, success, failure);
+                _tokenManager.ExecuteAsync<FitnessActivitiesFeedModel>(request, success, failure);
             }
         }
 
-        public FitnessActivitiesFeedPageModel GetPrevFeedPage(FitnessActivitiesFeedPageModel currentFeedPage)
+        public FitnessActivitiesFeedModel GetPrevFeedPage(FitnessActivitiesFeedModel currentFeedPage)
         {
             if (string.IsNullOrEmpty(currentFeedPage.Previous))
             {
@@ -84,11 +87,11 @@ namespace HealthGraphNet
             {
                 var request = new RestRequest(Method.GET);
                 request.Resource = currentFeedPage.Previous;
-                return _tokenManager.Execute<FitnessActivitiesFeedPageModel>(request);
+                return _tokenManager.Execute<FitnessActivitiesFeedModel>(request);
             }
         }
 
-        public void GetPrevFeedPageAsync(Action<FitnessActivitiesFeedPageModel> success, Action<HealthGraphException> failure, FitnessActivitiesFeedPageModel currentFeedPage)
+        public void GetPrevFeedPageAsync(Action<FitnessActivitiesFeedModel> success, Action<HealthGraphException> failure, FitnessActivitiesFeedModel currentFeedPage)
         {
             if (string.IsNullOrEmpty(currentFeedPage.Previous))
             {
@@ -99,7 +102,7 @@ namespace HealthGraphNet
             {
                 var request = new RestRequest(Method.GET);
                 request.Resource = currentFeedPage.Previous;
-                _tokenManager.ExecuteAsync<FitnessActivitiesFeedPageModel>(request, success, failure);
+                _tokenManager.ExecuteAsync<FitnessActivitiesFeedModel>(request, success, failure);
             }
         }
 
@@ -173,9 +176,25 @@ namespace HealthGraphNet
             }
         }
 
+        public FitnessActivitiesModel UpdateActivity(FitnessActivitiesModel activityToUpdate)
+        {
+            var request = PrepareActivitiesUpdateRequest(activityToUpdate);
+            return _tokenManager.Execute<FitnessActivitiesModel>(request);
+        }
+
+        public void UpdateSettingsAsync(Action<FitnessActivitiesModel> success, Action<HealthGraphException> failure, FitnessActivitiesModel activityToUpdate)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         #region Helper Methods
+
+        private IRestRequest PrepareActivitiesUpdateRequest(FitnessActivitiesModel activityToUpdate)
+        {
+            throw new NotImplementedException();
+        }
 
         private IRestRequest PrepareFeedPageRequest(int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)        
         {

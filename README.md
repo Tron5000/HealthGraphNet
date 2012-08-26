@@ -35,3 +35,6 @@ Every endpoint request is synchronous and has a corresponding asynchronous metho
 		//An exception happened while trying to retrieve the ProfileModel.
 	});
 ```
+
+#####Navigating the Endpoints
+Care is taken to only use endpoint Uri's delivered by the HealthGraph API itself instead of trying to construct Uri's based on assumed paths and Ids (as per http://developer.runkeeper.com/healthgraph/overview#navigating-healthgraph).

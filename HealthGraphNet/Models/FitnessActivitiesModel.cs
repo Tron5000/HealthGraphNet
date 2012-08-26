@@ -5,6 +5,8 @@ namespace HealthGraphNet.Models
 {
     public class FitnessActivitiesModel
     {
+        internal const string ContentType = "application/vnd.com.runkeeper.FitnessActivity+json";
+                
         /// <summary>
         /// The URI for this activity. Read only.
         /// </summary>

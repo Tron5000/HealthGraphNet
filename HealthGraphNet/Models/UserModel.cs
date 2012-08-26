@@ -10,6 +10,8 @@ namespace HealthGraphNet.Models
     /// </summary>
     public class UserModel
     {
+        internal const string ContentType = "application/vnd.com.runkeeper.User+json";        
+        
         /// <summary>
         /// The unique ID for the user. Read only.
         /// </summary>

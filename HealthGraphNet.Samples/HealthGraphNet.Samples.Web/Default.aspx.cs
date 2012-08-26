@@ -154,8 +154,13 @@ namespace HealthGraphNet.Samples.Web
             //settings.FirstDayOfWeek = "Monday";
             //settings = settingsRequest.UpdateSettings(settings);
 
-            //var activitiesRequest = new FitnessActivitiesEndpoint(TokenManager, user);
-            //var activitiesFeed = activitiesRequest.GetMostRecentFeedPage(pageSize: 2, noLaterThan: new DateTime(2012, 6, 1));
+            var activitiesRequest = new FitnessActivitiesEndpoint(TokenManager, user);
+            var activitiesItem = activitiesRequest.GetMostRecentFeedPage(pageSize: 2, noLaterThan: new DateTime(2012, 6, 1)).Items.FirstOrDefault();
+            if (activitiesItem != null)
+            {
+                var activitiesDetail = activitiesRequest.GetActivity(activitiesItem);
+                int blah = 5;
+            }
         }
 
 		#endregion

@@ -6,8 +6,10 @@ namespace HealthGraphNet.Models
     /// <summary>
     /// The fitness activities feed model used in conjunction with activity data.
     /// </summary>
-    public class FitnessActivitiesFeedPageModel
+    public class FitnessActivitiesFeedModel
     {
+        internal const string ContentType = " application/vnd.com.runkeeper.FitnessActivityFeed+json";
+        
         /// <summary>
         /// The total number of fitness activities across all pages. Read only.
         /// </summary>

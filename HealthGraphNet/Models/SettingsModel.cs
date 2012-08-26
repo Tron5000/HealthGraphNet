@@ -7,6 +7,8 @@ namespace HealthGraphNet.Models
     /// </summary>    
     public class SettingsModel
     {
+        internal const string ContentType = "application/vnd.com.runkeeper.Settings+json";        
+                
         /// <summary>
         /// true if the user has connected to his/her Facebook account, false otherwise. Read only.
         /// </summary>
