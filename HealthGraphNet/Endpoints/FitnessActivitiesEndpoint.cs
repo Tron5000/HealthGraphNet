@@ -46,30 +46,30 @@ namespace HealthGraphNet
             _tokenManager.ExecuteAsync<FitnessActivitiesFeedModel>(request, success, failure);
         }
 
-        public FitnessActivitiesModel GetActivity(string uri)
+        public FitnessActivitiesPastModel GetActivity(string uri)
         {
             var request = new RestRequest(Method.GET);
             request.Resource = uri;
-            return _tokenManager.Execute<FitnessActivitiesModel>(request);
+            return _tokenManager.Execute<FitnessActivitiesPastModel>(request);
         }
 
-        public void GetActivityAsync(Action<FitnessActivitiesModel> success, Action<HealthGraphException> failure, string uri)
+        public void GetActivityAsync(Action<FitnessActivitiesPastModel> success, Action<HealthGraphException> failure, string uri)
         {
             var request = new RestRequest(Method.GET);
             request.Resource = uri;
             _tokenManager.ExecuteAsync(request, success, failure);
         }
 
-        public FitnessActivitiesModel UpdateActivity(FitnessActivitiesModel activityToUpdate)
+        public FitnessActivitiesPastModel UpdateActivity(FitnessActivitiesPastModel activityToUpdate)
         {
             var request = PrepareActivitiesUpdateRequest(activityToUpdate);
-            return _tokenManager.Execute<FitnessActivitiesModel>(request);
+            return _tokenManager.Execute<FitnessActivitiesPastModel>(request);
         }
 
-        public void UpdateSettingsAsync(Action<FitnessActivitiesModel> success, Action<HealthGraphException> failure, FitnessActivitiesModel activityToUpdate)
+        public void UpdateSettingsAsync(Action<FitnessActivitiesPastModel> success, Action<HealthGraphException> failure, FitnessActivitiesPastModel activityToUpdate)
         {
             var request = PrepareActivitiesUpdateRequest(activityToUpdate);
-            _tokenManager.ExecuteAsync<FitnessActivitiesModel>(request, success, failure);
+            _tokenManager.ExecuteAsync<FitnessActivitiesPastModel>(request, success, failure);
         }
 
         #endregion
@@ -81,42 +81,40 @@ namespace HealthGraphNet
         /// </summary>
         /// <param name="activityToUpdate"></param>
         /// <returns></returns>
-        private IRestRequest PrepareActivitiesUpdateRequest(FitnessActivitiesModel activityToUpdate)
+        private IRestRequest PrepareActivitiesUpdateRequest(FitnessActivitiesPastModel activityToUpdate)
         {
             var request = new RestRequest(Method.PUT);
+            //request.JsonSerializer = _tokenManager.DefaultJsonSerializer;
+            request.RequestFormat = DataFormat.Json;
             request.Resource = activityToUpdate.Uri;
 
             //Validate the activityToUpdate properties
             Validate.IsValueValid<string>(activityToUpdate.Type, ValidType, "Type");
+            if (activityToUpdate.Type != "Other")
+            {
+                activityToUpdate.SecondaryType = null;
+            }
             if (string.IsNullOrEmpty(activityToUpdate.Equipment))
             {
                 activityToUpdate.Equipment = "None";
             }
             Validate.IsValueValid<string>(activityToUpdate.Equipment, ValidEquipment, "Equipment");
-            if (activityToUpdate.HeartRate == null)
-            {
-                activityToUpdate.HeartRate = new List<HeartRateModel>();
-            }
-            if (activityToUpdate.Path == null)
-            {
-                activityToUpdate.Path = new List<PathModel>();
-            }
 
             //Add body to the request
-            request.AddParameter(FitnessActivitiesModel.ContentType, new
+            request.AddParameter(FitnessActivitiesPastModel.ContentType, _tokenManager.DefaultJsonSerializer.Serialize(new
             {
                 type = activityToUpdate.Type,
                 secondary_type = activityToUpdate.SecondaryType,
                 equipment = activityToUpdate.Equipment,
-                start_time = activityToUpdate.StartTime,
+                //start_time = activityToUpdate.StartTime,
                 total_distance = activityToUpdate.TotalDistance,
                 duration = activityToUpdate.Duration,
-                average_heart_rate = (activityToUpdate.AverageHeartRate.HasValue ? activityToUpdate.AverageHeartRate.Value : 0),
-                heart_rate = activityToUpdate.HeartRate,
+                average_heart_rate = activityToUpdate.AverageHeartRate,
+                //heart_rate = activityToUpdate.HeartRate,
                 total_calories = activityToUpdate.TotalCalories,
-                notes = activityToUpdate.Notes,
-                path = activityToUpdate.Path
-            }, ParameterType.RequestBody);
+                notes = activityToUpdate.Notes
+                //path = activityToUpdate.Path 
+            }), ParameterType.RequestBody);
             return request;
         }
 

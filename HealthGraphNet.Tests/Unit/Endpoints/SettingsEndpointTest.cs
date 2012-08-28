@@ -56,7 +56,7 @@ namespace HealthGraphNet.Tests.Unit
         #region Tests
 
         [Test()]
-        public void UpdateSettings_ShareFitnessActivitiesValid_DoesNotThrowArgumentException()
+        public void UpdateSettings_AllPropertiesValid_DoesNotThrowArgumentException()
         {
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();

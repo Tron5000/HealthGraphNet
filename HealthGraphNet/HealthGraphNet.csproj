@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Lib\net4\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="RestSharp">
       <HintPath>..\Lib\net4\RestSharp.dll</HintPath>
     </Reference>
@@ -49,12 +52,14 @@
     <Compile Include="Models\CaloriesModel.cs" />
     <Compile Include="Models\DistanceModel.cs" />
     <Compile Include="Models\FitnessActivitiesFeedModel.cs" />
-    <Compile Include="Models\FitnessActivitiesModel.cs" />
+    <Compile Include="Models\FitnessActivitiesPastModel.cs" />
+    <Compile Include="Models\FitnessActivitiesNewModel.cs" />
     <Compile Include="Models\HeartRateModel.cs" />
     <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Models\PathModel.cs" />
     <Compile Include="Models\ProfileModel.cs" />
     <Compile Include="Models\SettingsModel.cs" />
+    <Compile Include="RestSharp\JsonIgnoreNullSerializer.cs" />
     <Compile Include="RestSharp\OAuth2RequestHeaderAuthenticator.cs" />
     <Compile Include="AccessTokenManager.cs" />
     <Compile Include="HealthGraphException.cs" />

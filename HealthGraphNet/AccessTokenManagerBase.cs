@@ -2,6 +2,7 @@
 using System.Net;
 using RestSharp;
 using RestSharp.Deserializers;
+using RestSharp.Serializers;
 using HealthGraphNet.Models;
 using HealthGraphNet.RestSharp;
 
@@ -21,12 +22,13 @@ namespace HealthGraphNet
         public abstract void InitAccessToken(string code);
         public abstract void InitAccessTokenAsync(Action success, Action<HealthGraphException> failure, string code);
 
+        internal readonly ISerializer DefaultJsonSerializer = new JsonIgnoreNullSerializer();
+
         #endregion
 
         #region Fields and Properties
 
         private const string ApiBaseUrl = "https://api.runkeeper.com";
-        private const string AccessTokenPrefix = "Bearer ";
 
         private RestClient _client { get; set; }
 

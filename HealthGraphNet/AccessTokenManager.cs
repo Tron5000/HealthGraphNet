@@ -14,6 +14,7 @@ namespace HealthGraphNet
         #region Fields and Properties
 
         protected const string AccessTokenUrl = "https://runkeeper.com/apps/token";
+        protected const string DefaultTokenType = "Bearer";
 
         private string _clientId;
         private string _clientSecret;
@@ -59,7 +60,7 @@ namespace HealthGraphNet
         /// <param name="accessToken"></param>
         public AccessTokenManager(string clientId, string clientSecret, string requestUri, string accessToken) : this(clientId, clientSecret, requestUri)
         {
-            Token = new AccessTokenModel { AccessToken = accessToken };
+            Token = new AccessTokenModel { AccessToken = accessToken, TokenType = DefaultTokenType };
         }
 
         #endregion

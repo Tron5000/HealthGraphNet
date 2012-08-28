@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HealthGraphNet.Models
 {
-    public class FitnessActivitiesModel
+    public class FitnessActivitiesPastModel
     {
         internal const string ContentType = "application/vnd.com.runkeeper.FitnessActivity+json";
                 
