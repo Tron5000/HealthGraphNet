@@ -34,146 +34,30 @@ namespace HealthGraphNet
 
         #region IFitnessActivitiesEndpoint
 
-        public FitnessActivitiesFeedModel GetMostRecentFeedPage(int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
+        public FitnessActivitiesFeedModel GetFeedPage(int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
         {
             var request = PrepareFeedPageRequest(pageIndex, pageSize, noEarlierThan, noLaterThan, modifiedNoEarlierThan, modifiedNoLaterThan);
             return _tokenManager.Execute<FitnessActivitiesFeedModel>(request);
         }
 
-        public void GetMostRecentFeedPageAsync(Action<FitnessActivitiesFeedModel> success, Action<HealthGraphException> failure, int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
+        public void GetFeedPageAsync(Action<FitnessActivitiesFeedModel> success, Action<HealthGraphException> failure, int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
         {
             var request = PrepareFeedPageRequest(pageIndex, pageSize, noEarlierThan, noLaterThan, modifiedNoEarlierThan, modifiedNoLaterThan);
             _tokenManager.ExecuteAsync<FitnessActivitiesFeedModel>(request, success, failure);
         }
 
-        public FitnessActivitiesFeedModel GetNextFeedPage(FitnessActivitiesFeedModel currentFeedPage)
-        {
-            if (string.IsNullOrEmpty(currentFeedPage.Next))
-            {
-                //No next page of feed activity exists
-                return null;
-            }
-            else
-            {
-                var request = new RestRequest(Method.GET);
-                request.Resource = currentFeedPage.Next;
-                return _tokenManager.Execute<FitnessActivitiesFeedModel>(request);
-            }
-        }
-
-        public void GetNextFeedPageAsync(Action<FitnessActivitiesFeedModel> success, Action<HealthGraphException> failure, FitnessActivitiesFeedModel currentFeedPage)
-        {
-            if (string.IsNullOrEmpty(currentFeedPage.Next))
-            {
-                //No next page of feed activity exists
-                success(null);
-            }
-            else
-            {
-                var request = new RestRequest(Method.GET);
-                request.Resource = currentFeedPage.Next;
-                _tokenManager.ExecuteAsync<FitnessActivitiesFeedModel>(request, success, failure);
-            }
-        }
-
-        public FitnessActivitiesFeedModel GetPrevFeedPage(FitnessActivitiesFeedModel currentFeedPage)
-        {
-            if (string.IsNullOrEmpty(currentFeedPage.Previous))
-            {
-                //No prev page of feed activity exists
-                return null;
-            }
-            else
-            {
-                var request = new RestRequest(Method.GET);
-                request.Resource = currentFeedPage.Previous;
-                return _tokenManager.Execute<FitnessActivitiesFeedModel>(request);
-            }
-        }
-
-        public void GetPrevFeedPageAsync(Action<FitnessActivitiesFeedModel> success, Action<HealthGraphException> failure, FitnessActivitiesFeedModel currentFeedPage)
-        {
-            if (string.IsNullOrEmpty(currentFeedPage.Previous))
-            {
-                //No prev page of feed activity exists
-                success(null);
-            }
-            else
-            {
-                var request = new RestRequest(Method.GET);
-                request.Resource = currentFeedPage.Previous;
-                _tokenManager.ExecuteAsync<FitnessActivitiesFeedModel>(request, success, failure);
-            }
-        }
-
-        public FitnessActivitiesModel GetActivity(FitnessActivitiesFeedItemModel currentFeedItem)
+        public FitnessActivitiesModel GetActivity(string uri)
         {
             var request = new RestRequest(Method.GET);
-            request.Resource = currentFeedItem.Uri;
+            request.Resource = uri;
             return _tokenManager.Execute<FitnessActivitiesModel>(request);
         }
 
-        public void GetActivityAsync(Action<FitnessActivitiesModel> success, Action<HealthGraphException> failure, FitnessActivitiesFeedItemModel currentFeedItem)
+        public void GetActivityAsync(Action<FitnessActivitiesModel> success, Action<HealthGraphException> failure, string uri)
         {
             var request = new RestRequest(Method.GET);
-            request.Resource = currentFeedItem.Uri;
+            request.Resource = uri;
             _tokenManager.ExecuteAsync(request, success, failure);
-        }
-
-        public FitnessActivitiesModel GetNextActivity(FitnessActivitiesModel currentActivity)
-        {
-            if (string.IsNullOrEmpty(currentActivity.Next))
-            {
-                return null;
-            }
-            else
-            {
-                var request = new RestRequest(Method.GET);
-                request.Resource = currentActivity.Next;
-                return _tokenManager.Execute<FitnessActivitiesModel>(request);
-            }
-        }
-
-        public void GetNextActivityAsync(Action<FitnessActivitiesModel> success, Action<HealthGraphException> failure, FitnessActivitiesModel currentActivity)
-        {
-            if (string.IsNullOrEmpty(currentActivity.Next))
-            {
-                success(null);
-            }
-            else
-            {
-                var request = new RestRequest(Method.GET);
-                request.Resource = currentActivity.Next;
-                _tokenManager.ExecuteAsync<FitnessActivitiesModel>(request, success, failure);
-            }
-        }
-
-        public FitnessActivitiesModel GetPrevActivity(FitnessActivitiesModel currentActivity)
-        {
-            if (string.IsNullOrEmpty(currentActivity.Previous))
-            {
-                return null;
-            }
-            else
-            {
-                var request = new RestRequest(Method.GET);
-                request.Resource = currentActivity.Previous;
-                return _tokenManager.Execute<FitnessActivitiesModel>(request);
-            }
-        }
-
-        public void GetPrevActivityAsync(Action<FitnessActivitiesModel> success, Action<HealthGraphException> failure, FitnessActivitiesModel currentActivity)
-        {
-            if (string.IsNullOrEmpty(currentActivity.Previous))
-            {
-                success(null);
-            }
-            else
-            {
-                var request = new RestRequest(Method.GET);
-                request.Resource = currentActivity.Previous;
-                _tokenManager.ExecuteAsync<FitnessActivitiesModel>(request, success, failure);
-            }
         }
 
         public FitnessActivitiesModel UpdateActivity(FitnessActivitiesModel activityToUpdate)
@@ -184,18 +68,68 @@ namespace HealthGraphNet
 
         public void UpdateSettingsAsync(Action<FitnessActivitiesModel> success, Action<HealthGraphException> failure, FitnessActivitiesModel activityToUpdate)
         {
-            throw new NotImplementedException();
+            var request = PrepareActivitiesUpdateRequest(activityToUpdate);
+            _tokenManager.ExecuteAsync<FitnessActivitiesModel>(request, success, failure);
         }
 
         #endregion
 
         #region Helper Methods
 
+        /// <summary>
+        /// Prepares the request object to be updated.
+        /// </summary>
+        /// <param name="activityToUpdate"></param>
+        /// <returns></returns>
         private IRestRequest PrepareActivitiesUpdateRequest(FitnessActivitiesModel activityToUpdate)
         {
-            throw new NotImplementedException();
+            var request = new RestRequest(Method.PUT);
+            request.Resource = activityToUpdate.Uri;
+
+            //Validate the activityToUpdate properties
+            Validate.IsValueValid<string>(activityToUpdate.Type, ValidType, "Type");
+            if (string.IsNullOrEmpty(activityToUpdate.Equipment))
+            {
+                activityToUpdate.Equipment = "None";
+            }
+            Validate.IsValueValid<string>(activityToUpdate.Equipment, ValidEquipment, "Equipment");
+            if (activityToUpdate.HeartRate == null)
+            {
+                activityToUpdate.HeartRate = new List<HeartRateModel>();
+            }
+            if (activityToUpdate.Path == null)
+            {
+                activityToUpdate.Path = new List<PathModel>();
+            }
+
+            //Add body to the request
+            request.AddParameter(FitnessActivitiesModel.ContentType, new
+            {
+                type = activityToUpdate.Type,
+                secondary_type = activityToUpdate.SecondaryType,
+                equipment = activityToUpdate.Equipment,
+                start_time = activityToUpdate.StartTime,
+                total_distance = activityToUpdate.TotalDistance,
+                duration = activityToUpdate.Duration,
+                average_heart_rate = (activityToUpdate.AverageHeartRate.HasValue ? activityToUpdate.AverageHeartRate.Value : 0),
+                heart_rate = activityToUpdate.HeartRate,
+                total_calories = activityToUpdate.TotalCalories,
+                notes = activityToUpdate.Notes,
+                path = activityToUpdate.Path
+            }, ParameterType.RequestBody);
+            return request;
         }
 
+        /// <summary>
+        /// Adds filtering parameters for the retrieval of a feed page.
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="noEarlierThan"></param>
+        /// <param name="noLaterThan"></param>
+        /// <param name="modifiedNoEarlierThan"></param>
+        /// <param name="modifiedNoLaterThan"></param>
+        /// <returns></returns>
         private IRestRequest PrepareFeedPageRequest(int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)        
         {
             var request = new RestRequest(Method.GET);

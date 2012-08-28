@@ -25,7 +25,7 @@ Now the endpoints may be called as needed.  Here is an example of how to retriev
 Every endpoint request is synchronous and has a corresponding asynchronous method.  To make the above retrieval of profile data an asynchronous call, we'd change the code to the following:
 
 ```csharp
-	var profileRequest = new ProfileEndpoint(TokenManager, user);
+	var profileRequest = new ProfileEndpoint(tokenManager, user);
     profileRequest.GetProfileAsync((prof) =>
 	{
 		//ProfileModel was successfully retrieved as prof.

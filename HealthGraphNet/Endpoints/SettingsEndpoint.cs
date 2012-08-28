@@ -14,7 +14,6 @@ namespace HealthGraphNet
     {
         #region Fields and Properties
 
-        private const string ContentType = "application/vnd.com.runkeeper.Settings+json";
         public static readonly List<string> ValidVisibility = new List<string> { "Just Me", "Street Team", "Everyone" };
         public static readonly List<string> ValidDistanceUnit = new List<string> { "mi", "km" };
         public static readonly List<string> ValidWeightUnit = new List<string> { "lbs", "kg" };
@@ -91,7 +90,7 @@ namespace HealthGraphNet
             Validate.IsValueValid<string>(settingsToUpdate.FirstDayOfWeek, ValidFirstDayOfWeek, "FirstDayOfWeek");
 
             //Add body to the request
-            request.AddParameter(ContentType, new
+            request.AddParameter(SettingsModel.ContentType, new
             {
                 share_fitness_activities = settingsToUpdate.ShareFitnessActivities,
                 share_map = settingsToUpdate.ShareMap,

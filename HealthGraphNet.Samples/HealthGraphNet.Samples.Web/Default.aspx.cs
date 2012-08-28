@@ -155,10 +155,10 @@ namespace HealthGraphNet.Samples.Web
             //settings = settingsRequest.UpdateSettings(settings);
 
             var activitiesRequest = new FitnessActivitiesEndpoint(TokenManager, user);
-            var activitiesItem = activitiesRequest.GetMostRecentFeedPage(pageSize: 2, noLaterThan: new DateTime(2012, 6, 1)).Items.FirstOrDefault();
+            var activitiesItem = activitiesRequest.GetFeedPage(pageSize: 2, noLaterThan: new DateTime(2012, 6, 1)).Items.FirstOrDefault();
             if (activitiesItem != null)
             {
-                var activitiesDetail = activitiesRequest.GetActivity(activitiesItem);
+                var activitiesDetail = activitiesRequest.GetActivity(activitiesItem.Uri);
                 int blah = 5;
             }
         }
