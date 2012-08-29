@@ -77,17 +77,17 @@ namespace HealthGraphNet
             request.Resource = _user.Settings;
 
             //Validate settingsToUpdate properties
-            Validate.IsValueValid<string>(settingsToUpdate.ShareFitnessActivities, ValidVisibility, "ShareFitnessActivities");
-            Validate.IsValueValid<string>(settingsToUpdate.ShareMap, ValidVisibility, "ShareMap");
-            Validate.IsValueValid<string>(settingsToUpdate.ShareBackgroundActivities, ValidVisibility, "ShareBackgroundActivities");
-            Validate.IsValueValid<string>(settingsToUpdate.ShareSleep, ValidVisibility, "ShareSleep");
-            Validate.IsValueValid<string>(settingsToUpdate.ShareNutrition, ValidVisibility, "ShareNutrition");
-            Validate.IsValueValid<string>(settingsToUpdate.ShareWeight, ValidVisibility, "ShareWeight");
-            Validate.IsValueValid<string>(settingsToUpdate.ShareGeneralMeasurements, ValidVisibility, "ShareGeneralMeasurements");
-            Validate.IsValueValid<string>(settingsToUpdate.ShareDiabetes, ValidVisibility, "ShareDiabetes");
-            Validate.IsValueValid<string>(settingsToUpdate.DistanceUnits, ValidDistanceUnit, "DistanceUnits");
-            Validate.IsValueValid<string>(settingsToUpdate.WeightUnits, ValidWeightUnit, "WeightUnits");
-            Validate.IsValueValid<string>(settingsToUpdate.FirstDayOfWeek, ValidFirstDayOfWeek, "FirstDayOfWeek");
+            ValidateHelper.IsValueValid<string>(settingsToUpdate.ShareFitnessActivities, ValidVisibility, "ShareFitnessActivities");
+            ValidateHelper.IsValueValid<string>(settingsToUpdate.ShareMap, ValidVisibility, "ShareMap");
+            ValidateHelper.IsValueValid<string>(settingsToUpdate.ShareBackgroundActivities, ValidVisibility, "ShareBackgroundActivities");
+            ValidateHelper.IsValueValid<string>(settingsToUpdate.ShareSleep, ValidVisibility, "ShareSleep");
+            ValidateHelper.IsValueValid<string>(settingsToUpdate.ShareNutrition, ValidVisibility, "ShareNutrition");
+            ValidateHelper.IsValueValid<string>(settingsToUpdate.ShareWeight, ValidVisibility, "ShareWeight");
+            ValidateHelper.IsValueValid<string>(settingsToUpdate.ShareGeneralMeasurements, ValidVisibility, "ShareGeneralMeasurements");
+            ValidateHelper.IsValueValid<string>(settingsToUpdate.ShareDiabetes, ValidVisibility, "ShareDiabetes");
+            ValidateHelper.IsValueValid<string>(settingsToUpdate.DistanceUnits, ValidDistanceUnit, "DistanceUnits");
+            ValidateHelper.IsValueValid<string>(settingsToUpdate.WeightUnits, ValidWeightUnit, "WeightUnits");
+            ValidateHelper.IsValueValid<string>(settingsToUpdate.FirstDayOfWeek, ValidFirstDayOfWeek, "FirstDayOfWeek");
 
             //Add body to the request
             request.AddParameter(SettingsModel.ContentType, new

@@ -82,7 +82,7 @@ namespace HealthGraphNet
         {
             var request = new RestRequest(Method.PUT);
             request.Resource = _user.Profile;
-            Validate.IsValueValid<string>(profileToUpdate.AthleteType, ValidAthleteType, "AthleteType");
+            ValidateHelper.IsValueValid<string>(profileToUpdate.AthleteType, ValidAthleteType, "AthleteType");
             request.AddParameter(ProfileModel.ContentType, new { athlete_type = profileToUpdate.AthleteType }, ParameterType.RequestBody);          
             return request;
         }

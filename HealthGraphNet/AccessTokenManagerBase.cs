@@ -1,5 +1,7 @@
 ﻿﻿using System;
 using System.Net;
+using System.Collections.Generic;
+using System.Linq;
 using RestSharp;
 using RestSharp.Deserializers;
 using RestSharp.Serializers;
@@ -23,6 +25,7 @@ namespace HealthGraphNet
         public abstract void InitAccessTokenAsync(Action success, Action<HealthGraphException> failure, string code);
 
         internal readonly ISerializer DefaultJsonSerializer = new JsonIgnoreNullSerializer();
+        private const string LocationHeaderName = "Location";
 
         #endregion
 
@@ -76,6 +79,62 @@ namespace HealthGraphNet
         }
 
         /// <summary>
+        /// Synchronous request for creation of a resource.  Returns the Location header if present, otherwise returns null.
+        /// Throws a HealthGraphException if response is anything other than CREATED.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="headerNameOfInterest"></param>
+        /// <param name="baseUrl"></param>
+        /// <returns></returns>
+        internal virtual string ExecuteCreate(IRestRequest request, string baseUrl = null)
+        {
+            if (string.IsNullOrEmpty(baseUrl) == false)
+            {
+                _client.BaseUrl = baseUrl;
+            }
+            else
+            {
+                _client.BaseUrl = ApiBaseUrl;
+            }
+            IRestResponse response = _client.Execute(request);
+            if (response.StatusCode != HttpStatusCode.Created)
+            {
+                throw new HealthGraphException(response);
+            }
+            var locationHeader = response.Headers.Where(h => h.Name == LocationHeaderName).FirstOrDefault();
+            if (locationHeader == null)
+            {
+                return null;
+            }
+            else
+            {
+                return locationHeader.Value as string;
+            }
+        }
+
+        /// <summary>
+        /// Synchronous request for a delete.  Throws an exception if status code from operation is anything but No Content.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="baseUrl"></param>
+        internal virtual void ExecuteDelete(IRestRequest request, string baseUrl = null)
+        {
+            if (string.IsNullOrEmpty(baseUrl) == false)
+            {
+                _client.BaseUrl = baseUrl;
+            }
+            else
+            {
+                _client.BaseUrl = ApiBaseUrl;
+            }
+            IRestResponse response = _client.Execute(request);
+            if (response.StatusCode != HttpStatusCode.NoContent)
+            {
+                throw new HealthGraphException(response);
+            }
+        }
+
+        /// <summary>
         /// If mobile and network not available, stops execution.  Otherwise, async request is performed on request.  
         /// Success is executed if success and failure is executed if status code is not OK.
         /// baseUrl is optional and may be assigned if restClient needs to be anything other than ApiBaseUrl.
@@ -114,6 +173,93 @@ namespace HealthGraphNet
                 else
                 {
                     success(response.Data);
+                }
+            });
+        }
+
+        /// <summary>
+        /// If mobile and network not available, stops execution.  Otherwise, performs an asynchronous creation of a resource.  
+        /// Passes the Location header to Success if present, otherwise passes null.
+        /// Failure is executed if response is anything other than CREATED.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="headerNameOfInterest"></param>
+        /// <param name="baseUrl"></param>
+        /// <returns></returns>
+        internal virtual void ExecuteCreateAsync(IRestRequest request, Action<string> success, Action<HealthGraphException> failure, string baseUrl = null)
+        {
+            #if MONOTOUCH
+            //check for network connection
+            if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+            {
+                //do nothing
+                failure(new HealthGraphException { StatusCode = System.Net.HttpStatusCode.BadGateway });
+                return;
+            }
+            #endif
+
+            if (string.IsNullOrEmpty(baseUrl) == false)
+            {
+                _client.BaseUrl = baseUrl;
+            }
+            else
+            {
+                _client.BaseUrl = ApiBaseUrl;
+            }
+            _client.ExecuteAsync(request, (response, asynchandle) =>
+            {
+                if (response.StatusCode != HttpStatusCode.Created)
+                {
+                    failure(new HealthGraphException(response));
+                }
+                else
+                {
+                    string locationHeaderValue = null;
+                    var locationHeader = response.Headers.Where(h => h.Name == LocationHeaderName).FirstOrDefault();                    
+                    if (locationHeader != null)
+                    {
+                        locationHeaderValue = locationHeader.Value as string;
+                    }
+                    success(locationHeaderValue);
+                }
+            });
+        }
+
+        /// <summary>
+        /// Asynchronous request for a delete.  Executes success if successful.
+        /// Passes an exception to failure if status code from operation is anything but No Content.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="baseUrl"></param>
+        internal virtual void ExecuteDeleteAsync(IRestRequest request, Action success, Action<HealthGraphException> failure, string baseUrl = null)
+        {
+            #if MONOTOUCH
+            //check for network connection
+            if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+            {
+                //do nothing
+                failure(new HealthGraphException { StatusCode = System.Net.HttpStatusCode.BadGateway });
+                return;
+            }
+            #endif
+
+            if (string.IsNullOrEmpty(baseUrl) == false)
+            {
+                _client.BaseUrl = baseUrl;
+            }
+            else
+            {
+                _client.BaseUrl = ApiBaseUrl;
+            }
+            _client.ExecuteAsync(request, (response, asynchandle) =>
+            {
+                if (response.StatusCode != HttpStatusCode.NoContent)
+                {
+                    failure(new HealthGraphException(response));
+                }
+                else
+                {
+                    success();
                 }
             });
         }

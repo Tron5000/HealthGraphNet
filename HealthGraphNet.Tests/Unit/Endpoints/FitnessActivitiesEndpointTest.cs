@@ -39,6 +39,14 @@ namespace HealthGraphNet.Tests.Unit
                         Longitude = 100.0,
                         Altitude = 100.0,
                         Type = FitnessActivitiesEndpoint.ValidPathType.First()
+                    },
+                    new PathModel
+                    {
+                        Timestamp = 60,
+                        Latitude = 120.0,
+                        Longitude = 120.0,
+                        Altitude = 50.0,
+                        Type = FitnessActivitiesEndpoint.ValidPathType.First()
                     }
                 }
             };
@@ -88,6 +96,36 @@ namespace HealthGraphNet.Tests.Unit
             FitnessActivitiesEndpoint activitiesRequest = new FitnessActivitiesEndpoint(tokenManager.Object, new UserModel());
             //Act and assert
             ValidActivity.Path.First().Type = "Not a valid path type.";
+            Assert.Throws(typeof(ArgumentException), () => { activitiesRequest.UpdateActivity(ValidActivity); });
+        }
+
+        [Test()]
+        public void UpdateActivity_OnePathItemInArray_ArgumentException()
+        {
+            //Arrange
+            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            FitnessActivitiesEndpoint activitiesRequest = new FitnessActivitiesEndpoint(tokenManager.Object, new UserModel());
+            //Act and assert
+            ValidActivity.Path.RemoveAt(1);
+            Assert.AreEqual(1, ValidActivity.Path.Count);
+            Assert.Throws(typeof(ArgumentException), () => { activitiesRequest.UpdateActivity(ValidActivity); });
+        }
+
+        [Test()]
+        public void UpdateActivity_TypeOtherSecondaryTypeSixtyFiveCharacters_ArgumentException()
+        {
+            //Arrange
+            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            FitnessActivitiesEndpoint activitiesRequest = new FitnessActivitiesEndpoint(tokenManager.Object, new UserModel());
+            //Act and assert
+            ValidActivity.Type = "Other";
+            string sixtyFiveCharacterSecondaryType = string.Empty;
+            for (var count = 0; count < 65; count++)
+            {
+                sixtyFiveCharacterSecondaryType += "A";
+            }
+            ValidActivity.SecondaryType = sixtyFiveCharacterSecondaryType;
+            Assert.AreEqual(65, ValidActivity.SecondaryType.Length);
             Assert.Throws(typeof(ArgumentException), () => { activitiesRequest.UpdateActivity(ValidActivity); });
         }
 

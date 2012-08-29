@@ -158,11 +158,27 @@ namespace HealthGraphNet.Samples.Web
             var activitiesItem = activitiesRequest.GetFeedPage(pageSize: 2, noLaterThan: new DateTime(2013, 6, 1)).Items.FirstOrDefault();
             if (activitiesItem != null)
             {
-                var activitiesDetail = activitiesRequest.GetActivity(activitiesItem.Uri);
-                activitiesDetail.AverageHeartRate = null;
-                activitiesDetail.Notes = "blah";
-                activitiesRequest.UpdateActivity(activitiesDetail);
+                //Retrieve and update an activity
+                //var activitiesDetail = activitiesRequest.GetActivity(activitiesItem.Uri);               
+                //activitiesDetail.Type = "Running";
+                //activitiesDetail.Equipment = "None";
+                //activitiesDetail.AverageHeartRate = null;
+                //activitiesDetail.Notes = "Testing is fun.";                
+                //activitiesRequest.UpdateActivity(activitiesDetail);
+
+                //Delete the activity
+                //activitiesRequest.DeleteActivity(activitiesDetail.Uri);
             }
+
+            //Create an activity
+            //var newActivity = new FitnessActivitiesNewModel
+            //{
+            //    Type = "Running",
+            //    StartTime = DateTime.Now,
+            //    Duration = 50,
+            //    Notes = "Yay!"
+            //};
+            //var uri = activitiesRequest.CreateActivity(newActivity);
         }
 
 		#endregion

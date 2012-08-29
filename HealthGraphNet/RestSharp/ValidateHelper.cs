@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using RestSharp.Validation;
 
 namespace HealthGraphNet.RestSharp
 {
-    public class Validate
+    /// <summary>
+    /// Extends RestSharp.Validation.Validate to add additional validation functionality.
+    /// </summary>
+    public class ValidateHelper : Validate
     {
         /// <summary>
         /// Makes sure that a given value is valid (found in a list of validValues).

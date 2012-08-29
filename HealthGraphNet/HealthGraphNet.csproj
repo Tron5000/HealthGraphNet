@@ -56,6 +56,7 @@
     <Compile Include="Models\FitnessActivitiesNewModel.cs" />
     <Compile Include="Models\HeartRateModel.cs" />
     <Compile Include="Models\ImageModel.cs" />
+    <Compile Include="Models\Interfaces\IFitnessActivitiesModel.cs" />
     <Compile Include="Models\PathModel.cs" />
     <Compile Include="Models\ProfileModel.cs" />
     <Compile Include="Models\SettingsModel.cs" />
@@ -69,7 +70,7 @@
     <Compile Include="AccessTokenManagerBase.cs" />
     <Compile Include="Endpoints\ProfileEndpoint.cs" />
     <Compile Include="Endpoints\UsersEndpoint.cs" />
-    <Compile Include="RestSharp\Validate.cs" />
+    <Compile Include="RestSharp\ValidateHelper.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -4,19 +4,31 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using RestSharp.Serializers;
 
 namespace HealthGraphNet.RestSharp
 {
     /// <summary>
-    /// The built-in JsonSerializer does not have a way to ignore null properties when serializing.  The underlying serialization procedures (SimpleJson.cs) are 
-    /// sealed so no options to override.  Using Json.Net as a serializer (has ignoring of null values build in).
+    /// The built-in JsonSerializer does not have a way to ignore null properties when serializing.  It also lacks the ability to serialize to a different json 
+    /// property name.  The underlying serialization procedures (SimpleJson.cs) are internal so no options to override.  Using Json.Net as a serializer 
+    /// gives us more flexibility. 
     /// </summary>
     public class JsonIgnoreNullSerializer : ISerializer
     {
+        #region Fields and Properties
+
+        /// <summary>
+        /// Serialization of DateTime objects is done in RFC1123 format as per the following documentation. 
+        /// https://groups.google.com/d/msg/healthgraph/wyHmJVuNNLQ/uCCpqbFTXxAJ
+        /// </summary>
+        private const string RFC1123DateTimeFormat = "R";
+
+        #endregion
+
         #region Constructors
 
-		/// <summary>
+        /// <summary>
 		/// Serializer that ignores null values when serializing.
 		/// </summary>
 		public JsonIgnoreNullSerializer()
@@ -35,26 +47,14 @@ namespace HealthGraphNet.RestSharp
 		/// <returns>JSON as String</returns>
 		public string Serialize(object obj)
 		{
-            //return JsonConvert.SerializeObject(obj, Formatting.None, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-
-            var serializer = new Newtonsoft.Json.JsonSerializer
+            var jsonSettings = new JsonSerializerSettings
             {
-                MissingMemberHandling = MissingMemberHandling.Ignore,
-                NullValueHandling = NullValueHandling.Ignore,
+                MissingMemberHandling = MissingMemberHandling.Ignore,               
                 DefaultValueHandling = DefaultValueHandling.Include,
-                DateFormatHandling = DateFormatHandling.IsoDateFormat
+                NullValueHandling = NullValueHandling.Ignore
             };
-            using (var stringWriter = new StringWriter())
-            {
-                using (var jsonTextWriter = new JsonTextWriter(stringWriter))
-                {
-                    jsonTextWriter.Formatting = Formatting.Indented;
-                    jsonTextWriter.QuoteChar = '"';
-                    serializer.Serialize(jsonTextWriter, obj);
-                    var result = stringWriter.ToString();
-                    return result;
-                }
-            }        
+            jsonSettings.Converters.Add(new IsoDateTimeConverter { DateTimeFormat = "R" });
+            return JsonConvert.SerializeObject(obj, Formatting.Indented, jsonSettings);
         }
 
 		/// <summary>
