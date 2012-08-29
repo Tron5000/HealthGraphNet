@@ -16,6 +16,7 @@ namespace HealthGraphNet
 
         public static readonly List<string> ValidType = new List<string> { "Running", "Cycling", "Mountain Biking", "Walking", "Hiking", "Downhill Skiing", "Cross-Country Skiing", "Snowboarding", "Skating", "Swimming", "Wheelchair", "Rowing", "Elliptical", "Other" };
         public static readonly List<string> ValidEquipment = new List<string> { "None", "Treadmill", "Stationary Bike", "Elliptical", "Row Machine" };
+        public static readonly List<string> ValidPathType = new List<string> { "start", "end", "gps", "pause", "resume", "manual" };
 
         private AccessTokenManagerBase _tokenManager;
         private UserModel _user;
@@ -84,8 +85,6 @@ namespace HealthGraphNet
         private IRestRequest PrepareActivitiesUpdateRequest(FitnessActivitiesPastModel activityToUpdate)
         {
             var request = new RestRequest(Method.PUT);
-            //request.JsonSerializer = _tokenManager.DefaultJsonSerializer;
-            request.RequestFormat = DataFormat.Json;
             request.Resource = activityToUpdate.Uri;
 
             //Validate the activityToUpdate properties
@@ -99,6 +98,14 @@ namespace HealthGraphNet
                 activityToUpdate.Equipment = "None";
             }
             Validate.IsValueValid<string>(activityToUpdate.Equipment, ValidEquipment, "Equipment");
+            //Also make sure the path type is valid.
+            if (activityToUpdate.Path != null)
+            {
+                foreach (var path in activityToUpdate.Path)
+                {
+                    Validate.IsValueValid<string>(path.Type, ValidPathType, "Path Type");
+                }
+            }
 
             //Add body to the request
             request.AddParameter(FitnessActivitiesPastModel.ContentType, _tokenManager.DefaultJsonSerializer.Serialize(new
@@ -110,10 +117,10 @@ namespace HealthGraphNet
                 total_distance = activityToUpdate.TotalDistance,
                 duration = activityToUpdate.Duration,
                 average_heart_rate = activityToUpdate.AverageHeartRate,
-                //heart_rate = activityToUpdate.HeartRate,
+                heart_rate = activityToUpdate.HeartRate,
                 total_calories = activityToUpdate.TotalCalories,
-                notes = activityToUpdate.Notes
-                //path = activityToUpdate.Path 
+                notes = activityToUpdate.Notes,
+                path = ((activityToUpdate.Path != null) && (activityToUpdate.Path.Count == 0)) ? null : activityToUpdate.Path 
             }), ParameterType.RequestBody);
             return request;
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using Newtonsoft.Json;
 using RestSharp.Serializers;
 
@@ -34,7 +35,26 @@ namespace HealthGraphNet.RestSharp
 		/// <returns>JSON as String</returns>
 		public string Serialize(object obj)
 		{
-            return JsonConvert.SerializeObject(obj, Formatting.None, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            //return JsonConvert.SerializeObject(obj, Formatting.None, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+
+            var serializer = new Newtonsoft.Json.JsonSerializer
+            {
+                MissingMemberHandling = MissingMemberHandling.Ignore,
+                NullValueHandling = NullValueHandling.Ignore,
+                DefaultValueHandling = DefaultValueHandling.Include,
+                DateFormatHandling = DateFormatHandling.IsoDateFormat
+            };
+            using (var stringWriter = new StringWriter())
+            {
+                using (var jsonTextWriter = new JsonTextWriter(stringWriter))
+                {
+                    jsonTextWriter.Formatting = Formatting.Indented;
+                    jsonTextWriter.QuoteChar = '"';
+                    serializer.Serialize(jsonTextWriter, obj);
+                    var result = stringWriter.ToString();
+                    return result;
+                }
+            }        
         }
 
 		/// <summary>

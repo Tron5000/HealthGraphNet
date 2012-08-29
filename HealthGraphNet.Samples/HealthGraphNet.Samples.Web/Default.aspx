@@ -12,7 +12,7 @@
     </ol>
     <hr />
     <asp:Panel ID="PnlTokenSamples" runat="server" Visible="false"> 
-    	AccessType|Access Token => <asp:Label ID="LblAccessType" runat="server" />|<asp:Label ID="LblAccessToken" runat="server" /><br /><br />
+    	Access Type|Access Token => <asp:Label ID="LblAccessType" runat="server" />|<asp:Label ID="LblAccessToken" runat="server" /><br /><br />
         User =><ul>
             <li>User Id: <asp:Label ID="LblUserId" runat="server" /></li>
             <li>Strength Training Activities: <asp:Label ID="LblUserStrengthTrainingActivities" runat="server" /></li>

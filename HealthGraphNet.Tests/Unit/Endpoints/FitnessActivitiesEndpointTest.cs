@@ -30,7 +30,17 @@ namespace HealthGraphNet.Tests.Unit
                 HeartRate = null,
                 TotalCalories = 500,
                 Notes = null,
-                Path = null
+                Path = new List<PathModel>
+                {
+                    new PathModel
+                    {
+                        Timestamp = 0,
+                        Latitude = 100.0,
+                        Longitude = 100.0,
+                        Altitude = 100.0,
+                        Type = FitnessActivitiesEndpoint.ValidPathType.First()
+                    }
+                }
             };
         }
 
@@ -67,6 +77,17 @@ namespace HealthGraphNet.Tests.Unit
             FitnessActivitiesEndpoint activitiesRequest = new FitnessActivitiesEndpoint(tokenManager.Object, new UserModel());
             //Act and assert
             ValidActivity.Equipment = "Not a valid equipment.";
+            Assert.Throws(typeof(ArgumentException), () => { activitiesRequest.UpdateActivity(ValidActivity); });
+        }
+
+        [Test()]
+        public void UpdateActivity_PathTypeNotValid_ArgumentException()
+        {
+            //Arrange
+            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            FitnessActivitiesEndpoint activitiesRequest = new FitnessActivitiesEndpoint(tokenManager.Object, new UserModel());
+            //Act and assert
+            ValidActivity.Path.First().Type = "Not a valid path type.";
             Assert.Throws(typeof(ArgumentException), () => { activitiesRequest.UpdateActivity(ValidActivity); });
         }
 
