@@ -134,6 +134,7 @@ namespace HealthGraphNet.Samples.Web
             var profileRequest = new ProfileEndpoint(TokenManager, user);
             var profile = profileRequest.GetProfile();
             //Optionally change and update it here
+            //profile.AthleteType = "Hiker";
             profile.AthleteType = "Hiker";
             profile = profileRequest.UpdateProfile(profile);
             //Display user profile

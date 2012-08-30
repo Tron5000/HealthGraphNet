@@ -14,7 +14,7 @@ namespace HealthGraphNet
     {
         #region Fields and Properties
 
-        public static readonly List<string> ValidAthleteType = new List<string> { "Athlete", "Runner", "Marathoner", "Ultra Marathoner", "Cyclist", "Tri-Athlete, Walker", "Hiker", "Skier", "Snowboarder", "Skater", "Swimmer", "Rower" };
+        public static readonly List<string> ValidAthleteType = new List<string> { "Athlete", "Runner", "Marathoner", "Ultra Marathoner", "Cyclist", "Tri-Athlete, Walker", "Hiker", "Skier", "Snowboarder", "Skater", "Swimmer", "Rower", null };
         
         private AccessTokenManagerBase _tokenManager;
         private UserModel _user;
@@ -83,7 +83,10 @@ namespace HealthGraphNet
             var request = new RestRequest(Method.PUT);
             request.Resource = _user.Profile;
             ValidateHelper.IsValueValid<string>(profileToUpdate.AthleteType, ValidAthleteType, "AthleteType");
-            request.AddParameter(ProfileModel.ContentType, new { athlete_type = profileToUpdate.AthleteType }, ParameterType.RequestBody);          
+            request.AddParameter(ProfileModel.ContentType, _tokenManager.DefaultJsonSerializer.Serialize(new 
+            { 
+                athlete_type = profileToUpdate.AthleteType 
+            }), ParameterType.RequestBody);          
             return request;
         }
 

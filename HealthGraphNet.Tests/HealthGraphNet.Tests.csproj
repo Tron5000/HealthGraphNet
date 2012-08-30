@@ -71,6 +71,7 @@
     <Compile Include="Unit\Endpoints\ProfileEndpointTest.cs" />
     <Compile Include="Unit\Endpoints\SettingsEndpointTest.cs" />
     <Compile Include="Unit\RestSharp\OAuth2RequestHeaderAuthenticatorTest.cs" />
+    <Compile Include="Unit\RestSharp\ValidateHelperTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Integration\" />

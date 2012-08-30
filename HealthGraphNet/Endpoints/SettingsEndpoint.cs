@@ -90,7 +90,7 @@ namespace HealthGraphNet
             ValidateHelper.IsValueValid<string>(settingsToUpdate.FirstDayOfWeek, ValidFirstDayOfWeek, "FirstDayOfWeek");
 
             //Add body to the request
-            request.AddParameter(SettingsModel.ContentType, new
+            request.AddParameter(SettingsModel.ContentType, _tokenManager.DefaultJsonSerializer.Serialize(new
             {
                 share_fitness_activities = settingsToUpdate.ShareFitnessActivities,
                 share_map = settingsToUpdate.ShareMap,
@@ -119,7 +119,7 @@ namespace HealthGraphNet
                 distance_units = settingsToUpdate.DistanceUnits,
                 weight_units = settingsToUpdate.WeightUnits,
                 first_day_of_week = settingsToUpdate.FirstDayOfWeek
-            }, ParameterType.RequestBody);
+            }), ParameterType.RequestBody);
             return request;
         }
 
