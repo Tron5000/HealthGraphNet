@@ -156,7 +156,26 @@ namespace HealthGraphNet.Samples.Web
             //settings = settingsRequest.UpdateSettings(settings);
 
             var weightRequest = new WeightEndpoint(TokenManager, user);
-            var weightItem = weightRequest.GetFeedPage(0, 1, new DateTime(2010, 1, 1), new DateTime(2013, 6, 1)).Items.First();
+            var weightItems =  weightRequest.GetFeedPage(0, 20, new DateTime(2010, 1, 1), new DateTime(2013, 6, 1)).Items; 
+            var weightItem = weightItems.First();
+            var weightDetail = weightRequest.GetWeight(weightItem.Uri);
+            //weightDetail.Bmi = 240;
+            //weightDetail = weightRequest.UpdateWeight(weightDetail);
+
+            /*
+            var weightNew = new WeightNewModel
+            {
+                Timestamp = DateTime.Now, 
+                MassWeight = 55,
+                PostToFacebook = false,
+                PostToTwitter = false
+            };
+            weightRequest.CreateWeight(weightNew);
+            */
+              
+            //var test = weightDetail.Timestamp.ToLocalTime();
+            //weightRequest.DeleteWeight(weightDetail.Uri);
+
 
             var activitiesRequest = new FitnessActivitiesEndpoint(TokenManager, user);
             var activitiesItem = activitiesRequest.GetFeedPage(pageSize: 2, noLaterThan: new DateTime(2013, 6, 1)).Items.FirstOrDefault();

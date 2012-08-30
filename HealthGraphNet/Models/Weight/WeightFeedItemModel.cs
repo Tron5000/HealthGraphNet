@@ -43,7 +43,7 @@ namespace HealthGraphNet.Models
         }
 
         /// <summary>
-        /// The value of the measured quantity. Read only. 
+        /// The value of the measured quantity (in kg). Read only. 
         /// </summary>
         public new double? FreeMass
         {
@@ -58,7 +58,7 @@ namespace HealthGraphNet.Models
         }
 
         /// <summary>
-        /// The value of the measured quantity. Read only. 
+        /// The value of the measured quantity (in kg). Read only. 
         /// </summary>
         public new double? MassWeight
         {
@@ -73,7 +73,7 @@ namespace HealthGraphNet.Models
         }
 
         /// <summary>
-        /// The value of the measured quantity. Read only. 
+        /// The value of the measured quantity (in kg). Read only. 
         /// </summary>
         public new double? Weight
         {

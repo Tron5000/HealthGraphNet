@@ -5,10 +5,11 @@ namespace HealthGraphNet.Models
 {
     public abstract class WeightModelBase
     {
+        private double? _bmi;
+        
         /// <summary>
         /// The value of the measured quantity.  
         /// </summary>
-        private double? _bmi;
         public double? Bmi 
         {
             get
@@ -23,10 +24,11 @@ namespace HealthGraphNet.Models
             }
         }
 
+        private double? _fatPercent;
+
         /// <summary>
         /// The value of the measured quantity.  
         /// </summary>
-        private double? _fatPercent;
         public double? FatPercent 
         {
             get
@@ -41,10 +43,11 @@ namespace HealthGraphNet.Models
             }
         }
 
-        /// <summary>
-        /// The value of the measured quantity.  
-        /// </summary>
         private double? _freeMass;
+
+        /// <summary>
+        /// The value of the measured quantity (in kg).  
+        /// </summary>
         public double? FreeMass 
         {
             get
@@ -55,14 +58,15 @@ namespace HealthGraphNet.Models
             {
                 NullAllMeasurements();
                 _freeMass = value;
-                AssignMeasurement(_massWeight, WeightType.FreeMass);
+                AssignMeasurement(_freeMass, WeightType.FreeMass);
             }
         }
 
-        /// <summary>
-        /// The value of the measured quantity.  
-        /// </summary>
         private double? _massWeight;
+
+        /// <summary>
+        /// The value of the measured quantity (in kg).  
+        /// </summary>
         public double? MassWeight 
         {
             get
@@ -77,10 +81,11 @@ namespace HealthGraphNet.Models
             }
         }
 
-        /// <summary>
-        /// The value of the measured quantity.  
-        /// </summary>
         private double? _weight;
+        
+        /// <summary>
+        /// The value of the measured quantity (in kg).  
+        /// </summary>
         public double? Weight 
         {
             get
@@ -95,10 +100,11 @@ namespace HealthGraphNet.Models
             }
         }
 
-        /// <summary>
-        /// The measurement value - as defined by the MeasureType.
-        /// </summary>
         private double? _measurement;
+
+        /// <summary>
+        /// The measurement value (in kg for FreeMass, MassWeight and Weight MeasurementTypes.
+        /// </summary>
         public double? Measurement 
         {
             get
@@ -107,10 +113,11 @@ namespace HealthGraphNet.Models
             }
         }
 
+        private WeightType? _measurementType;
+
         /// <summary>
         /// The measurement type.
         /// </summary>
-        private WeightType? _measurementType;
         public WeightType? MeasurementType 
         {
             get

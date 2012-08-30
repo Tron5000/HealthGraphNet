@@ -109,8 +109,9 @@ namespace HealthGraphNet.Tests.Unit
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             FitnessActivitiesEndpoint activitiesRequest = new FitnessActivitiesEndpoint(tokenManager.Object, new UsersModel());
-            //Act and assert
+            //Act
             ValidActivity.Type = "Not a valid type.";
+            //Assert
             Assert.Throws(typeof(ArgumentException), () => { activitiesRequest.UpdateActivity(ValidActivity); });
         }
 
@@ -120,8 +121,9 @@ namespace HealthGraphNet.Tests.Unit
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             FitnessActivitiesEndpoint activitiesRequest = new FitnessActivitiesEndpoint(tokenManager.Object, new UsersModel());
-            //Act and assert
+            //Act
             ValidActivity.Equipment = "Not a valid equipment.";
+            //Assert
             Assert.Throws(typeof(ArgumentException), () => { activitiesRequest.UpdateActivity(ValidActivity); });
         }
 
@@ -131,8 +133,9 @@ namespace HealthGraphNet.Tests.Unit
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             FitnessActivitiesEndpoint activitiesRequest = new FitnessActivitiesEndpoint(tokenManager.Object, new UsersModel());
-            //Act and assert
+            //Act
             ValidActivity.Path.First().Type = "Not a valid path type.";
+            //Assert
             Assert.Throws(typeof(ArgumentException), () => { activitiesRequest.UpdateActivity(ValidActivity); });
         }
 
@@ -142,8 +145,9 @@ namespace HealthGraphNet.Tests.Unit
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             FitnessActivitiesEndpoint activitiesRequest = new FitnessActivitiesEndpoint(tokenManager.Object, new UsersModel());
-            //Act and assert
+            //Act
             ValidActivity.Path.RemoveAt(1);
+            //Assert
             Assert.AreEqual(1, ValidActivity.Path.Count);
             Assert.Throws(typeof(ArgumentException), () => { activitiesRequest.UpdateActivity(ValidActivity); });
         }
@@ -154,7 +158,7 @@ namespace HealthGraphNet.Tests.Unit
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             FitnessActivitiesEndpoint activitiesRequest = new FitnessActivitiesEndpoint(tokenManager.Object, new UsersModel());
-            //Act and assert
+            //Act
             ValidActivity.Type = "Other";
             string sixtyFiveCharacterSecondaryType = string.Empty;
             for (var count = 0; count < 65; count++)
@@ -162,6 +166,7 @@ namespace HealthGraphNet.Tests.Unit
                 sixtyFiveCharacterSecondaryType += "A";
             }
             ValidActivity.SecondaryType = sixtyFiveCharacterSecondaryType;
+            //Assert
             Assert.AreEqual(65, ValidActivity.SecondaryType.Length);
             Assert.Throws(typeof(ArgumentException), () => { activitiesRequest.UpdateActivity(ValidActivity); });
         }
@@ -182,8 +187,9 @@ namespace HealthGraphNet.Tests.Unit
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             FitnessActivitiesEndpoint activitiesRequest = new FitnessActivitiesEndpoint(tokenManager.Object, new UsersModel());
-            //Act and assert
+            //Act
             ValidActivityNew.Type = "Not a valid type.";
+            //Assert
             Assert.Throws(typeof(ArgumentException), () => { activitiesRequest.CreateActivity(ValidActivityNew); });
         }
 
@@ -193,8 +199,9 @@ namespace HealthGraphNet.Tests.Unit
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             FitnessActivitiesEndpoint activitiesRequest = new FitnessActivitiesEndpoint(tokenManager.Object, new UsersModel());
-            //Act and assert
+            //Act
             ValidActivityNew.Equipment = "Not a valid equipment.";
+            //Assert
             Assert.Throws(typeof(ArgumentException), () => { activitiesRequest.CreateActivity(ValidActivityNew); });
         }
 
@@ -204,8 +211,9 @@ namespace HealthGraphNet.Tests.Unit
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             FitnessActivitiesEndpoint activitiesRequest = new FitnessActivitiesEndpoint(tokenManager.Object, new UsersModel());
-            //Act and assert
+            //Act
             ValidActivityNew.Path.First().Type = "Not a valid path type.";
+            //Assert
             Assert.Throws(typeof(ArgumentException), () => { activitiesRequest.CreateActivity(ValidActivityNew); });
         }
 
@@ -215,8 +223,9 @@ namespace HealthGraphNet.Tests.Unit
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             FitnessActivitiesEndpoint activitiesRequest = new FitnessActivitiesEndpoint(tokenManager.Object, new UsersModel());
-            //Act and assert
+            //Act
             ValidActivityNew.Path.RemoveAt(1);
+            //Assert
             Assert.AreEqual(1, ValidActivityNew.Path.Count);
             Assert.Throws(typeof(ArgumentException), () => { activitiesRequest.CreateActivity(ValidActivityNew); });
         }
@@ -227,7 +236,7 @@ namespace HealthGraphNet.Tests.Unit
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             FitnessActivitiesEndpoint activitiesRequest = new FitnessActivitiesEndpoint(tokenManager.Object, new UsersModel());
-            //Act and assert
+            //Act
             ValidActivityNew.Type = "Other";
             string sixtyFiveCharacterSecondaryType = string.Empty;
             for (var count = 0; count < 65; count++)
@@ -235,6 +244,7 @@ namespace HealthGraphNet.Tests.Unit
                 sixtyFiveCharacterSecondaryType += "A";
             }
             ValidActivityNew.SecondaryType = sixtyFiveCharacterSecondaryType;
+            //Assert
             Assert.AreEqual(65, ValidActivityNew.SecondaryType.Length);
             Assert.Throws(typeof(ArgumentException), () => { activitiesRequest.CreateActivity(ValidActivityNew); });
         }

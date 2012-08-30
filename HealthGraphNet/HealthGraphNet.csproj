@@ -65,9 +65,12 @@
     <Compile Include="Models\FeedModel.cs" />
     <Compile Include="Models\Weight\WeightFeedItemModel.cs" />
     <Compile Include="Models\Weight\WeightModelBase.cs" />
+    <Compile Include="Models\Weight\WeightNewModel.cs" />
+    <Compile Include="Models\Weight\WeightPastModel.cs" />
     <Compile Include="Models\Weight\WeightType.cs" />
     <Compile Include="RestSharp\ExtensionHelpers.cs" />
-    <Compile Include="RestSharp\JsonIgnoreNullSerializer.cs" />
+    <Compile Include="RestSharp\JsonNETDeserializer.cs" />
+    <Compile Include="RestSharp\JsonNETSerializer.cs" />
     <Compile Include="RestSharp\OAuth2RequestHeaderAuthenticator.cs" />
     <Compile Include="AccessTokenManager.cs" />
     <Compile Include="HealthGraphException.cs" />
@@ -79,9 +82,7 @@
     <Compile Include="Endpoints\UsersEndpoint.cs" />
     <Compile Include="RestSharp\ValidateHelper.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

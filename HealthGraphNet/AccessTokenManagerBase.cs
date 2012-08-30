@@ -24,7 +24,7 @@ namespace HealthGraphNet
         public abstract void InitAccessToken(string code);
         public abstract void InitAccessTokenAsync(Action success, Action<HealthGraphException> failure, string code);
 
-        internal readonly ISerializer DefaultJsonSerializer = new JsonIgnoreNullSerializer();
+        internal readonly ISerializer DefaultJsonSerializer = new JsonNETSerializer();
         private const string LocationHeaderName = "Location";
 
         #endregion
@@ -44,6 +44,7 @@ namespace HealthGraphNet
             //Initialize the rest client
             _client = new RestClient();
             _client.ClearHandlers();
+            //_client.AddHandler("*", new JsonNETDeserializer());
             _client.AddHandler("*", new JsonDeserializer());
         }
 
