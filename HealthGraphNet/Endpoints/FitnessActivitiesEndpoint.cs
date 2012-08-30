@@ -20,13 +20,13 @@ namespace HealthGraphNet
         public static readonly List<string> ValidPathType = new List<string> { "start", "end", "gps", "pause", "resume", "manual" };
 
         private AccessTokenManagerBase _tokenManager;
-        private UserModel _user;
+        private UsersModel _user;
 
         #endregion        
         
         #region Constructors
 
-        public FitnessActivitiesEndpoint(AccessTokenManagerBase tokenManager, UserModel user)
+        public FitnessActivitiesEndpoint(AccessTokenManagerBase tokenManager, UsersModel user)
         {
             _tokenManager = tokenManager;
             _user = user;
@@ -36,16 +36,18 @@ namespace HealthGraphNet
 
         #region IFitnessActivitiesEndpoint
 
-        public FitnessActivitiesFeedModel GetFeedPage(int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
+        public FeedModel<FitnessActivitiesFeedItemModel> GetFeedPage(int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
         {
-            var request = PrepareFeedPageRequest(pageIndex, pageSize, noEarlierThan, noLaterThan, modifiedNoEarlierThan, modifiedNoLaterThan);
-            return _tokenManager.Execute<FitnessActivitiesFeedModel>(request);
+            var request = new RestRequest();
+            request.PrepareFeedPageRequest(_user.FitnessActivities, pageIndex, pageSize, noEarlierThan, noLaterThan, modifiedNoEarlierThan, modifiedNoLaterThan);
+            return _tokenManager.Execute<FeedModel<FitnessActivitiesFeedItemModel>>(request);
         }
 
-        public void GetFeedPageAsync(Action<FitnessActivitiesFeedModel> success, Action<HealthGraphException> failure, int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
+        public void GetFeedPageAsync(Action<FeedModel<FitnessActivitiesFeedItemModel>> success, Action<HealthGraphException> failure, int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
         {
-            var request = PrepareFeedPageRequest(pageIndex, pageSize, noEarlierThan, noLaterThan, modifiedNoEarlierThan, modifiedNoLaterThan);
-            _tokenManager.ExecuteAsync<FitnessActivitiesFeedModel>(request, success, failure);
+            var request = new RestRequest();
+            request.PrepareFeedPageRequest(_user.FitnessActivities, pageIndex, pageSize, noEarlierThan, noLaterThan, modifiedNoEarlierThan, modifiedNoLaterThan);
+            _tokenManager.ExecuteAsync<FeedModel<FitnessActivitiesFeedItemModel>>(request, success, failure);
         }
 
         public FitnessActivitiesPastModel GetActivity(string uri)
@@ -199,60 +201,6 @@ namespace HealthGraphNet
                 notes = activityToUpdate.Notes,
                 path = ((activityToUpdate.Path != null) && (activityToUpdate.Path.Count == 0)) ? null : activityToUpdate.Path                
             }), ParameterType.RequestBody);
-            return request;
-        }
-
-        /// <summary>
-        /// Adds filtering parameters for the retrieval of a feed page.
-        /// </summary>
-        /// <param name="pageIndex"></param>
-        /// <param name="pageSize"></param>
-        /// <param name="noEarlierThan"></param>
-        /// <param name="noLaterThan"></param>
-        /// <param name="modifiedNoEarlierThan"></param>
-        /// <param name="modifiedNoLaterThan"></param>
-        /// <returns></returns>
-        private IRestRequest PrepareFeedPageRequest(int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)        
-        {
-            var request = new RestRequest(Method.GET);
-            request.Resource = _user.FitnessActivities;
-            string delimiter = "?";
-            if (pageIndex.HasValue)
-            {
-                request.Resource += delimiter + "page={page}";
-                request.AddUrlSegment("page", pageIndex.Value.ToString());
-                delimiter = "&";
-            }
-            if (pageSize.HasValue)
-            {
-                request.Resource += delimiter + "pageSize={pageSize}";
-                request.AddUrlSegment("pageSize", pageSize.Value.ToString());
-                delimiter = "&";
-            }
-            if (noEarlierThan.HasValue)
-            {
-                request.Resource += delimiter + "noEarlierThan={noEarlierThan}";
-                request.AddUrlSegment("noEarlierThan", noEarlierThan.Value.ToString("yyyy-MM-dd"));
-                delimiter = "&";
-            }
-            if (noLaterThan.HasValue)
-            {
-                request.Resource += delimiter + "noLaterThan={noLaterThan}";
-                request.AddUrlSegment("noLaterThan", noLaterThan.Value.ToString("yyyy-MM-dd"));
-                delimiter = "&";
-            }
-            if (modifiedNoEarlierThan.HasValue)
-            {
-                request.Resource += delimiter + "modifiedNoEarlierThan={modifiedNoEarlierThan}";
-                request.AddUrlSegment("modifiedNoEarlierThan", modifiedNoEarlierThan.Value.ToString("yyyy-MM-dd"));
-                delimiter = "&";
-            }
-            if (modifiedNoLaterThan.HasValue)
-            {
-                request.Resource += delimiter + "modifiedNoLaterThan={modifiedNoLaterThan}";
-                request.AddUrlSegment("modifiedNoLaterThan", modifiedNoLaterThan.Value.ToString("yyyy-MM-dd"));
-                delimiter = "&";
-            }
             return request;
         }
 

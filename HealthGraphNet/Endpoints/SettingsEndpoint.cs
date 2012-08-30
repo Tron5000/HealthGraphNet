@@ -20,13 +20,13 @@ namespace HealthGraphNet
         public static readonly List<string> ValidFirstDayOfWeek = new List<string> { "Sunday", "Monday" };
 
         private AccessTokenManagerBase _tokenManager;
-        private UserModel _user;
+        private UsersModel _user;
 
         #endregion
 
         #region Constructors
 
-        public SettingsEndpoint(AccessTokenManagerBase tokenManager, UserModel user)
+        public SettingsEndpoint(AccessTokenManagerBase tokenManager, UsersModel user)
         {
             _tokenManager = tokenManager;
             _user = user;

@@ -60,7 +60,7 @@ namespace HealthGraphNet.Tests.Unit
         {
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            SettingsEndpoint settingsRequest = new SettingsEndpoint(tokenManager.Object, new UserModel());
+            SettingsEndpoint settingsRequest = new SettingsEndpoint(tokenManager.Object, new UsersModel());
             //Act and Assert
             Assert.DoesNotThrow(() => { settingsRequest.UpdateSettings(ValidSettings); });
         }
@@ -70,7 +70,7 @@ namespace HealthGraphNet.Tests.Unit
         {
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            SettingsEndpoint settingsRequest = new SettingsEndpoint(tokenManager.Object, new UserModel());
+            SettingsEndpoint settingsRequest = new SettingsEndpoint(tokenManager.Object, new UsersModel());
             //Act and Assert
             ValidSettings.ShareFitnessActivities = "Not valid value.";
             Assert.Throws(typeof(ArgumentException), () => { settingsRequest.UpdateSettings(ValidSettings); });
@@ -81,7 +81,7 @@ namespace HealthGraphNet.Tests.Unit
         {
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            SettingsEndpoint settingsRequest = new SettingsEndpoint(tokenManager.Object, new UserModel());
+            SettingsEndpoint settingsRequest = new SettingsEndpoint(tokenManager.Object, new UsersModel());
             //Act and Assert
             ValidSettings.ShareMap = "Not valid value.";
             Assert.Throws(typeof(ArgumentException), () => { settingsRequest.UpdateSettings(ValidSettings); });
@@ -92,7 +92,7 @@ namespace HealthGraphNet.Tests.Unit
         {
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            SettingsEndpoint settingsRequest = new SettingsEndpoint(tokenManager.Object, new UserModel());
+            SettingsEndpoint settingsRequest = new SettingsEndpoint(tokenManager.Object, new UsersModel());
             //Act and Assert
             ValidSettings.ShareBackgroundActivities = "Not valid value.";
             Assert.Throws(typeof(ArgumentException), () => { settingsRequest.UpdateSettings(ValidSettings); });
@@ -103,7 +103,7 @@ namespace HealthGraphNet.Tests.Unit
         {
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            SettingsEndpoint settingsRequest = new SettingsEndpoint(tokenManager.Object, new UserModel());
+            SettingsEndpoint settingsRequest = new SettingsEndpoint(tokenManager.Object, new UsersModel());
             //Act and Assert
             ValidSettings.ShareSleep = "Not valid value.";
             Assert.Throws(typeof(ArgumentException), () => { settingsRequest.UpdateSettings(ValidSettings); });
@@ -114,7 +114,7 @@ namespace HealthGraphNet.Tests.Unit
         {
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            SettingsEndpoint settingsRequest = new SettingsEndpoint(tokenManager.Object, new UserModel());
+            SettingsEndpoint settingsRequest = new SettingsEndpoint(tokenManager.Object, new UsersModel());
             //Act and Assert
             ValidSettings.ShareNutrition = "Not valid value.";
             Assert.Throws(typeof(ArgumentException), () => { settingsRequest.UpdateSettings(ValidSettings); });
@@ -125,7 +125,7 @@ namespace HealthGraphNet.Tests.Unit
         {
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            SettingsEndpoint settingsRequest = new SettingsEndpoint(tokenManager.Object, new UserModel());
+            SettingsEndpoint settingsRequest = new SettingsEndpoint(tokenManager.Object, new UsersModel());
             //Act and Assert
             ValidSettings.ShareWeight = "Not valid value.";
             Assert.Throws(typeof(ArgumentException), () => { settingsRequest.UpdateSettings(ValidSettings); });
@@ -136,7 +136,7 @@ namespace HealthGraphNet.Tests.Unit
         {
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            SettingsEndpoint settingsRequest = new SettingsEndpoint(tokenManager.Object, new UserModel());
+            SettingsEndpoint settingsRequest = new SettingsEndpoint(tokenManager.Object, new UsersModel());
             //Act and Assert
             ValidSettings.ShareGeneralMeasurements = "Not valid value.";
             Assert.Throws(typeof(ArgumentException), () => { settingsRequest.UpdateSettings(ValidSettings); });
@@ -147,7 +147,7 @@ namespace HealthGraphNet.Tests.Unit
         {
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            SettingsEndpoint settingsRequest = new SettingsEndpoint(tokenManager.Object, new UserModel());
+            SettingsEndpoint settingsRequest = new SettingsEndpoint(tokenManager.Object, new UsersModel());
             //Act and Assert
             ValidSettings.ShareDiabetes = "Not valid value.";
             Assert.Throws(typeof(ArgumentException), () => { settingsRequest.UpdateSettings(ValidSettings); });
@@ -158,7 +158,7 @@ namespace HealthGraphNet.Tests.Unit
         {
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            SettingsEndpoint settingsRequest = new SettingsEndpoint(tokenManager.Object, new UserModel());
+            SettingsEndpoint settingsRequest = new SettingsEndpoint(tokenManager.Object, new UsersModel());
             //Act and Assert
             ValidSettings.DistanceUnits = "Not valid value.";
             Assert.Throws(typeof(ArgumentException), () => { settingsRequest.UpdateSettings(ValidSettings); });
@@ -169,7 +169,7 @@ namespace HealthGraphNet.Tests.Unit
         {
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            SettingsEndpoint settingsRequest = new SettingsEndpoint(tokenManager.Object, new UserModel());
+            SettingsEndpoint settingsRequest = new SettingsEndpoint(tokenManager.Object, new UsersModel());
             //Act and Assert
             ValidSettings.WeightUnits = "Not valid value.";
             Assert.Throws(typeof(ArgumentException), () => { settingsRequest.UpdateSettings(ValidSettings); });
@@ -180,7 +180,7 @@ namespace HealthGraphNet.Tests.Unit
         {
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            SettingsEndpoint settingsRequest = new SettingsEndpoint(tokenManager.Object, new UserModel());
+            SettingsEndpoint settingsRequest = new SettingsEndpoint(tokenManager.Object, new UsersModel());
             //Act and Assert
             ValidSettings.FirstDayOfWeek = "Not valid value.";
             Assert.Throws(typeof(ArgumentException), () => { settingsRequest.UpdateSettings(ValidSettings); });

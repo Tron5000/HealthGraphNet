@@ -155,6 +155,9 @@ namespace HealthGraphNet.Samples.Web
             //settings.FirstDayOfWeek = "Monday";
             //settings = settingsRequest.UpdateSettings(settings);
 
+            var weightRequest = new WeightEndpoint(TokenManager, user);
+            var weightItem = weightRequest.GetFeedPage(0, 1, new DateTime(2010, 1, 1), new DateTime(2013, 6, 1)).Items.First();
+
             var activitiesRequest = new FitnessActivitiesEndpoint(TokenManager, user);
             var activitiesItem = activitiesRequest.GetFeedPage(pageSize: 2, noLaterThan: new DateTime(2013, 6, 1)).Items.FirstOrDefault();
             if (activitiesItem != null)

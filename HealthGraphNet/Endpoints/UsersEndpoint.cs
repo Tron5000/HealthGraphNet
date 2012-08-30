@@ -27,18 +27,18 @@ namespace HealthGraphNet
 
         #region IUsersEndpoint
 
-        public UserModel GetUser()
+        public UsersModel GetUser()
         {
             var request = new RestRequest(Method.GET);
             request.Resource = UriResource;
-            return _tokenManager.Execute<UserModel>(request);
+            return _tokenManager.Execute<UsersModel>(request);
         }
 
-        public void GetUserAsync(Action<UserModel> success, Action<HealthGraphException> failure)
+        public void GetUserAsync(Action<UsersModel> success, Action<HealthGraphException> failure)
         {
             var request = new RestRequest(Method.GET);
             request.Resource = UriResource;
-            _tokenManager.ExecuteAsync<UserModel>(request, success, failure);
+            _tokenManager.ExecuteAsync<UsersModel>(request, success, failure);
         }
 
         #endregion

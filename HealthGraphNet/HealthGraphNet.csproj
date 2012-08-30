@@ -47,32 +47,41 @@
     <Compile Include="Endpoints\Interfaces\IProfileEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\ISettingsEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\IUsersEndpoint.cs" />
+    <Compile Include="Endpoints\Interfaces\IWeightEndpoint.cs" />
     <Compile Include="Endpoints\SettingsEndpoint.cs" />
-    <Compile Include="Models\FitnessActivitiesFeedItemModel.cs" />
-    <Compile Include="Models\CaloriesModel.cs" />
-    <Compile Include="Models\DistanceModel.cs" />
-    <Compile Include="Models\FitnessActivitiesFeedModel.cs" />
-    <Compile Include="Models\FitnessActivitiesPastModel.cs" />
-    <Compile Include="Models\FitnessActivitiesNewModel.cs" />
-    <Compile Include="Models\HeartRateModel.cs" />
-    <Compile Include="Models\ImageModel.cs" />
-    <Compile Include="Models\Interfaces\IFitnessActivitiesModel.cs" />
-    <Compile Include="Models\PathModel.cs" />
-    <Compile Include="Models\ProfileModel.cs" />
-    <Compile Include="Models\SettingsModel.cs" />
+    <Compile Include="Endpoints\WeightEndpoint.cs" />
+    <Compile Include="Models\FitnessActivities\FitnessActivitiesFeedItemModel.cs" />
+    <Compile Include="Models\FitnessActivities\CaloriesModel.cs" />
+    <Compile Include="Models\FitnessActivities\DistanceModel.cs" />
+    <Compile Include="Models\FitnessActivities\FitnessActivitiesPastModel.cs" />
+    <Compile Include="Models\FitnessActivities\FitnessActivitiesNewModel.cs" />
+    <Compile Include="Models\FitnessActivities\HeartRateModel.cs" />
+    <Compile Include="Models\FitnessActivities\ImageModel.cs" />
+    <Compile Include="Models\IFeedModelItem.cs" />
+    <Compile Include="Models\FitnessActivities\IFitnessActivitiesModel.cs" />
+    <Compile Include="Models\FitnessActivities\PathModel.cs" />
+    <Compile Include="Models\Profile\ProfileModel.cs" />
+    <Compile Include="Models\Settings\SettingsModel.cs" />
+    <Compile Include="Models\FeedModel.cs" />
+    <Compile Include="Models\Weight\WeightFeedItemModel.cs" />
+    <Compile Include="Models\Weight\WeightModelBase.cs" />
+    <Compile Include="Models\Weight\WeightType.cs" />
+    <Compile Include="RestSharp\ExtensionHelpers.cs" />
     <Compile Include="RestSharp\JsonIgnoreNullSerializer.cs" />
     <Compile Include="RestSharp\OAuth2RequestHeaderAuthenticator.cs" />
     <Compile Include="AccessTokenManager.cs" />
     <Compile Include="HealthGraphException.cs" />
     <Compile Include="Models\AccessTokenModel.cs" />
-    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\UsersModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AccessTokenManagerBase.cs" />
     <Compile Include="Endpoints\ProfileEndpoint.cs" />
     <Compile Include="Endpoints\UsersEndpoint.cs" />
     <Compile Include="RestSharp\ValidateHelper.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\Interfaces\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

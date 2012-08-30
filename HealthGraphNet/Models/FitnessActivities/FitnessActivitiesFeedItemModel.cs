@@ -5,7 +5,7 @@ namespace HealthGraphNet.Models
     /// <summary>
     /// The fitness activities feed item model used in conjunction with activity data.
     /// </summary>
-    public class FitnessActivitiesFeedItemModel
+    public class FitnessActivitiesFeedItemModel : IFeedModelItem
     {
         /// <summary>
         /// The type of activity, as one of the following values: Running, Cycling, Mountain Biking, Walking, Hiking, Downhill Skiing, Cross-Country Skiing, Snowboarding, Skating, Swimming, Wheelchair, Rowing, Elliptical, Other. Read only.

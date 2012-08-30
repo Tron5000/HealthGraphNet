@@ -5,7 +5,7 @@ namespace HealthGraphNet
 {
     public interface IUsersEndpoint
     {
-        UserModel GetUser();
-        void GetUserAsync(Action<UserModel> success, Action<HealthGraphException> failure);
+        UsersModel GetUser();
+        void GetUserAsync(Action<UsersModel> success, Action<HealthGraphException> failure);
     }
 }

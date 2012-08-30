@@ -17,13 +17,13 @@ namespace HealthGraphNet
         public static readonly List<string> ValidAthleteType = new List<string> { "Athlete", "Runner", "Marathoner", "Ultra Marathoner", "Cyclist", "Tri-Athlete, Walker", "Hiker", "Skier", "Snowboarder", "Skater", "Swimmer", "Rower", null };
         
         private AccessTokenManagerBase _tokenManager;
-        private UserModel _user;
+        private UsersModel _user;
 
         #endregion        
         
         #region Constructors
 
-        public ProfileEndpoint(AccessTokenManagerBase tokenManager, UserModel user)
+        public ProfileEndpoint(AccessTokenManagerBase tokenManager, UsersModel user)
         {
             _tokenManager = tokenManager;
             _user = user;
