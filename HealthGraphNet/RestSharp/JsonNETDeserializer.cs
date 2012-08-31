@@ -39,7 +39,7 @@ namespace HealthGraphNet.RestSharp
                 DefaultValueHandling = DefaultValueHandling.Include,
                 NullValueHandling = NullValueHandling.Ignore
             };
-            jsonSettings.Converters.Add(new IsoDateTimeConverter { DateTimeFormat = DateFormat ?? "R", DateTimeStyles = DateTimeStyles.AdjustToUniversal });            
+            jsonSettings.Converters.Add(new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AdjustToUniversal });            
             return JsonConvert.DeserializeObject<T>(response.Content, jsonSettings);
         }
 

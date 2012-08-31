@@ -44,8 +44,7 @@ namespace HealthGraphNet
             //Initialize the rest client
             _client = new RestClient();
             _client.ClearHandlers();
-            //_client.AddHandler("*", new JsonNETDeserializer());
-            _client.AddHandler("*", new JsonDeserializer());
+            _client.AddHandler("*", new JsonNETDeserializer());
         }
 
         #endregion

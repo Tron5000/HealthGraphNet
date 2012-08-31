@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace HealthGraphNet.Models
 {
@@ -13,11 +14,13 @@ namespace HealthGraphNet.Models
         /// <summary>
         /// The OAuth2 access token.
         /// </summary>
+        [JsonProperty(PropertyName = "access_token")]
         public string AccessToken { get; set; }
         
         /// <summary>
         /// The type of OAuth2 access token.
         /// </summary>
+        [JsonProperty(PropertyName = "token_type")]
         public string TokenType { get; set; }
     }
 }
