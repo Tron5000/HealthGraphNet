@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace HealthGraphNet.Models
 {
@@ -41,7 +42,7 @@ namespace HealthGraphNet.Models
         /// <summary>
         /// The starting time for the activity (e.g., Sat, 1 Jan 2011 00:00:00).
         /// </summary>
-        [JsonProperty(PropertyName = "start_time")]                        
+        [JsonProperty(PropertyName = "start_time")]
         public DateTime StartTime { get; set; }
 
         /// <summary>

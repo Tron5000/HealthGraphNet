@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace HealthGraphNet.Models
 {
@@ -10,11 +11,13 @@ namespace HealthGraphNet.Models
         /// <summary>
         /// The number of seconds since the start of the activity.
         /// </summary>
+        [JsonProperty(PropertyName = "timestamp")]
         public double Timestamp { get; set; }
         
         /// <summary>
         /// The total calories burned since the start of the activity.
         /// </summary>
+        [JsonProperty(PropertyName = "calories")]        
         public double Calories { get; set; }
     }
 }

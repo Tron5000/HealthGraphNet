@@ -10,6 +10,7 @@ namespace HealthGraphNet.Models
         /// <summary>
         /// The value of the measured quantity.  
         /// </summary>
+        [JsonProperty(PropertyName = "bmi")]
         public double? Bmi 
         {
             get
@@ -29,6 +30,7 @@ namespace HealthGraphNet.Models
         /// <summary>
         /// The value of the measured quantity.  
         /// </summary>
+        [JsonProperty(PropertyName = "fat_percent")]        
         public double? FatPercent 
         {
             get
@@ -48,6 +50,7 @@ namespace HealthGraphNet.Models
         /// <summary>
         /// The value of the measured quantity (in kg).  
         /// </summary>
+        [JsonProperty(PropertyName = "free_mass")]        
         public double? FreeMass 
         {
             get
@@ -67,6 +70,7 @@ namespace HealthGraphNet.Models
         /// <summary>
         /// The value of the measured quantity (in kg).  
         /// </summary>
+        [JsonProperty(PropertyName = "mass_weight")]        
         public double? MassWeight 
         {
             get
@@ -86,6 +90,7 @@ namespace HealthGraphNet.Models
         /// <summary>
         /// The value of the measured quantity (in kg).  
         /// </summary>
+        [JsonProperty(PropertyName = "weigh")]        
         public double? Weight 
         {
             get

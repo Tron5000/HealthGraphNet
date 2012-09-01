@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace HealthGraphNet.Models
 {
@@ -10,11 +11,13 @@ namespace HealthGraphNet.Models
         /// <summary>
         /// The time at which the measurement was taken (e.g., "Sat, 1 Jan 2011 00:00:00"). Read only.
         /// </summary>
+        [JsonProperty(PropertyName = "timestamp")]
         public DateTime Timestamp { get; internal set; }
        
         /// <summary>
         /// The value of the measured quantity. Read only. 
         /// </summary>
+        [JsonProperty(PropertyName = "bmi")]        
         public new double? Bmi
         {
             get
@@ -30,6 +33,7 @@ namespace HealthGraphNet.Models
         /// <summary>
         /// The value of the measured quantity. Read only. 
         /// </summary>
+        [JsonProperty(PropertyName = "fat_percent")]                
         public new double? FatPercent
         {
             get
@@ -45,6 +49,7 @@ namespace HealthGraphNet.Models
         /// <summary>
         /// The value of the measured quantity (in kg). Read only. 
         /// </summary>
+        [JsonProperty(PropertyName = "free_mass")]                
         public new double? FreeMass
         {
             get
@@ -60,6 +65,7 @@ namespace HealthGraphNet.Models
         /// <summary>
         /// The value of the measured quantity (in kg). Read only. 
         /// </summary>
+        [JsonProperty(PropertyName = "mass_weight")]                
         public new double? MassWeight
         {
             get
@@ -75,6 +81,7 @@ namespace HealthGraphNet.Models
         /// <summary>
         /// The value of the measured quantity (in kg). Read only. 
         /// </summary>
+        [JsonProperty(PropertyName = "weight")]                
         public new double? Weight
         {
             get
@@ -90,6 +97,7 @@ namespace HealthGraphNet.Models
         /// <summary>
         /// The URI of detailed information for the weight measurement. Read only.
         /// </summary>
+        [JsonProperty(PropertyName = "uri")]                
         public string Uri { get; internal set; }
     }
 }
