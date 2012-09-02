@@ -37,9 +37,10 @@ namespace HealthGraphNet.RestSharp
             {                
                 MissingMemberHandling = MissingMemberHandling.Ignore,
                 DefaultValueHandling = DefaultValueHandling.Include,
-                NullValueHandling = NullValueHandling.Ignore
+                NullValueHandling = NullValueHandling.Ignore,
+                DateTimeZoneHandling = DateTimeZoneHandling.Local
             };
-            jsonSettings.Converters.Add(new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.None });            
+            //jsonSettings.Converters.Add(new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.None });            
             return JsonConvert.DeserializeObject<T>(response.Content, jsonSettings);
         }
 

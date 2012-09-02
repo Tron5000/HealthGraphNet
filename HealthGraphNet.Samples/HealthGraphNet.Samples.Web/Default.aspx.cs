@@ -155,11 +155,20 @@ namespace HealthGraphNet.Samples.Web
             //settings.FirstDayOfWeek = "Monday";
             //settings = settingsRequest.UpdateSettings(settings);
 
-            //var weightRequest = new WeightEndpoint(TokenManager, user);
-            //var weightItems =  weightRequest.GetFeedPage(0, 20, new DateTime(2010, 1, 1), new DateTime(2013, 6, 1)).Items; 
-            //var weightItem = weightItems.First();
-            //int test = 5;
-            //var weightDetail = weightRequest.GetWeight(weightItem.Uri);
+            var weightRequest = new WeightEndpoint(TokenManager, user);
+
+            var weightNew = new WeightNewModel
+            {
+                Timestamp = DateTime.Now,
+                MassWeight = 56,
+                PostToFacebook = false,
+                PostToTwitter = false
+            };
+            var test = weightRequest.CreateWeight(weightNew);
+
+            var weightItems =  weightRequest.GetFeedPage(0, 20, new DateTime(2010, 1, 1), new DateTime(2013, 6, 1)).Items; 
+            var weightItem = weightItems.First();
+            var weightDetail = weightRequest.GetWeight(weightItem.Uri);
             //weightDetail.Bmi = 240;
             //weightDetail = weightRequest.UpdateWeight(weightDetail);
 
@@ -178,7 +187,19 @@ namespace HealthGraphNet.Samples.Web
             //weightRequest.DeleteWeight(weightDetail.Uri);
 
 
+            /*
             var activitiesRequest = new FitnessActivitiesEndpoint(TokenManager, user);
+            var newActivity = new FitnessActivitiesNewModel
+            {
+                Type = "Running",
+                StartTime = DateTime.Now,
+                Duration = 50,
+                Notes = "blah6!"
+            };
+            var uri = activitiesRequest.CreateActivity(newActivity);
+            */
+            
+            /*
             var activitiesItem = activitiesRequest.GetFeedPage(pageSize: 2, noLaterThan: new DateTime(2013, 6, 1)).Items.FirstOrDefault();
             if (activitiesItem != null)
             {
@@ -193,17 +214,10 @@ namespace HealthGraphNet.Samples.Web
                 //Delete the activity
                 //activitiesRequest.DeleteActivity(activitiesDetail.Uri);
             }
-
+            */
             //Create an activity
             
-            var newActivity = new FitnessActivitiesNewModel
-            {
-                Type = "Running",
-                StartTime = DateTime.Now,
-                Duration = 50,
-                Notes = "blah2!"
-            };
-            var uri = activitiesRequest.CreateActivity(newActivity);
+
             
         }
 

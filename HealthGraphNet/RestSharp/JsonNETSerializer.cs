@@ -23,7 +23,7 @@ namespace HealthGraphNet.RestSharp
         /// Serialization of DateTime objects is done in RFC1123 format as per the following documentation. 
         /// https://groups.google.com/d/msg/healthgraph/wyHmJVuNNLQ/uCCpqbFTXxAJ
         /// </summary>
-        private const string RFC1123DateTimeFormat = "R";
+        public const string RFC1123DateTimeFormat = "R";
 
         #endregion
 
@@ -54,7 +54,7 @@ namespace HealthGraphNet.RestSharp
                 DefaultValueHandling = DefaultValueHandling.Include,
                 NullValueHandling = NullValueHandling.Ignore
             };
-            jsonSettings.Converters.Add(new IsoDateTimeConverter { DateTimeFormat = DateFormat ?? "R", DateTimeStyles = DateTimeStyles.AdjustToUniversal });
+            jsonSettings.Converters.Add(new IsoDateTimeConverter { DateTimeFormat = DateFormat ?? RFC1123DateTimeFormat, DateTimeStyles = DateTimeStyles.None });
             return JsonConvert.SerializeObject(obj, Formatting.Indented, jsonSettings);
         }
 

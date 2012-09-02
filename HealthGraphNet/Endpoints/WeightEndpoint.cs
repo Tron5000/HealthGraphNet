@@ -129,7 +129,7 @@ namespace HealthGraphNet
             //Add body to the request
             request.AddParameter(WeightNewModel.ContentType, _tokenManager.DefaultJsonSerializer.Serialize(new
             {
-                timestamp = weightToCreate.Timestamp,
+                timestamp = weightToCreate.Timestamp.ToUniversalTime(),
                 bmi = weightToCreate.Bmi,
                 fat_percent = weightToCreate.FatPercent,
                 free_mass = weightToCreate.FreeMass,

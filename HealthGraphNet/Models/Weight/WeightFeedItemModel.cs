@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using HealthGraphNet.RestSharp;
 
 namespace HealthGraphNet.Models
 {
