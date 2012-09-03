@@ -94,6 +94,94 @@ namespace HealthGraphNet.Tests.Unit
         #region Tests
 
         [Test()]
+        public void GetActivity_UriValid_DoesNotThrowArgumentException()
+        {
+            //Arrange
+            var validPath = "/test/";
+            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            FitnessActivitiesEndpoint activitiesRequest = new FitnessActivitiesEndpoint(tokenManager.Object, new UsersModel { FitnessActivities = validPath });
+            //Act and Assert
+            Assert.DoesNotThrow(() => { activitiesRequest.GetActivity(validPath); });
+        }
+
+        [Test()]
+        public void GetActivity_UriNotValid_ArgumentException()
+        {
+            //Arrange
+            var validPath = "/test/";
+            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            FitnessActivitiesEndpoint activitiesRequest = new FitnessActivitiesEndpoint(tokenManager.Object, new UsersModel { FitnessActivities = validPath });
+            //Act and Assert
+            Assert.Throws(typeof(ArgumentException), () => { activitiesRequest.GetActivity("Not validPath."); });
+        }
+
+        [Test()]
+        public void GetActivityAsync_UriValid_DoesNotThrowArgumentException()
+        {
+            //Arrange
+            var validPath = "/test/";
+            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            FitnessActivitiesEndpoint activitiesRequest = new FitnessActivitiesEndpoint(tokenManager.Object, new UsersModel { FitnessActivities = validPath });
+            //Act and Assert
+            Assert.DoesNotThrow(() => { activitiesRequest.GetActivityAsync((m) => {}, (ex) => {}, validPath); });
+        }
+
+        [Test()]
+        public void GetActivityAsync_UriNotValid_ArgumentException()
+        {
+            //Arrange
+            var validPath = "/test/";
+            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            FitnessActivitiesEndpoint activitiesRequest = new FitnessActivitiesEndpoint(tokenManager.Object, new UsersModel { FitnessActivities = validPath });
+            //Act and Assert
+            Assert.Throws(typeof(ArgumentException), () => { activitiesRequest.GetActivityAsync((m) => { }, (ex) => { }, "Not validPath."); });
+        }
+
+        [Test()]
+        public void DeleteActivity_UriValid_DoesNotThrowArgumentException()
+        {
+            //Arrange
+            var validPath = "/test/";
+            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            FitnessActivitiesEndpoint activitiesRequest = new FitnessActivitiesEndpoint(tokenManager.Object, new UsersModel { FitnessActivities = validPath });
+            //Act and Assert
+            Assert.DoesNotThrow(() => { activitiesRequest.DeleteActivity(validPath); });
+        }
+
+        [Test()]
+        public void DeleteActivity_UriNotValid_ArgumentException()
+        {
+            //Arrange
+            var validPath = "/test/";
+            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            FitnessActivitiesEndpoint activitiesRequest = new FitnessActivitiesEndpoint(tokenManager.Object, new UsersModel { FitnessActivities = validPath });
+            //Act and Assert
+            Assert.Throws(typeof(ArgumentException), () => { activitiesRequest.DeleteActivity("Not validPath."); });
+        }
+
+        [Test()]
+        public void DeleteActivityAsync_UriValid_DoesNotThrowArgumentException()
+        {
+            //Arrange
+            var validPath = "/test/";
+            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            FitnessActivitiesEndpoint activitiesRequest = new FitnessActivitiesEndpoint(tokenManager.Object, new UsersModel { FitnessActivities = validPath });
+            //Act and Assert
+            Assert.DoesNotThrow(() => { activitiesRequest.DeleteActivityAsync(() => { }, (ex) => { }, validPath); });
+        }
+
+        [Test()]
+        public void DeleteActivityAsync_UriNotValid_ArgumentException()
+        {
+            //Arrange
+            var validPath = "/test/";
+            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            FitnessActivitiesEndpoint activitiesRequest = new FitnessActivitiesEndpoint(tokenManager.Object, new UsersModel { FitnessActivities = validPath });
+            //Act and Assert
+            Assert.Throws(typeof(ArgumentException), () => { activitiesRequest.DeleteActivityAsync(() => { }, (ex) => { }, "Not validPath."); });
+        }
+
+        [Test()]
         public void UpdateActivity_AllPropertiesValid_DoesNotThrowArgumentException()
         {
             //Arrange

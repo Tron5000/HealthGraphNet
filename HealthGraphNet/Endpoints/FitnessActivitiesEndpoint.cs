@@ -52,6 +52,10 @@ namespace HealthGraphNet
 
         public FitnessActivitiesPastModel GetActivity(string uri)
         {
+            if (uri.Contains(_user.FitnessActivities) == false)
+            {
+                throw new ArgumentException("The uri must identify a resource on or below the " + _user.FitnessActivities + " endpoint.");
+            }
             var request = new RestRequest(Method.GET);
             request.Resource = uri;
             return _tokenManager.Execute<FitnessActivitiesPastModel>(request);
@@ -59,6 +63,10 @@ namespace HealthGraphNet
 
         public void GetActivityAsync(Action<FitnessActivitiesPastModel> success, Action<HealthGraphException> failure, string uri)
         {
+            if (uri.Contains(_user.FitnessActivities) == false)
+            {
+                throw new ArgumentException("The uri must identify a resource on or below the " + _user.FitnessActivities + " endpoint.");
+            }            
             var request = new RestRequest(Method.GET);
             request.Resource = uri;
             _tokenManager.ExecuteAsync(request, success, failure);
@@ -70,7 +78,7 @@ namespace HealthGraphNet
             return _tokenManager.Execute<FitnessActivitiesPastModel>(request);
         }
 
-        public void UpdateSettingsAsync(Action<FitnessActivitiesPastModel> success, Action<HealthGraphException> failure, FitnessActivitiesPastModel activityToUpdate)
+        public void UpdateActivityAsync(Action<FitnessActivitiesPastModel> success, Action<HealthGraphException> failure, FitnessActivitiesPastModel activityToUpdate)
         {
             var request = PrepareActivitiesUpdateRequest(activityToUpdate);
             _tokenManager.ExecuteAsync<FitnessActivitiesPastModel>(request, success, failure);
@@ -90,6 +98,10 @@ namespace HealthGraphNet
 
         public void DeleteActivity(string uri)
         {
+            if (uri.Contains(_user.FitnessActivities) == false)
+            {
+                throw new ArgumentException("The uri must identify a resource on or below the " + _user.FitnessActivities + " endpoint.");
+            }            
             var request = new RestRequest(Method.DELETE);
             request.Resource = uri;
             _tokenManager.ExecuteDelete(request);
@@ -97,6 +109,10 @@ namespace HealthGraphNet
 
         public void DeleteActivityAsync(Action success, Action<HealthGraphException> failure, string uri)
         {
+            if (uri.Contains(_user.FitnessActivities) == false)
+            {
+                throw new ArgumentException("The uri must identify a resource on or below the " + _user.FitnessActivities + " endpoint.");
+            }            
             var request = new RestRequest(Method.DELETE);
             request.Resource = uri;
             _tokenManager.ExecuteDeleteAsync(request, success, failure);

@@ -13,6 +13,7 @@ namespace HealthGraphNet.Models
         /// The time at which the measurement was taken (e.g., "Sat, 1 Jan 2011 00:00:00"). Read only.
         /// </summary>
         [JsonProperty(PropertyName = "timestamp")]
+        [JsonConverter(typeof(AdjustToUniversalIsoDateTimeConverter))]
         public DateTime Timestamp { get; internal set; }
        
         /// <summary>

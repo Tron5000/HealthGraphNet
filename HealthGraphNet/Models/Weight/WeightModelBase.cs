@@ -110,6 +110,7 @@ namespace HealthGraphNet.Models
         /// <summary>
         /// The measurement value (in kg for FreeMass, MassWeight and Weight MeasurementTypes.
         /// </summary>
+        [JsonIgnore()]
         public double? Measurement 
         {
             get
@@ -123,6 +124,7 @@ namespace HealthGraphNet.Models
         /// <summary>
         /// The measurement type.
         /// </summary>
+        [JsonIgnore()]
         public WeightType? MeasurementType 
         {
             get

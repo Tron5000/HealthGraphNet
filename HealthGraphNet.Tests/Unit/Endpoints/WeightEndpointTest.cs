@@ -40,6 +40,94 @@ namespace HealthGraphNet.Tests.Unit
         #region Tests
 
         [Test()]
+        public void GetWeight_UriValid_DoesNotThrowArgumentException()
+        {
+            //Arrange
+            var validPath = "/test/";
+            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            WeightEndpoint weightRequest = new WeightEndpoint(tokenManager.Object, new UsersModel { Weight = validPath });
+            //Act and Assert
+            Assert.DoesNotThrow(() => { weightRequest.GetWeight(validPath); });
+        }
+
+        [Test()]
+        public void GetWeight_UriNotValid_ArgumentException()
+        {
+            //Arrange
+            var validPath = "/test/";
+            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            WeightEndpoint weightRequest = new WeightEndpoint(tokenManager.Object, new UsersModel { Weight = validPath });
+            //Act and Assert
+            Assert.Throws(typeof(ArgumentException), () => { weightRequest.GetWeight("Not validPath."); });
+        }
+
+        [Test()]
+        public void GetWeightAsync_UriValid_DoesNotThrowArgumentException()
+        {
+            //Arrange
+            var validPath = "/test/";
+            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            WeightEndpoint weightRequest = new WeightEndpoint(tokenManager.Object, new UsersModel { Weight = validPath });
+            //Act and Assert
+            Assert.DoesNotThrow(() => { weightRequest.GetWeightAsync((m) => { }, (ex) => { }, validPath); });
+        }
+
+        [Test()]
+        public void GetWeightAsync_UriNotValid_ArgumentException()
+        {
+            //Arrange
+            var validPath = "/test/";
+            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            WeightEndpoint weightRequest = new WeightEndpoint(tokenManager.Object, new UsersModel { Weight = validPath });
+            //Act and Assert
+            Assert.Throws(typeof(ArgumentException), () => { weightRequest.GetWeightAsync((m) => { }, (ex) => { }, "Not validPath."); });
+        }
+
+        [Test()]
+        public void DeleteWeight_UriValid_DoesNotThrowArgumentException()
+        {
+            //Arrange
+            var validPath = "/test/";
+            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            WeightEndpoint weightRequest = new WeightEndpoint(tokenManager.Object, new UsersModel { Weight = validPath });
+            //Act and Assert
+            Assert.DoesNotThrow(() => { weightRequest.DeleteWeight(validPath); });
+        }
+
+        [Test()]
+        public void DeleteWeight_UriNotValid_ArgumentException()
+        {
+            //Arrange
+            var validPath = "/test/";
+            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            WeightEndpoint weightRequest = new WeightEndpoint(tokenManager.Object, new UsersModel { Weight = validPath });
+            //Act and Assert
+            Assert.Throws(typeof(ArgumentException), () => { weightRequest.DeleteWeight("Not validPath."); });
+        }
+
+        [Test()]
+        public void DeleteWeightAsync_UriValid_DoesNotThrowArgumentException()
+        {
+            //Arrange
+            var validPath = "/test/";
+            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            WeightEndpoint weightRequest = new WeightEndpoint(tokenManager.Object, new UsersModel { Weight = validPath });
+            //Act and Assert
+            Assert.DoesNotThrow(() => { weightRequest.DeleteWeightAsync(() => { }, (ex) => { }, validPath); });
+        }
+
+        [Test()]
+        public void DeleteWeightAsync_UriNotValid_ArgumentException()
+        {
+            //Arrange
+            var validPath = "/test/";
+            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            WeightEndpoint weightRequest = new WeightEndpoint(tokenManager.Object, new UsersModel { Weight = validPath });
+            //Act and Assert
+            Assert.Throws(typeof(ArgumentException), () => { weightRequest.DeleteWeightAsync(() => { }, (ex) => { }, "Not validPath."); });
+        }
+
+        [Test()]
         public void UpdateWeight_AllPropertiesValid_DoesNotThrowArgumentException()
         {
             //Arrange

@@ -13,7 +13,7 @@ namespace HealthGraphNet
         void GetActivityAsync(Action<FitnessActivitiesPastModel> success, Action<HealthGraphException> failure, string uri);
         //Update Activity (Detailed)
         FitnessActivitiesPastModel UpdateActivity(FitnessActivitiesPastModel activityToUpdate);
-        void UpdateSettingsAsync(Action<FitnessActivitiesPastModel> success, Action<HealthGraphException> failure, FitnessActivitiesPastModel activityToUpdate);
+        void UpdateActivityAsync(Action<FitnessActivitiesPastModel> success, Action<HealthGraphException> failure, FitnessActivitiesPastModel activityToUpdate);
         //Create Activity
         string CreateActivity(FitnessActivitiesNewModel activityToCreate);
         void CreateActivityAsync(Action<string> success, Action<HealthGraphException> failure, FitnessActivitiesNewModel activityToCreate);

@@ -68,6 +68,7 @@
     <Compile Include="Models\Weight\WeightNewModel.cs" />
     <Compile Include="Models\Weight\WeightPastModel.cs" />
     <Compile Include="Models\Weight\WeightType.cs" />
+    <Compile Include="RestSharp\AdjustToUniversalIsoDateTimeConverter.cs" />
     <Compile Include="RestSharp\ExtensionHelpers.cs" />
     <Compile Include="RestSharp\JsonNETDeserializer.cs" />
     <Compile Include="RestSharp\JsonNETSerializer.cs" />

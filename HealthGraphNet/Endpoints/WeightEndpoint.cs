@@ -48,6 +48,10 @@ namespace HealthGraphNet
 
         public WeightPastModel GetWeight(string uri)
         {
+            if (uri.Contains(_user.Weight) == false)
+            {
+                throw new ArgumentException("The uri must identify a resource on or below the " + _user.Weight + " endpoint.");
+            }            
             var request = new RestRequest(Method.GET);
             request.Resource = uri;
             return _tokenManager.Execute<WeightPastModel>(request);
@@ -55,6 +59,10 @@ namespace HealthGraphNet
 
         public void GetWeightAsync(Action<WeightPastModel> success, Action<HealthGraphException> failure, string uri)
         {
+            if (uri.Contains(_user.Weight) == false)
+            {
+                throw new ArgumentException("The uri must identify a resource on or below the " + _user.Weight + " endpoint.");
+            }             
             var request = new RestRequest(Method.GET);
             request.Resource = uri;
             _tokenManager.ExecuteAsync<WeightPastModel>(request, success, failure);
@@ -86,6 +94,10 @@ namespace HealthGraphNet
 
         public void DeleteWeight(string uri)
         {
+            if (uri.Contains(_user.Weight) == false)
+            {
+                throw new ArgumentException("The uri must identify a resource on or below the " + _user.Weight + " endpoint.");
+            }             
             var request = new RestRequest(Method.DELETE);
             request.Resource = uri;
             _tokenManager.ExecuteDelete(request);
@@ -93,6 +105,10 @@ namespace HealthGraphNet
 
         public void DeleteWeightAsync(Action success, Action<HealthGraphException> failure, string uri)
         {
+            if (uri.Contains(_user.Weight) == false)
+            {
+                throw new ArgumentException("The uri must identify a resource on or below the " + _user.Weight + " endpoint.");
+            }             
             var request = new RestRequest(Method.DELETE);
             request.Resource = uri;
             _tokenManager.ExecuteDeleteAsync(request, success, failure);
