@@ -42,7 +42,9 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Endpoints\CommentThreadsEndpoint.cs" />
     <Compile Include="Endpoints\FitnessActivitiesEndpoint.cs" />
+    <Compile Include="Endpoints\Interfaces\ICommentThreadsEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\IFitnessActivitiesEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\IProfileEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\IRecordsEndpoint.cs" />
@@ -52,6 +54,9 @@
     <Compile Include="Endpoints\RecordsEndpoint.cs" />
     <Compile Include="Endpoints\SettingsEndpoint.cs" />
     <Compile Include="Endpoints\WeightEndpoint.cs" />
+    <Compile Include="Models\CommentThreads\CommentsModel.cs" />
+    <Compile Include="Models\CommentThreads\CommentsNewModel.cs" />
+    <Compile Include="Models\CommentThreads\CommentThreadsModel.cs" />
     <Compile Include="Models\FitnessActivities\FitnessActivitiesFeedItemModel.cs" />
     <Compile Include="Models\FitnessActivities\CaloriesModel.cs" />
     <Compile Include="Models\FitnessActivities\DistanceModel.cs" />

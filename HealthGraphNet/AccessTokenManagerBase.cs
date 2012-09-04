@@ -79,6 +79,30 @@ namespace HealthGraphNet
         }
 
         /// <summary>
+        /// Synchronous request.  baseUrl is optional and may be assigned if restClient eneds to be anything other than ApiBaseUrl.
+        /// Throws a HealthGraphException if response is anything other than OK.
+        /// No data is returned.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="baseUrl"></param>
+        internal virtual void Execute(IRestRequest request, string baseUrl = null)
+        {
+            if (string.IsNullOrEmpty(baseUrl) == false)
+            {
+                _client.BaseUrl = baseUrl;
+            }
+            else
+            {
+                _client.BaseUrl = ApiBaseUrl;
+            }
+            IRestResponse response = _client.Execute(request);
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                throw new HealthGraphException(response);
+            }
+        }
+
+        /// <summary>
         /// Synchronous request for creation of a resource.  Returns the Location header if present, otherwise returns null.
         /// Throws a HealthGraphException if response is anything other than CREATED.
         /// </summary>
@@ -173,6 +197,49 @@ namespace HealthGraphNet
                 else
                 {
                     success(response.Data);
+                }
+            });
+        }
+
+        /// <summary>
+        /// If mobile and network not available, stops execution.  Otherwise, async request is performed on request.  
+        /// Success is executed if success and failure is executed if status code is not OK.
+        /// baseUrl is optional and may be assigned if restClient needs to be anything other than ApiBaseUrl. 
+        /// No data is returned.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="success"></param>
+        /// <param name="failure"></param>
+        /// <param name="baseUrl"></param>
+        internal virtual void ExecuteAsync(IRestRequest request, Action success, Action<HealthGraphException> failure, string baseUrl = null)
+        {
+            #if MONOTOUCH
+            //check for network connection
+            if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+            {
+                //do nothing
+                failure(new HealthGraphException { StatusCode = System.Net.HttpStatusCode.BadGateway });
+                return;
+            }
+            #endif
+
+            if (string.IsNullOrEmpty(baseUrl) == false)
+            {
+                _client.BaseUrl = baseUrl;
+            }
+            else
+            {
+                _client.BaseUrl = ApiBaseUrl;
+            }
+            _client.ExecuteAsync(request, (response, asynchandle) =>
+            {
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    failure(new HealthGraphException(response));
+                }
+                else
+                {
+                    success();
                 }
             });
         }

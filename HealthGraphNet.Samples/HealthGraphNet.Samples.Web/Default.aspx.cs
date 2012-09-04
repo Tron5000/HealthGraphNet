@@ -160,11 +160,11 @@ namespace HealthGraphNet.Samples.Web
             var weightNew = new WeightNewModel
             {
                 Timestamp = DateTime.Now,
-                MassWeight = 59,
+                Weight = 90,
                 PostToFacebook = false,
                 PostToTwitter = false
             };
-            var test = weightRequest.CreateWeight(weightNew);
+            var test = weightRequest.CreateWeight(weightNew);         
 
             var weightItems =  weightRequest.GetFeedPage(0, 20, new DateTime(2010, 1, 1), new DateTime(2013, 6, 1)).Items; 
             var weightItem = weightItems.First();
@@ -173,9 +173,9 @@ namespace HealthGraphNet.Samples.Web
             weightDetail = weightRequest.UpdateWeight(weightDetail);
             weightRequest.DeleteWeight(weightDetail.Uri);
             */
-
+        
+            //var activitiesRequest = new FitnessActivitiesEndpoint(TokenManager, user);
             /*
-            var activitiesRequest = new FitnessActivitiesEndpoint(TokenManager, user);
             var newActivity = new FitnessActivitiesNewModel
             {
                 Type = "Running",
@@ -184,9 +184,23 @@ namespace HealthGraphNet.Samples.Web
                 Notes = "blah6!"
             };
             var uri = activitiesRequest.CreateActivity(newActivity);                                
-            var activitiesItem = activitiesRequest.GetFeedPage(pageSize: 2, noLaterThan: new DateTime(2013, 6, 1)).Items.FirstOrDefault();
-            if (activitiesItem != null)
-            {
+            */
+            //var activitiesItem = activitiesRequest.GetFeedPage(pageSize: 2, noLaterThan: new DateTime(2013, 6, 1)).Items.FirstOrDefault();
+            //if (activitiesItem != null)
+            //{
+                //var activitiesDetail = activitiesRequest.GetActivity(activitiesItem.Uri);                 
+                
+                //Get associated comments
+                //var commentRequest = new CommentThreadsEndpoint(TokenManager);
+                //var commentThread = commentRequest.GetCommentThread(activitiesDetail.Comments);
+
+                //var newComment = new CommentsNewModel
+                //{
+                //    Comment = "Another test comment! Posted with async."
+                //};
+                //commentRequest.CreateComment(newComment, activitiesDetail.Comments);
+                //commentRequest.CreateCommentAsync(() => { }, (ex) => { }, newComment, activitiesDetail.Comments);
+               
                 //Retrieve and update an activity
                 //var activitiesDetail = activitiesRequest.GetActivity(activitiesItem.Uri);               
                 //activitiesDetail.Type = "Running";
@@ -197,8 +211,8 @@ namespace HealthGraphNet.Samples.Web
 
                 //Delete the activity
                 //activitiesRequest.DeleteActivity(activitiesDetail.Uri);
-            }
-            */
+            //}
+            
 
             //var recordsRequest = new RecordsEndpoint(TokenManager, user);
             //var items = recordsRequest.GetRecordsFeed();

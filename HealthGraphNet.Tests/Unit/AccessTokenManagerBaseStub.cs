@@ -19,6 +19,10 @@ namespace HealthGraphNet.Tests.Unit
             return new T();
         }
 
+        internal override void Execute(IRestRequest request, string baseUrl = null)
+        {
+        }
+
         internal override string ExecuteCreate(IRestRequest request, string baseUrl = null)
         {
             return string.Empty;
@@ -29,6 +33,10 @@ namespace HealthGraphNet.Tests.Unit
         }
 
         internal override void ExecuteAsync<T>(IRestRequest request, Action<T> success, Action<HealthGraphException> failure, string baseUrl = null)
+        {
+        }
+
+        internal override void ExecuteAsync(IRestRequest request, Action success, Action<HealthGraphException> failure, string baseUrl = null)
         {
         }
 
