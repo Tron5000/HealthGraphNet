@@ -45,9 +45,11 @@
     <Compile Include="Endpoints\FitnessActivitiesEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\IFitnessActivitiesEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\IProfileEndpoint.cs" />
+    <Compile Include="Endpoints\Interfaces\IRecordsEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\ISettingsEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\IUsersEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\IWeightEndpoint.cs" />
+    <Compile Include="Endpoints\RecordsEndpoint.cs" />
     <Compile Include="Endpoints\SettingsEndpoint.cs" />
     <Compile Include="Endpoints\WeightEndpoint.cs" />
     <Compile Include="Models\FitnessActivities\FitnessActivitiesFeedItemModel.cs" />
@@ -61,6 +63,8 @@
     <Compile Include="Models\FitnessActivities\IFitnessActivitiesModel.cs" />
     <Compile Include="Models\FitnessActivities\PathModel.cs" />
     <Compile Include="Models\Profile\ProfileModel.cs" />
+    <Compile Include="Models\Records\RecordsFeedItemModel.cs" />
+    <Compile Include="Models\Records\StatModel.cs" />
     <Compile Include="Models\Settings\SettingsModel.cs" />
     <Compile Include="Models\FeedModel.cs" />
     <Compile Include="Models\Weight\WeightFeedItemModel.cs" />

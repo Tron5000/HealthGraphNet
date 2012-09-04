@@ -198,7 +198,11 @@ namespace HealthGraphNet.Samples.Web
                 //Delete the activity
                 //activitiesRequest.DeleteActivity(activitiesDetail.Uri);
             }
-            */    
+            */
+
+            //var recordsRequest = new RecordsEndpoint(TokenManager, user);
+            //var items = recordsRequest.GetRecordsFeed();
+            //int test = 4;
         }
 
 		#endregion
