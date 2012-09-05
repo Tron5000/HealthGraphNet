@@ -49,10 +49,12 @@
     <Compile Include="Endpoints\Interfaces\IProfileEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\IRecordsEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\ISettingsEndpoint.cs" />
+    <Compile Include="Endpoints\Interfaces\IStreetTeamEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\IUsersEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\IWeightEndpoint.cs" />
     <Compile Include="Endpoints\RecordsEndpoint.cs" />
     <Compile Include="Endpoints\SettingsEndpoint.cs" />
+    <Compile Include="Endpoints\StreetTeamEndpoint.cs" />
     <Compile Include="Endpoints\WeightEndpoint.cs" />
     <Compile Include="Models\CommentThreads\CommentsModel.cs" />
     <Compile Include="Models\CommentThreads\CommentsNewModel.cs" />
@@ -72,6 +74,7 @@
     <Compile Include="Models\Records\StatModel.cs" />
     <Compile Include="Models\Settings\SettingsModel.cs" />
     <Compile Include="Models\FeedModel.cs" />
+    <Compile Include="Models\StreetTeam\StreetTeamFeedItemModel.cs" />
     <Compile Include="Models\Weight\WeightFeedItemModel.cs" />
     <Compile Include="Models\Weight\WeightModelBase.cs" />
     <Compile Include="Models\Weight\WeightNewModel.cs" />

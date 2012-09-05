@@ -135,8 +135,8 @@ namespace HealthGraphNet.Samples.Web
             var profile = profileRequest.GetProfile();
             //Optionally change and update it here
             //profile.AthleteType = "Hiker";
-            profile.AthleteType = "Hiker";
-            profile = profileRequest.UpdateProfile(profile);
+            //profile.AthleteType = "Hiker";
+            //profile = profileRequest.UpdateProfile(profile);
             //Display user profile
             LblProfileName.Text = !string.IsNullOrEmpty(profile.Name) ? profile.Name : "N/A";
             LblProfileLocation.Text = !string.IsNullOrEmpty(profile.Location) ? profile.Location : "N/A";
@@ -154,6 +154,11 @@ namespace HealthGraphNet.Samples.Web
             //var settings = settingsRequest.GetSettings();
             //settings.FirstDayOfWeek = "Monday";
             //settings = settingsRequest.UpdateSettings(settings);
+
+            var streetTeamRequest = new StreetTeamEndpoint(TokenManager, user);
+            var streetTeamItems = streetTeamRequest.GetFeedPage(pageIndex: 1, pageSize: 2);
+
+            int test = 5;
 
             /*
             var weightRequest = new WeightEndpoint(TokenManager, user);
