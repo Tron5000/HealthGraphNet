@@ -4,9 +4,9 @@ using Newtonsoft.Json;
 namespace HealthGraphNet.Models
 {
     /// <summary>
-    /// The street team feed item model used in conjunction with street team data.
+    /// The street team item used in conunction with street team data.
     /// </summary>
-    public class StreetTeamFeedItemModel : IFeedModelItem
+    public class StreetTeamModel
     {
         /// <summary>
         /// The unique ID for the member. Read only.
@@ -29,7 +29,13 @@ namespace HealthGraphNet.Models
         /// <summary>
         /// A URI for detailed information about the member, including membership status. Read only.
         /// </summary>
-        [JsonProperty(PropertyName = "url")]
+        [JsonProperty(PropertyName = "uri")]
         public string Uri { get; internal set; }
+
+        /// <summary>
+        /// One of the following value: pending, member. Read only.
+        /// </summary>
+        [JsonProperty(PropertyName = "status")]
+        public string Status { get; internal set; }
     }
 }

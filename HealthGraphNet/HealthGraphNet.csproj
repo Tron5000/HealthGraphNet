@@ -75,6 +75,8 @@
     <Compile Include="Models\Settings\SettingsModel.cs" />
     <Compile Include="Models\FeedModel.cs" />
     <Compile Include="Models\StreetTeam\StreetTeamFeedItemModel.cs" />
+    <Compile Include="Models\StreetTeam\StreetTeamInvitationsModel.cs" />
+    <Compile Include="Models\StreetTeam\StreetTeamModel.cs" />
     <Compile Include="Models\Weight\WeightFeedItemModel.cs" />
     <Compile Include="Models\Weight\WeightModelBase.cs" />
     <Compile Include="Models\Weight\WeightNewModel.cs" />

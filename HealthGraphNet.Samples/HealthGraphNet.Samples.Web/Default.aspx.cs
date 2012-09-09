@@ -155,10 +155,10 @@ namespace HealthGraphNet.Samples.Web
             //settings.FirstDayOfWeek = "Monday";
             //settings = settingsRequest.UpdateSettings(settings);
 
-            var streetTeamRequest = new StreetTeamEndpoint(TokenManager, user);
-            var streetTeamItems = streetTeamRequest.GetFeedPage(pageIndex: 1, pageSize: 2);
-
-            int test = 5;
+            //var streetTeamRequest = new StreetTeamEndpoint(TokenManager, user);
+            //var streetTeamItems = streetTeamRequest.GetFeedPage(pageIndex: 1, pageSize: 2);
+            //var uri = streetTeamRequest.CreateTeamInvitation(new StreetTeamInvitationsModel { UserID = 7072229 });
+            //var results = streetTeamRequest.GetStreetTeam(uri);
 
             /*
             var weightRequest = new WeightEndpoint(TokenManager, user);

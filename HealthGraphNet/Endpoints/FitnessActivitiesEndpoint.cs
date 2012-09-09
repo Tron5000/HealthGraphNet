@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using RestSharp;
 using RestSharp.Validation;
 using RestSharp.Serializers;
@@ -104,7 +105,7 @@ namespace HealthGraphNet
             }            
             var request = new RestRequest(Method.DELETE);
             request.Resource = uri;
-            _tokenManager.ExecuteDelete(request);
+            _tokenManager.Execute(request, expectedStatusCode: HttpStatusCode.NoContent);
         }
 
         public void DeleteActivityAsync(Action success, Action<HealthGraphException> failure, string uri)
@@ -115,7 +116,7 @@ namespace HealthGraphNet
             }            
             var request = new RestRequest(Method.DELETE);
             request.Resource = uri;
-            _tokenManager.ExecuteDeleteAsync(request, success, failure);
+            _tokenManager.ExecuteAsync(request, success, failure, expectedStatusCode: HttpStatusCode.NoContent);
         }
 
         #endregion

@@ -60,7 +60,7 @@ namespace HealthGraphNet
         /// <param name="request"></param>
         /// <param name="baseUrl"></param>
         /// <returns></returns>
-        internal virtual T Execute<T>(IRestRequest request, string baseUrl = null) where T : new()
+        internal virtual T Execute<T>(IRestRequest request, string baseUrl = null, HttpStatusCode? expectedStatusCode = null) where T : new()
         {
             if (string.IsNullOrEmpty(baseUrl) == false)
             {
@@ -71,7 +71,9 @@ namespace HealthGraphNet
                 _client.BaseUrl = ApiBaseUrl;
             }
             IRestResponse<T> response = _client.Execute<T>(request);
-            if (response.StatusCode != HttpStatusCode.OK)
+            //If a particular status code is expected, check for it, otherwise assume we are looking for an OK
+            HttpStatusCode codeToCheckAgainst = expectedStatusCode.HasValue ? expectedStatusCode.Value : HttpStatusCode.OK;
+            if (response.StatusCode != codeToCheckAgainst)
             {
                 throw new HealthGraphException(response);
             }
@@ -85,7 +87,7 @@ namespace HealthGraphNet
         /// </summary>
         /// <param name="request"></param>
         /// <param name="baseUrl"></param>
-        internal virtual void Execute(IRestRequest request, string baseUrl = null)
+        internal virtual void Execute(IRestRequest request, string baseUrl = null, HttpStatusCode? expectedStatusCode = null)
         {
             if (string.IsNullOrEmpty(baseUrl) == false)
             {
@@ -96,7 +98,9 @@ namespace HealthGraphNet
                 _client.BaseUrl = ApiBaseUrl;
             }
             IRestResponse response = _client.Execute(request);
-            if (response.StatusCode != HttpStatusCode.OK)
+            //If a particular status code is expected, check for it, otherwise assume we are looking for an OK
+            HttpStatusCode codeToCheckAgainst = expectedStatusCode.HasValue ? expectedStatusCode.Value : HttpStatusCode.OK;
+            if (response.StatusCode != codeToCheckAgainst)
             {
                 throw new HealthGraphException(response);
             }
@@ -137,28 +141,6 @@ namespace HealthGraphNet
         }
 
         /// <summary>
-        /// Synchronous request for a delete.  Throws an exception if status code from operation is anything but No Content.
-        /// </summary>
-        /// <param name="request"></param>
-        /// <param name="baseUrl"></param>
-        internal virtual void ExecuteDelete(IRestRequest request, string baseUrl = null)
-        {
-            if (string.IsNullOrEmpty(baseUrl) == false)
-            {
-                _client.BaseUrl = baseUrl;
-            }
-            else
-            {
-                _client.BaseUrl = ApiBaseUrl;
-            }
-            IRestResponse response = _client.Execute(request);
-            if (response.StatusCode != HttpStatusCode.NoContent)
-            {
-                throw new HealthGraphException(response);
-            }
-        }
-
-        /// <summary>
         /// If mobile and network not available, stops execution.  Otherwise, async request is performed on request.  
         /// Success is executed if success and failure is executed if status code is not OK.
         /// baseUrl is optional and may be assigned if restClient needs to be anything other than ApiBaseUrl.
@@ -168,7 +150,7 @@ namespace HealthGraphNet
         /// <param name="success"></param>
         /// <param name="failure"></param>
         /// <param name="baseUrl"></param>
-        internal virtual void ExecuteAsync<T>(IRestRequest request, Action<T> success, Action<HealthGraphException> failure, string baseUrl = null) where T : new()
+        internal virtual void ExecuteAsync<T>(IRestRequest request, Action<T> success, Action<HealthGraphException> failure, string baseUrl = null, HttpStatusCode? expectedStatusCode = null) where T : new()
         {
             #if MONOTOUCH
             //check for network connection
@@ -190,7 +172,9 @@ namespace HealthGraphNet
             }
             _client.ExecuteAsync<T>(request, (response, asynchandle) =>
             {
-                if (response.StatusCode != HttpStatusCode.OK)
+                //If a particular status code is expected, check for it, otherwise assume we are looking for an OK
+                HttpStatusCode codeToCheckAgainst = expectedStatusCode.HasValue ? expectedStatusCode.Value : HttpStatusCode.OK;                
+                if (response.StatusCode != codeToCheckAgainst)
                 {
                     failure(new HealthGraphException(response));
                 }
@@ -211,7 +195,7 @@ namespace HealthGraphNet
         /// <param name="success"></param>
         /// <param name="failure"></param>
         /// <param name="baseUrl"></param>
-        internal virtual void ExecuteAsync(IRestRequest request, Action success, Action<HealthGraphException> failure, string baseUrl = null)
+        internal virtual void ExecuteAsync(IRestRequest request, Action success, Action<HealthGraphException> failure, string baseUrl = null, HttpStatusCode? expectedStatusCode = null)
         {
             #if MONOTOUCH
             //check for network connection
@@ -233,7 +217,9 @@ namespace HealthGraphNet
             }
             _client.ExecuteAsync(request, (response, asynchandle) =>
             {
-                if (response.StatusCode != HttpStatusCode.OK)
+                //If a particular status code is expected, check for it, otherwise assume we are looking for an OK
+                HttpStatusCode codeToCheckAgainst = expectedStatusCode.HasValue ? expectedStatusCode.Value : HttpStatusCode.OK;                
+                if (response.StatusCode != codeToCheckAgainst)
                 {
                     failure(new HealthGraphException(response));
                 }
@@ -288,45 +274,6 @@ namespace HealthGraphNet
                         locationHeaderValue = locationHeader.Value as string;
                     }
                     success(locationHeaderValue);
-                }
-            });
-        }
-
-        /// <summary>
-        /// Asynchronous request for a delete.  Executes success if successful.
-        /// Passes an exception to failure if status code from operation is anything but No Content.
-        /// </summary>
-        /// <param name="request"></param>
-        /// <param name="baseUrl"></param>
-        internal virtual void ExecuteDeleteAsync(IRestRequest request, Action success, Action<HealthGraphException> failure, string baseUrl = null)
-        {
-            #if MONOTOUCH
-            //check for network connection
-            if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
-            {
-                //do nothing
-                failure(new HealthGraphException { StatusCode = System.Net.HttpStatusCode.BadGateway });
-                return;
-            }
-            #endif
-
-            if (string.IsNullOrEmpty(baseUrl) == false)
-            {
-                _client.BaseUrl = baseUrl;
-            }
-            else
-            {
-                _client.BaseUrl = ApiBaseUrl;
-            }
-            _client.ExecuteAsync(request, (response, asynchandle) =>
-            {
-                if (response.StatusCode != HttpStatusCode.NoContent)
-                {
-                    failure(new HealthGraphException(response));
-                }
-                else
-                {
-                    success();
                 }
             });
         }
