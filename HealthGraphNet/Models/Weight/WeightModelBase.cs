@@ -90,7 +90,7 @@ namespace HealthGraphNet.Models
         /// <summary>
         /// The value of the measured quantity (in kg).  
         /// </summary>
-        [JsonProperty(PropertyName = "weigh")]        
+        [JsonProperty(PropertyName = "weight")]        
         public double? Weight 
         {
             get

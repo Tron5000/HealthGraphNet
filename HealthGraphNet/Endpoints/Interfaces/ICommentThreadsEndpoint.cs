@@ -10,6 +10,8 @@ namespace HealthGraphNet
         void GetCommentThreadAsync(Action<CommentThreadsModel> success, Action<HealthGraphException> failure, string uri);
         //Create Comment
         void CreateComment(CommentsNewModel commentToCreate, string uri);
-        void CreateCommentAsync(Action success, Action<HealthGraphException> failure, CommentsNewModel commentToCreate, string uri); 
+        void CreateComment(string commentToCreate, string uri);
+        void CreateCommentAsync(Action success, Action<HealthGraphException> failure, CommentsNewModel commentToCreate, string uri);
+        void CreateCommentAsync(Action success, Action<HealthGraphException> failure, string commentToCreate, string uri);
     }
 }

@@ -74,6 +74,9 @@
     <Compile Include="Models\Records\StatModel.cs" />
     <Compile Include="Models\Settings\SettingsModel.cs" />
     <Compile Include="Models\FeedModel.cs" />
+    <Compile Include="Models\Sleep\SleepFeedItemModel.cs" />
+    <Compile Include="Models\Sleep\SleepModelBase.cs" />
+    <Compile Include="Models\Sleep\SleepType.cs" />
     <Compile Include="Models\StreetTeam\StreetTeamFeedItemModel.cs" />
     <Compile Include="Models\StreetTeam\StreetTeamInvitationsModel.cs" />
     <Compile Include="Models\StreetTeam\StreetTeamModel.cs" />

@@ -50,10 +50,20 @@ namespace HealthGraphNet
             _tokenManager.Execute(request);
         }
 
+        public void CreateComment(string commentToCreate, string uri)
+        {
+            CreateComment(new CommentsNewModel { Comment = commentToCreate }, uri);
+        }
+
         public void CreateCommentAsync(Action success, Action<HealthGraphException> failure, CommentsNewModel commentToCreate, string uri)
         {
             var request = PrepareCommentCreateRequest(commentToCreate, uri);
             _tokenManager.ExecuteAsync(request, success, failure);
+        }
+
+        public void CreateCommentAsync(Action success, Action<HealthGraphException> failure, string commentToCreate, string uri)
+        {
+            CreateCommentAsync(success, failure, new CommentsNewModel { Comment = commentToCreate }, uri);
         }
 
         #endregion
