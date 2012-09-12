@@ -17,7 +17,7 @@ namespace HealthGraphNet.Models
         public DateTime Timestamp { get; internal set; }
 
         /// <summary>
-        /// The value of the measured quantity (in minutes).
+        /// The value of the measured quantity (in minutes). Read only.
         /// </summary>
         [JsonProperty(PropertyName = "awake")]
         public new double? Awake
@@ -33,7 +33,7 @@ namespace HealthGraphNet.Models
         }
 
         /// <summary>
-        /// The value of the measured quantity (in minutes).
+        /// The value of the measured quantity (in minutes). Read only.
         /// </summary>
         [JsonProperty(PropertyName = "deep")]
         public new double? Deep
@@ -49,7 +49,7 @@ namespace HealthGraphNet.Models
         }
 
         /// <summary>
-        /// The value of the measured quantity (in minutes).
+        /// The value of the measured quantity (in minutes). Read only.
         /// </summary>
         [JsonProperty(PropertyName = "light")]
         public new double? Light
@@ -65,7 +65,7 @@ namespace HealthGraphNet.Models
         }
 
         /// <summary>
-        /// The value of the measured quantity (in minutes).
+        /// The value of the measured quantity (in minutes). Read only.
         /// </summary>
         [JsonProperty(PropertyName = "rem")]
         public new double? Rem
@@ -81,7 +81,7 @@ namespace HealthGraphNet.Models
         }
 
         /// <summary>
-        /// The value of the measured quantity.
+        /// The value of the measured quantity. Read only.
         /// </summary>
         [JsonProperty(PropertyName = "times_woken")]
         public new double? TimesWoken
@@ -97,7 +97,7 @@ namespace HealthGraphNet.Models
         }
 
         /// <summary>
-        /// The value of the measured quantity (in minutes).
+        /// The value of the measured quantity (in minutes). Read only.
         /// </summary>
         [JsonProperty(PropertyName = "total_sleep")]
         public new double? TotalSleep

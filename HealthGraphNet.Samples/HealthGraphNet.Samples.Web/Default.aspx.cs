@@ -149,7 +149,27 @@ namespace HealthGraphNet.Samples.Web
             LblProfileNormalPicture.Text = !string.IsNullOrEmpty(profile.NormalPicture) ? profile.NormalPicture : "N/A";
             LblProfileMediumPicture.Text = !string.IsNullOrEmpty(profile.MediumPicture) ? profile.MediumPicture : "N/A";
             LblProfileLargePicture.Text = !string.IsNullOrEmpty(profile.LargePicture) ? profile.LargePicture : "N/A";
+          
+            //var sleepRequest = new SleepEndpoint(TokenManager, user);
+            //var sleepNew = new SleepNewModel
+            //{
+            //    Timestamp = DateTime.Now,
+            //    TimesWoken = 3,
+            //    PostToTwitter = false,
+            //    PostToFacebook = false
+            //};
+            //var uriOfSleep = sleepRequest.CreateSleep(sleepNew);
+            //var sleepPage = sleepRequest.GetFeedPage();
+            //var sleepDetail = sleepRequest.GetSleep(uriOfSleep);
 
+            //var uriOfSleep = sleepPage.Items.First().Uri;
+            //var sleepDetail = sleepRequest.GetSleep(uriOfSleep);
+            //sleepDetail.Rem = 180;
+            //sleepDetail = sleepRequest.UpdateSleep(sleepDetail);
+
+            //sleepRequest.DeleteSleep(uriOfSleep);
+
+            //int test = 4;
             //var settingsRequest = new SettingsEndpoint(TokenManager, user);
             //var settings = settingsRequest.GetSettings();
             //settings.FirstDayOfWeek = "Monday";

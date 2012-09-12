@@ -70,6 +70,7 @@
     <Compile Include="Unit\Endpoints\FitnessActivitiesEndpointTest.cs" />
     <Compile Include="Unit\Endpoints\ProfileEndpointTest.cs" />
     <Compile Include="Unit\Endpoints\SettingsEndpointTest.cs" />
+    <Compile Include="Unit\Endpoints\SleepEndpointTest.cs" />
     <Compile Include="Unit\Endpoints\StreetTeamEndpointTest.cs" />
     <Compile Include="Unit\Endpoints\WeightEndpointTest.cs" />
     <Compile Include="Unit\RestSharp\OAuth2RequestHeaderAuthenticatorTest.cs" />
