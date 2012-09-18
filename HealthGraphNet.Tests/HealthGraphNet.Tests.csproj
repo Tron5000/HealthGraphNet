@@ -68,6 +68,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Unit\AccessTokenManagerBaseStub.cs" />
     <Compile Include="Unit\Endpoints\FitnessActivitiesEndpointTest.cs" />
+    <Compile Include="Unit\Endpoints\NutritionEndpointTest.cs" />
     <Compile Include="Unit\Endpoints\ProfileEndpointTest.cs" />
     <Compile Include="Unit\Endpoints\SettingsEndpointTest.cs" />
     <Compile Include="Unit\Endpoints\SleepEndpointTest.cs" />

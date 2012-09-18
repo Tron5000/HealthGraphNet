@@ -46,6 +46,7 @@
     <Compile Include="Endpoints\FitnessActivitiesEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\ICommentThreadsEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\IFitnessActivitiesEndpoint.cs" />
+    <Compile Include="Endpoints\Interfaces\INutritionEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\IProfileEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\IRecordsEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\ISettingsEndpoint.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Endpoints\Interfaces\IStreetTeamEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\IUsersEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\IWeightEndpoint.cs" />
+    <Compile Include="Endpoints\NutritionEndpoint.cs" />
     <Compile Include="Endpoints\RecordsEndpoint.cs" />
     <Compile Include="Endpoints\SettingsEndpoint.cs" />
     <Compile Include="Endpoints\SleepEndpoint.cs" />
@@ -71,6 +73,11 @@
     <Compile Include="Models\IFeedModelItem.cs" />
     <Compile Include="Models\FitnessActivities\IFitnessActivitiesModel.cs" />
     <Compile Include="Models\FitnessActivities\PathModel.cs" />
+    <Compile Include="Models\Nutrition\NutritionFeedItemModel.cs" />
+    <Compile Include="Models\Nutrition\NutritionModelBase.cs" />
+    <Compile Include="Models\Nutrition\NutritionNewModel.cs" />
+    <Compile Include="Models\Nutrition\NutritionPastModel.cs" />
+    <Compile Include="Models\Nutrition\NutritionType.cs" />
     <Compile Include="Models\Profile\ProfileModel.cs" />
     <Compile Include="Models\Records\RecordsFeedItemModel.cs" />
     <Compile Include="Models\Records\StatModel.cs" />

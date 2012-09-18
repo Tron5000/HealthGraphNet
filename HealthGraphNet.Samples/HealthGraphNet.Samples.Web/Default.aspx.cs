@@ -180,7 +180,18 @@ namespace HealthGraphNet.Samples.Web
             //var uri = streetTeamRequest.CreateTeamInvitation(new StreetTeamInvitationsModel { UserID = 7072229 });
             //var results = streetTeamRequest.GetStreetTeam(uri);
 
-            
+            //var nutritionNew = new NutritionNewModel
+            //{
+            //    Timestamp = DateTime.Now,
+            //    Fat = 200,
+            //    PostToFacebook = false,
+            //    PostToTwitter = false
+            //};
+            //var nutritionRequest = new NutritionEndpoint(TokenManager, user);
+            //var uriOfNutrition = nutritionRequest.CreateNutrition(nutritionNew);
+            //var uriOfNutrition = nutritionRequest.GetFeedPage().Items.First().Uri;
+            //nutritionRequest.DeleteNutrition(uriOfNutrition);
+
             //var weightRequest = new WeightEndpoint(TokenManager, user);
             /*
             var weightNew = new WeightNewModel
