@@ -70,7 +70,7 @@ namespace HealthGraphNet
             }            
             var request = new RestRequest(Method.GET);
             request.Resource = uri;
-            _tokenManager.ExecuteAsync(request, success, failure);
+            _tokenManager.ExecuteAsync<FitnessActivitiesPastModel>(request, success, failure);
         }
 
         public FitnessActivitiesPastModel UpdateActivity(FitnessActivitiesPastModel activityToUpdate)
@@ -129,7 +129,7 @@ namespace HealthGraphNet
         /// <param name="activityToValidate"></param>
         private void ValidateModel(IFitnessActivitiesModel activityToValidate)
         {
-            //Validate the activityToUpdate properties
+            //Validate the activityToValidate properties
             ValidateHelper.IsValueValid<string>(activityToValidate.Type, ValidType, "Type");
             if (activityToValidate.Type != "Other")
             {

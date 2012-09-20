@@ -52,6 +52,7 @@
     <Compile Include="Endpoints\Interfaces\ISettingsEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\ISleepEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\IStreetTeamEndpoint.cs" />
+    <Compile Include="Endpoints\Interfaces\IStrengthTrainingActivitiesEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\IUsersEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\IWeightEndpoint.cs" />
     <Compile Include="Endpoints\NutritionEndpoint.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Endpoints\SettingsEndpoint.cs" />
     <Compile Include="Endpoints\SleepEndpoint.cs" />
     <Compile Include="Endpoints\StreetTeamEndpoint.cs" />
+    <Compile Include="Endpoints\StrengthTrainingActivitiesEndpoint.cs" />
     <Compile Include="Endpoints\WeightEndpoint.cs" />
     <Compile Include="Models\CommentThreads\CommentsModel.cs" />
     <Compile Include="Models\CommentThreads\CommentsNewModel.cs" />
@@ -91,6 +93,12 @@
     <Compile Include="Models\StreetTeam\StreetTeamFeedItemModel.cs" />
     <Compile Include="Models\StreetTeam\StreetTeamInvitationsModel.cs" />
     <Compile Include="Models\StreetTeam\StreetTeamModel.cs" />
+    <Compile Include="Models\StrengthTrainingActivities\ExercisesModel.cs" />
+    <Compile Include="Models\StrengthTrainingActivities\IStrengthTrainingActivitiesModel.cs" />
+    <Compile Include="Models\StrengthTrainingActivities\SetsModel.cs" />
+    <Compile Include="Models\StrengthTrainingActivities\StrengthTrainingActivitiesFeedItemModel.cs" />
+    <Compile Include="Models\StrengthTrainingActivities\StrengthTrainingActivitiesNewModel.cs" />
+    <Compile Include="Models\StrengthTrainingActivities\StrengthTrainingActivitiesPastModel.cs" />
     <Compile Include="Models\Weight\WeightFeedItemModel.cs" />
     <Compile Include="Models\Weight\WeightModelBase.cs" />
     <Compile Include="Models\Weight\WeightNewModel.cs" />
