@@ -358,6 +358,31 @@ namespace HealthGraphNet.Tests.Unit
         }
 
         [Test()]
+        public void UpdateActivity_ExerciseSetNull_ArgumentException()
+        {
+            //Arrange
+            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            StrengthTrainingActivitiesEndpoint activitiesRequest = new StrengthTrainingActivitiesEndpoint(tokenManager.Object, new UsersModel());
+            //Act
+            ValidActivity.Exercises.First().Sets = null;
+            //Assert
+            Assert.Throws(typeof(ArgumentException), () => { activitiesRequest.UpdateActivity(ValidActivity); });
+        }
+
+        [Test()]
+        public void UpdateActivity_ExerciseSetEmptyList_ArgumentException()
+        {
+            //Arrange
+            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            StrengthTrainingActivitiesEndpoint activitiesRequest = new StrengthTrainingActivitiesEndpoint(tokenManager.Object, new UsersModel());
+            //Act
+            ValidActivity.Exercises.First().Sets = new List<SetsModel>();
+            //Assert
+            Assert.AreEqual(0, ValidActivity.Exercises.First().Sets.Count);
+            Assert.Throws(typeof(ArgumentException), () => { activitiesRequest.UpdateActivity(ValidActivity); });
+        }
+
+        [Test()]
         public void UpdateActivity_ExerciseSetNotesNull_DoesNotThrowArgumentException()
         {
             //Arrange
@@ -557,6 +582,31 @@ namespace HealthGraphNet.Tests.Unit
             ValidActivityNew.Exercises.First().Notes = charactersCount1025;
             //Assert
             Assert.AreEqual(1025, ValidActivityNew.Exercises.First().Notes.Length);
+            Assert.Throws(typeof(ArgumentException), () => { activitiesRequest.CreateActivity(ValidActivityNew); });
+        }
+
+        [Test()]
+        public void CreateActivity_ExerciseSetNull_ArgumentException()
+        {
+            //Arrange
+            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            StrengthTrainingActivitiesEndpoint activitiesRequest = new StrengthTrainingActivitiesEndpoint(tokenManager.Object, new UsersModel());
+            //Act
+            ValidActivityNew.Exercises.First().Sets = null;
+            //Assert
+            Assert.Throws(typeof(ArgumentException), () => { activitiesRequest.CreateActivity(ValidActivityNew); });
+        }
+
+        [Test()]
+        public void CreateActivity_ExerciseSetEmptyList_ArgumentException()
+        {
+            //Arrange
+            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            StrengthTrainingActivitiesEndpoint activitiesRequest = new StrengthTrainingActivitiesEndpoint(tokenManager.Object, new UsersModel());
+            //Act
+            ValidActivityNew.Exercises.First().Sets = new List<SetsModel>();
+            //Assert
+            Assert.AreEqual(0, ValidActivityNew.Exercises.First().Sets.Count);
             Assert.Throws(typeof(ArgumentException), () => { activitiesRequest.CreateActivity(ValidActivityNew); });
         }
 

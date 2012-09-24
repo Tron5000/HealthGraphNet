@@ -146,7 +146,11 @@ namespace HealthGraphNet
                     }
                     ValidateHelper.IsValidLength(exercise.Routine, 32);
                     ValidateHelper.IsValidLength(exercise.Notes, 1024);
-                    if (exercise.Sets != null)
+                    if ((exercise.Sets == null) || ((exercise.Sets != null) && (exercise.Sets.Count == 0)))
+                    {
+                        throw new ArgumentException("The Sets collection must contain one or more elements.");
+                    }
+                    else
                     {
                         foreach (var set in exercise.Sets)
                         {

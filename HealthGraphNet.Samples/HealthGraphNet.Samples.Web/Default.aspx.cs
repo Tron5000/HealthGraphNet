@@ -150,21 +150,40 @@ namespace HealthGraphNet.Samples.Web
             LblProfileMediumPicture.Text = !string.IsNullOrEmpty(profile.MediumPicture) ? profile.MediumPicture : "N/A";
             LblProfileLargePicture.Text = !string.IsNullOrEmpty(profile.LargePicture) ? profile.LargePicture : "N/A";
 
-            /*
-            var strengthTrainingNew = new StrengthTrainingActivitiesNewModel
-            {
-                StartTime = DateTime.Now,
-                Notes = "Good exercise.",
-                TotalCalories = 100,
-                Exercises = new List<ExercisesModel>(),
-                PostToFacebook = false,
-                PostToTwitter = false
-            };
-            var strengthTrainingRequest = new StrengthTrainingActivitiesEndpoint(TokenManager, user);
-            var uriOfStrengthTraining = strengthTrainingRequest.CreateActivity(strengthTrainingNew);
 
-            int test = 5;
-            */
+            //var strengthTrainingNew = new StrengthTrainingActivitiesNewModel
+            //{
+            //    StartTime = DateTime.Now,
+            //    Notes = "Good exercise.",
+            //    TotalCalories = 100,
+            //    Exercises = new List<ExercisesModel>
+            //    {
+            //        new ExercisesModel
+            //        {
+            //            PrimaryType = "Barbell Curl",
+            //            PrimaryMuscleGroup = "Arms",
+            //            Sets = new List<SetsModel>
+            //            {
+            //                new SetsModel
+            //                {
+            //                    Weight = 200,
+            //                    Repetitions = 4
+            //                }
+            //            }
+            //        }
+            //    },
+            //    PostToFacebook = false,
+            //    PostToTwitter = false
+            //};
+            //var strengthTrainingRequest = new StrengthTrainingActivitiesEndpoint(TokenManager, user);
+            ////var uriOfStrengthTraining = strengthTrainingRequest.CreateActivity(strengthTrainingNew);
+            //var activitiesPage = strengthTrainingRequest.GetFeedPage();
+            //string uriOfStrengthTraining = activitiesPage.Items.First().Uri;
+            //var activitiesDetail = strengthTrainingRequest.GetActivity(uriOfStrengthTraining);
+            //activitiesDetail.TotalCalories = 200;
+            //activitiesDetail = strengthTrainingRequest.UpdateActivity(activitiesDetail);
+            //strengthTrainingRequest.DeleteActivity(uriOfStrengthTraining);
+
 
             //var sleepRequest = new SleepEndpoint(TokenManager, user);
             //var sleepNew = new SleepNewModel
