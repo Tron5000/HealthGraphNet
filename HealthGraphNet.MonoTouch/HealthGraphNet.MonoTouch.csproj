@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6CBE254B-ACED-4777-A36F-6262758A4222}</ProjectGuid>
+    <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>HealthGraphNet.MonoTouch</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <AssemblyName>HealthGraphNet.MonoTouch</AssemblyName>
+    <ReleaseVersion>1.0.0</ReleaseVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="monotouch" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Lib\monotouch\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp.MonoTouch">
+      <HintPath>..\Lib\monotouch\RestSharp.MonoTouch.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="..\HealthGraphNet\AccessTokenManager.cs">
+      <Link>AccessTokenManager.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\AccessTokenManagerBase.cs">
+      <Link>AccessTokenManagerBase.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\HealthGraphException.cs">
+      <Link>HealthGraphException.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Properties\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\RestSharp\AdjustToUniversalIsoDateTimeConverter.cs">
+      <Link>RestSharp\AdjustToUniversalIsoDateTimeConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\RestSharp\ExtensionHelpers.cs">
+      <Link>RestSharp\ExtensionHelpers.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\RestSharp\JsonNETDeserializer.cs">
+      <Link>RestSharp\JsonNETDeserializer.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\RestSharp\JsonNETSerializer.cs">
+      <Link>RestSharp\JsonNETSerializer.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\RestSharp\OAuth2RequestHeaderAuthenticator.cs">
+      <Link>RestSharp\OAuth2RequestHeaderAuthenticator.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\RestSharp\ValidateHelper.cs">
+      <Link>RestSharp\ValidateHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Endpoints\Interfaces\ICommentThreadsEndpoint.cs">
+      <Link>Endpoints\Interfaces\ICommentThreadsEndpoint.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Endpoints\Interfaces\IFitnessActivitiesEndpoint.cs">
+      <Link>Endpoints\Interfaces\IFitnessActivitiesEndpoint.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Endpoints\Interfaces\INutritionEndpoint.cs">
+      <Link>Endpoints\Interfaces\INutritionEndpoint.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Endpoints\Interfaces\IProfileEndpoint.cs">
+      <Link>Endpoints\Interfaces\IProfileEndpoint.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Endpoints\Interfaces\IRecordsEndpoint.cs">
+      <Link>Endpoints\Interfaces\IRecordsEndpoint.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Endpoints\Interfaces\ISettingsEndpoint.cs">
+      <Link>Endpoints\Interfaces\ISettingsEndpoint.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Endpoints\Interfaces\ISleepEndpoint.cs">
+      <Link>Endpoints\Interfaces\ISleepEndpoint.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Endpoints\Interfaces\IStreetTeamEndpoint.cs">
+      <Link>Endpoints\Interfaces\IStreetTeamEndpoint.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Endpoints\Interfaces\IStrengthTrainingActivitiesEndpoint.cs">
+      <Link>Endpoints\Interfaces\IStrengthTrainingActivitiesEndpoint.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Endpoints\Interfaces\IUsersEndpoint.cs">
+      <Link>Endpoints\Interfaces\IUsersEndpoint.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Endpoints\Interfaces\IWeightEndpoint.cs">
+      <Link>Endpoints\Interfaces\IWeightEndpoint.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Endpoints\CommentThreadsEndpoint.cs">
+      <Link>Endpoints\CommentThreadsEndpoint.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Endpoints\FitnessActivitiesEndpoint.cs">
+      <Link>Endpoints\FitnessActivitiesEndpoint.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Endpoints\NutritionEndpoint.cs">
+      <Link>Endpoints\NutritionEndpoint.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Endpoints\ProfileEndpoint.cs">
+      <Link>Endpoints\ProfileEndpoint.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Endpoints\RecordsEndpoint.cs">
+      <Link>Endpoints\RecordsEndpoint.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Endpoints\SettingsEndpoint.cs">
+      <Link>Endpoints\SettingsEndpoint.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Endpoints\SleepEndpoint.cs">
+      <Link>Endpoints\SleepEndpoint.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Endpoints\StreetTeamEndpoint.cs">
+      <Link>Endpoints\StreetTeamEndpoint.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Endpoints\StrengthTrainingActivitiesEndpoint.cs">
+      <Link>Endpoints\StrengthTrainingActivitiesEndpoint.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Endpoints\UsersEndpoint.cs">
+      <Link>Endpoints\UsersEndpoint.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Endpoints\WeightEndpoint.cs">
+      <Link>Endpoints\WeightEndpoint.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\AccessTokenModel.cs">
+      <Link>Models\AccessTokenModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\FeedModel.cs">
+      <Link>Models\FeedModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\IFeedModelItem.cs">
+      <Link>Models\IFeedModelItem.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\UsersModel.cs">
+      <Link>Models\UsersModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\CommentThreads\CommentsModel.cs">
+      <Link>Models\CommentThreads\CommentsModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\CommentThreads\CommentsNewModel.cs">
+      <Link>Models\CommentThreads\CommentsNewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\CommentThreads\CommentThreadsModel.cs">
+      <Link>Models\CommentThreads\CommentThreadsModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\FitnessActivities\CaloriesModel.cs">
+      <Link>Models\FitnessActivities\CaloriesModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\FitnessActivities\DistanceModel.cs">
+      <Link>Models\FitnessActivities\DistanceModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\FitnessActivities\FitnessActivitiesFeedItemModel.cs">
+      <Link>Models\FitnessActivities\FitnessActivitiesFeedItemModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\FitnessActivities\FitnessActivitiesNewModel.cs">
+      <Link>Models\FitnessActivities\FitnessActivitiesNewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\FitnessActivities\FitnessActivitiesPastModel.cs">
+      <Link>Models\FitnessActivities\FitnessActivitiesPastModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\FitnessActivities\HeartRateModel.cs">
+      <Link>Models\FitnessActivities\HeartRateModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\FitnessActivities\IFitnessActivitiesModel.cs">
+      <Link>Models\FitnessActivities\IFitnessActivitiesModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\FitnessActivities\ImageModel.cs">
+      <Link>Models\FitnessActivities\ImageModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\FitnessActivities\PathModel.cs">
+      <Link>Models\FitnessActivities\PathModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\Nutrition\NutritionFeedItemModel.cs">
+      <Link>Models\Nutrition\NutritionFeedItemModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\Nutrition\NutritionModelBase.cs">
+      <Link>Models\Nutrition\NutritionModelBase.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\Nutrition\NutritionNewModel.cs">
+      <Link>Models\Nutrition\NutritionNewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\Nutrition\NutritionPastModel.cs">
+      <Link>Models\Nutrition\NutritionPastModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\Nutrition\NutritionType.cs">
+      <Link>Models\Nutrition\NutritionType.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\Profile\ProfileModel.cs">
+      <Link>Models\Profile\ProfileModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\Records\RecordsFeedItemModel.cs">
+      <Link>Models\Records\RecordsFeedItemModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\Records\StatModel.cs">
+      <Link>Models\Records\StatModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\Settings\SettingsModel.cs">
+      <Link>Models\Settings\SettingsModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\Sleep\SleepFeedItemModel.cs">
+      <Link>Models\Sleep\SleepFeedItemModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\Sleep\SleepModelBase.cs">
+      <Link>Models\Sleep\SleepModelBase.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\Sleep\SleepNewModel.cs">
+      <Link>Models\Sleep\SleepNewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\Sleep\SleepPastModel.cs">
+      <Link>Models\Sleep\SleepPastModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\Sleep\SleepType.cs">
+      <Link>Models\Sleep\SleepType.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\StreetTeam\StreetTeamFeedItemModel.cs">
+      <Link>Models\StreetTeam\StreetTeamFeedItemModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\StreetTeam\StreetTeamInvitationsModel.cs">
+      <Link>Models\StreetTeam\StreetTeamInvitationsModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\StreetTeam\StreetTeamModel.cs">
+      <Link>Models\StreetTeam\StreetTeamModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\StrengthTrainingActivities\ExercisesModel.cs">
+      <Link>Models\StrengthTrainingActivities\ExercisesModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\StrengthTrainingActivities\IStrengthTrainingActivitiesModel.cs">
+      <Link>Models\StrengthTrainingActivities\IStrengthTrainingActivitiesModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\StrengthTrainingActivities\SetsModel.cs">
+      <Link>Models\StrengthTrainingActivities\SetsModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\StrengthTrainingActivities\StrengthTrainingActivitiesFeedItemModel.cs">
+      <Link>Models\StrengthTrainingActivities\StrengthTrainingActivitiesFeedItemModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\StrengthTrainingActivities\StrengthTrainingActivitiesNewModel.cs">
+      <Link>Models\StrengthTrainingActivities\StrengthTrainingActivitiesNewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\StrengthTrainingActivities\StrengthTrainingActivitiesPastModel.cs">
+      <Link>Models\StrengthTrainingActivities\StrengthTrainingActivitiesPastModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\Weight\WeightFeedItemModel.cs">
+      <Link>Models\Weight\WeightFeedItemModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\Weight\WeightModelBase.cs">
+      <Link>Models\Weight\WeightModelBase.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\Weight\WeightNewModel.cs">
+      <Link>Models\Weight\WeightNewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\Weight\WeightPastModel.cs">
+      <Link>Models\Weight\WeightPastModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\Weight\WeightType.cs">
+      <Link>Models\Weight\WeightType.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+    <Folder Include="Models\" />
+    <Folder Include="RestSharp\" />
+    <Folder Include="Endpoints\" />
+    <Folder Include="Endpoints\Interfaces\" />
+    <Folder Include="Models\CommentThreads\" />
+    <Folder Include="Models\FitnessActivities\" />
+    <Folder Include="Models\Nutrition\" />
+    <Folder Include="Models\Profile\" />
+    <Folder Include="Models\Records\" />
+    <Folder Include="Models\Settings\" />
+    <Folder Include="Models\Sleep\" />
+    <Folder Include="Models\StreetTeam\" />
+    <Folder Include="Models\StrengthTrainingActivities\" />
+    <Folder Include="Models\Weight\" />
+  </ItemGroup>
+</Project>
