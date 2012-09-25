@@ -62,6 +62,9 @@
     <Compile Include="Endpoints\StreetTeamEndpoint.cs" />
     <Compile Include="Endpoints\StrengthTrainingActivitiesEndpoint.cs" />
     <Compile Include="Endpoints\WeightEndpoint.cs" />
+    <Compile Include="Models\BackgroundActivities\BackgroundActivitiesFeedItemModel.cs" />
+    <Compile Include="Models\BackgroundActivities\BackgroundActivitiesModelBase.cs" />
+    <Compile Include="Models\BackgroundActivities\BackgroundActivitiesType.cs" />
     <Compile Include="Models\CommentThreads\CommentsModel.cs" />
     <Compile Include="Models\CommentThreads\CommentsNewModel.cs" />
     <Compile Include="Models\CommentThreads\CommentThreadsModel.cs" />
