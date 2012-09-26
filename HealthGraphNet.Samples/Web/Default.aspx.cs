@@ -150,6 +150,21 @@ namespace HealthGraphNet.Samples.Web
             LblProfileMediumPicture.Text = !string.IsNullOrEmpty(profile.MediumPicture) ? profile.MediumPicture : "N/A";
             LblProfileLargePicture.Text = !string.IsNullOrEmpty(profile.LargePicture) ? profile.LargePicture : "N/A";
 
+            //var backgroundNew = new BackgroundActivitiesNewModel
+            //{
+            //    Timestamp = DateTime.Now,
+            //    Steps = 1000,
+            //    PostToFacebook = false,
+            //    PostToTwitter = false
+            //};
+            //var backgroundActivitiesRequest = new BackgroundActivitiesEndpoint(TokenManager, user);
+            //var uriOfBackground = backgroundActivitiesRequest.CreateActivity(backgroundNew); 
+            //var backgroundPage = backgroundActivitiesRequest.GetFeedPage();
+            //string uriOfBackground = backgroundPage.Items.First().Uri;
+            //var backgroundDetail = backgroundActivitiesRequest.GetActivity(uriOfBackground);
+            //backgroundDetail.CaloriesBurned = 100;
+            //backgroundDetail = backgroundActivitiesRequest.UpdateActivity(backgroundDetail);
+            //backgroundActivitiesRequest.DeleteActivity(uriOfBackground);
 
             //var strengthTrainingNew = new StrengthTrainingActivitiesNewModel
             //{
