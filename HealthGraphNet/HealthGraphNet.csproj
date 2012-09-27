@@ -79,6 +79,8 @@
     <Compile Include="Models\FitnessActivities\FitnessActivitiesNewModel.cs" />
     <Compile Include="Models\FitnessActivities\HeartRateModel.cs" />
     <Compile Include="Models\FitnessActivities\ImageModel.cs" />
+    <Compile Include="Models\GeneralMeasurements\GeneralMeasurementsModelBase.cs" />
+    <Compile Include="Models\GeneralMeasurements\GeneralMeasurementsType.cs" />
     <Compile Include="Models\IFeedModelItem.cs" />
     <Compile Include="Models\FitnessActivities\IFitnessActivitiesModel.cs" />
     <Compile Include="Models\FitnessActivities\PathModel.cs" />
