@@ -295,6 +295,27 @@
     <Compile Include="..\HealthGraphNet\Models\BackgroundActivities\BackgroundActivitiesType.cs">
       <Link>Models\BackgroundActivities\BackgroundActivitiesType.cs</Link>
     </Compile>
+    <Compile Include="..\HealthGraphNet\Models\GeneralMeasurements\GeneralMeasurementsFeedItemModel.cs">
+      <Link>Models\GeneralMeasurements\GeneralMeasurementsFeedItemModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\GeneralMeasurements\GeneralMeasurementsModelBase.cs">
+      <Link>Models\GeneralMeasurements\GeneralMeasurementsModelBase.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\GeneralMeasurements\GeneralMeasurementsNewModel.cs">
+      <Link>Models\GeneralMeasurements\GeneralMeasurementsNewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\GeneralMeasurements\GeneralMeasurementsPastModel.cs">
+      <Link>Models\GeneralMeasurements\GeneralMeasurementsPastModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\GeneralMeasurements\GeneralMeasurementsType.cs">
+      <Link>Models\GeneralMeasurements\GeneralMeasurementsType.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Endpoints\Interfaces\IGeneralMeasurementsEndpoint.cs">
+      <Link>Endpoints\Interfaces\IGeneralMeasurementsEndpoint.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Endpoints\GeneralMeasurementsEndpoint.cs">
+      <Link>Endpoints\GeneralMeasurementsEndpoint.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
@@ -313,5 +334,6 @@
     <Folder Include="Models\StrengthTrainingActivities\" />
     <Folder Include="Models\Weight\" />
     <Folder Include="Models\BackgroundActivities\" />
+    <Folder Include="Models\GeneralMeasurements\" />
   </ItemGroup>
 </Project>
