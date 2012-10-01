@@ -150,6 +150,22 @@ namespace HealthGraphNet.Samples.Web
             LblProfileMediumPicture.Text = !string.IsNullOrEmpty(profile.MediumPicture) ? profile.MediumPicture : "N/A";
             LblProfileLargePicture.Text = !string.IsNullOrEmpty(profile.LargePicture) ? profile.LargePicture : "N/A";
 
+            //var measurementNew = new GeneralMeasurementsNewModel
+            //{
+            //    Timestamp = DateTime.Now,
+            //    Testosterone = 40,
+            //    PostToFacebook = false,
+            //    PostToTwitter = false
+            //};
+            //var measurementRequest = new GeneralMeasurementsEndpoint(TokenManager, user);
+            //var uriOfMeasurement = measurementRequest.CreateMeasurement(measurementNew);
+            //var measurementPage = measurementRequest.GetFeedPage();
+            //string uriOfMeasurement = measurementPage.Items.First().Uri;
+            //var measurementDetail = measurementRequest.GetMeasurement(uriOfMeasurement);
+            //measurementDetail.Testosterone = 100;
+            //measurementDetail = measurementRequest.UpdateMeasurement(measurementDetail);
+            //measurementRequest.DeleteMeasurement(uriOfMeasurement);
+
             //var backgroundNew = new BackgroundActivitiesNewModel
             //{
             //    Timestamp = DateTime.Now,
