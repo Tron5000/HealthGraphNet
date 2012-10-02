@@ -401,7 +401,7 @@ namespace HealthGraphNet.Models
         }
 
         /// <summary>
-        /// The URI of detailed information for the weight measurement. Read only.
+        /// The URI of detailed information for the general measurement. Read only.
         /// </summary>
         [JsonProperty(PropertyName = "uri")]
         public string Uri { get; internal set; }

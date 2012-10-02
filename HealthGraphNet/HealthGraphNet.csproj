@@ -44,10 +44,12 @@
   <ItemGroup>
     <Compile Include="Endpoints\BackgroundActivitiesEndpoint.cs" />
     <Compile Include="Endpoints\CommentThreadsEndpoint.cs" />
+    <Compile Include="Endpoints\DiabetesMeasurementsEndpoint.cs" />
     <Compile Include="Endpoints\FitnessActivitiesEndpoint.cs" />
     <Compile Include="Endpoints\GeneralMeasurementsEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\IBackgroundActivitiesEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\ICommentThreadsEndpoint.cs" />
+    <Compile Include="Endpoints\Interfaces\IDiabetesMeasurementsEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\IFitnessActivitiesEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\IGeneralMeasurementsEndpoint.cs" />
     <Compile Include="Endpoints\Interfaces\INutritionEndpoint.cs" />
@@ -74,6 +76,11 @@
     <Compile Include="Models\CommentThreads\CommentsModel.cs" />
     <Compile Include="Models\CommentThreads\CommentsNewModel.cs" />
     <Compile Include="Models\CommentThreads\CommentThreadsModel.cs" />
+    <Compile Include="Models\DiabetesMeasurements\DiabetesMeasurementsFeedItemModel.cs" />
+    <Compile Include="Models\DiabetesMeasurements\DiabetesMeasurementsModelBase.cs" />
+    <Compile Include="Models\DiabetesMeasurements\DiabetesMeasurementsNewModel.cs" />
+    <Compile Include="Models\DiabetesMeasurements\DiabetesMeasurementsPastModel.cs" />
+    <Compile Include="Models\DiabetesMeasurements\DiabetesMeasurementsType.cs" />
     <Compile Include="Models\FitnessActivities\FitnessActivitiesFeedItemModel.cs" />
     <Compile Include="Models\FitnessActivities\CaloriesModel.cs" />
     <Compile Include="Models\FitnessActivities\DistanceModel.cs" />

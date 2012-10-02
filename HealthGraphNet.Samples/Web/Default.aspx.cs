@@ -150,6 +150,22 @@ namespace HealthGraphNet.Samples.Web
             LblProfileMediumPicture.Text = !string.IsNullOrEmpty(profile.MediumPicture) ? profile.MediumPicture : "N/A";
             LblProfileLargePicture.Text = !string.IsNullOrEmpty(profile.LargePicture) ? profile.LargePicture : "N/A";
 
+            //var measurementNew = new DiabetesMeasurementsNewModel
+            //{
+            //    Timestamp = DateTime.Now,
+            //    Triglyceride = 150,
+            //    PostToFacebook = false,
+            //    PostToTwitter = false
+            //};
+            //var measurementRequest = new DiabetesMeasurementsEndpoint(TokenManager, user);
+            //var uriOfMeasurement = measurementRequest.CreateMeasurement(measurementNew);            
+            //var measurementPage = measurementRequest.GetFeedPage();
+            //string uriOfMeasurement = measurementPage.Items.First().Uri;            
+            //var measurementDetail = measurementRequest.GetMeasurement(uriOfMeasurement);
+            //measurementDetail.Triglyceride = 40;
+            //measurementDetail = measurementRequest.UpdateMeasurement(measurementDetail);
+            //measurementRequest.DeleteMeasurement(uriOfMeasurement);
+
             //var measurementNew = new GeneralMeasurementsNewModel
             //{
             //    Timestamp = DateTime.Now,
