@@ -316,6 +316,27 @@
     <Compile Include="..\HealthGraphNet\Endpoints\GeneralMeasurementsEndpoint.cs">
       <Link>Endpoints\GeneralMeasurementsEndpoint.cs</Link>
     </Compile>
+    <Compile Include="..\HealthGraphNet\Models\DiabetesMeasurements\DiabetesMeasurementsFeedItemModel.cs">
+      <Link>Models\DiabetesMeasurements\DiabetesMeasurementsFeedItemModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\DiabetesMeasurements\DiabetesMeasurementsModelBase.cs">
+      <Link>Models\DiabetesMeasurements\DiabetesMeasurementsModelBase.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\DiabetesMeasurements\DiabetesMeasurementsNewModel.cs">
+      <Link>Models\DiabetesMeasurements\DiabetesMeasurementsNewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\DiabetesMeasurements\DiabetesMeasurementsPastModel.cs">
+      <Link>Models\DiabetesMeasurements\DiabetesMeasurementsPastModel.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Models\DiabetesMeasurements\DiabetesMeasurementsType.cs">
+      <Link>Models\DiabetesMeasurements\DiabetesMeasurementsType.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Endpoints\Interfaces\IDiabetesMeasurementsEndpoint.cs">
+      <Link>Endpoints\Interfaces\IDiabetesMeasurementsEndpoint.cs</Link>
+    </Compile>
+    <Compile Include="..\HealthGraphNet\Endpoints\DiabetesMeasurementsEndpoint.cs">
+      <Link>Endpoints\DiabetesMeasurementsEndpoint.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
@@ -335,5 +356,6 @@
     <Folder Include="Models\Weight\" />
     <Folder Include="Models\BackgroundActivities\" />
     <Folder Include="Models\GeneralMeasurements\" />
+    <Folder Include="Models\DiabetesMeasurements\" />
   </ItemGroup>
 </Project>
