@@ -6,32 +6,35 @@ namespace HealthGraphNet.Models
     /// <summary>
     /// The profile model.
     /// </summary>
-    public class ProfileModel
+	#if MONOTOUCH
+	[MonoTouch.Foundation.Preserve(AllMembers = true)]
+	#endif      
+	public class ProfileModel
     {
         internal const string ContentType = " application/vnd.com.runkeeper.Profile+json";        
         
         /// <summary>
         /// The user's full name (omitted if not yet specified). Read only.
-        /// </summary>
-        [JsonProperty(PropertyName = "name")]        
+        /// </summary>     
+		[JsonProperty(PropertyName = "name")]        
         public string Name { get; internal set; }
         
         /// <summary>
         /// The user's geographical location (omitted if not yet specified). Read only.
         /// </summary>
-        [JsonProperty(PropertyName = "location")]                
+		[JsonProperty(PropertyName = "location")]                
         public string Location { get; internal set; }
         
         /// <summary>
         /// One of the following values: Athlete, Runner, Marathoner, Ultra Marathoner, Cyclist, Tri-Athlete, Walker, Hiker, Skier, Snowboarder, Skater, Swimmer, Rower (omitted if not yet specified).
         /// </summary>
-        [JsonProperty(PropertyName = "athlete_type")]                
+		[JsonProperty(PropertyName = "athlete_type")]                
         public string AthleteType { get; set; }
         
         /// <summary>
         /// One of the following values: M, F (omitted if not yet specified). Read only.
-        /// </summary>
-        [JsonProperty(PropertyName = "gender")]                
+        /// </summary>       
+		[JsonProperty(PropertyName = "gender")]                
         public string Gender { get; internal set; }
         
         /// <summary>
