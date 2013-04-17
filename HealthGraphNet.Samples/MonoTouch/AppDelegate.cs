@@ -71,7 +71,7 @@ namespace HealthGraphNet.Samples.MonoTouch
 
 			if ((string.IsNullOrEmpty(ClientId)) || (string.IsNullOrEmpty(ClientSecret)) || (string.IsNullOrEmpty(RequestUri)))
 			{
-				UIAlertView firstPageValidationAlert = new UIAlertView("Whoops!", "Please provide a Client Id, Client Secrent and Request Uri.", null, "Okay");
+				UIAlertView firstPageValidationAlert = new UIAlertView("Whoops!", "Please provide a Client Id, Client Secret and Request Uri.", null, "Okay");
 				firstPageValidationAlert.Show();
 			}
 			else
