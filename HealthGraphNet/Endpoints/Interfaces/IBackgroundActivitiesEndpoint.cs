@@ -6,8 +6,8 @@ namespace HealthGraphNet
     public interface IBackgroundActivitiesEndpoint
     {
         //Get Background Activities Feed
-        FeedModel<BackgroundActivitiesFeedItemModel> GetFeedPage(int? pageIndex, int? pageSize, DateTime? noEarlierThan, DateTime? noLaterThan, DateTime? modifiedNoEarlierThan, DateTime? modifiedNoLaterThan);
-        void GetFeedPageAsync(Action<FeedModel<BackgroundActivitiesFeedItemModel>> success, Action<HealthGraphException> failure, int? pageIndex, int? pageSize, DateTime? noEarlierThan, DateTime? noLaterThan, DateTime? modifiedNoEarlierThan, DateTime? modifiedNoLaterThan);
+        FeedModel<BackgroundActivitiesFeedItemModel> GetFeedPage(int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null);
+        void GetFeedPageAsync(Action<FeedModel<BackgroundActivitiesFeedItemModel>> success, Action<HealthGraphException> failure, int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null);
         //Get Background Activity (Detailed)
         BackgroundActivitiesPastModel GetActivity(string uri);
         void GetActivityAsync(Action<BackgroundActivitiesPastModel> success, Action<HealthGraphException> failure, string uri);

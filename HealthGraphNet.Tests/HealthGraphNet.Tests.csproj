@@ -65,6 +65,10 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Integration\AccessTokenManagerSetupBase.cs" />
+    <Compile Include="Integration\Endpoints\FitnessActivitiesEndpointTest.cs" />
+    <Compile Include="Integration\Endpoints\ProfileEndpointTest.cs" />
+    <Compile Include="Integration\Endpoints\UsersEndpointTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Unit\AccessTokenManagerBaseStub.cs" />
     <Compile Include="Unit\Endpoints\BackgroundActivitiesEndpointTest.cs" />
@@ -81,9 +85,7 @@
     <Compile Include="Unit\RestSharp\OAuth2RequestHeaderAuthenticatorTest.cs" />
     <Compile Include="Unit\RestSharp\ValidateHelperTest.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Integration\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\HealthGraphNet\HealthGraphNet.csproj">
       <Project>{95267c4f-e409-4d06-9988-1c8c3ca5c0b5}</Project>

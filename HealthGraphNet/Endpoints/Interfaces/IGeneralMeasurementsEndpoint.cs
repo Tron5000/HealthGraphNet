@@ -6,8 +6,8 @@ namespace HealthGraphNet
     public interface IGeneralMeasurementsEndpoint
     {
         //Get General Measurements Feed
-        FeedModel<GeneralMeasurementsFeedItemModel> GetFeedPage(int? pageIndex, int? pageSize, DateTime? noEarlierThan, DateTime? noLaterThan, DateTime? modifiedNoEarlierThan, DateTime? modifiedNoLaterThan);
-        void GetFeedPageAsync(Action<FeedModel<GeneralMeasurementsFeedItemModel>> success, Action<HealthGraphException> failure, int? pageIndex, int? pageSize, DateTime? noEarlierThan, DateTime? noLaterThan, DateTime? modifiedNoEarlierThan, DateTime? modifiedNoLaterThan);   
+        FeedModel<GeneralMeasurementsFeedItemModel> GetFeedPage(int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null);
+        void GetFeedPageAsync(Action<FeedModel<GeneralMeasurementsFeedItemModel>> success, Action<HealthGraphException> failure, int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null);   
         //Get General Measurement (Detailed)
         GeneralMeasurementsPastModel GetMeasurement(string uri);
         void GetMeasurementAsync(Action<GeneralMeasurementsPastModel> success, Action<HealthGraphException> failure, string uri);

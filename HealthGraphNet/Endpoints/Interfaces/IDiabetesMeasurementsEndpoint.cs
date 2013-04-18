@@ -6,8 +6,8 @@ namespace HealthGraphNet
     public interface IDiabetesMeasurementsEndpoint
     {
         //Get Diabetes Measurements Feed
-        FeedModel<DiabetesMeasurementsFeedItemModel> GetFeedPage(int? pageIndex, int? pageSize, DateTime? noEarlierThan, DateTime? noLaterThan, DateTime? modifiedNoEarlierThan, DateTime? modifiedNoLaterThan);
-        void GetFeedPageAsync(Action<FeedModel<DiabetesMeasurementsFeedItemModel>> success, Action<HealthGraphException> failure, int? pageIndex, int? pageSize, DateTime? noEarlierThan, DateTime? noLaterThan, DateTime? modifiedNoEarlierThan, DateTime? modifiedNoLaterThan);   
+        FeedModel<DiabetesMeasurementsFeedItemModel> GetFeedPage(int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null);
+        void GetFeedPageAsync(Action<FeedModel<DiabetesMeasurementsFeedItemModel>> success, Action<HealthGraphException> failure, int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null);   
         //Get Diabetes Measurement (Detailed)
         DiabetesMeasurementsPastModel GetMeasurement(string uri);
         void GetMeasurementAsync(Action<DiabetesMeasurementsPastModel> success, Action<HealthGraphException> failure, string uri);

@@ -6,8 +6,8 @@ namespace HealthGraphNet
     public interface IStrengthTrainingActivitiesEndpoint
     {
         //Get Strength Training Activity Feed
-        FeedModel<StrengthTrainingActivitiesFeedItemModel> GetFeedPage(int? pageIndex, int? pageSize, DateTime? noEarlierThan, DateTime? noLaterThan, DateTime? modifiedNoEarlierThan, DateTime? modifiedNoLaterThan);
-        void GetFeedPageAsync(Action<FeedModel<StrengthTrainingActivitiesFeedItemModel>> success, Action<HealthGraphException> failure, int? pageIndex, int? pageSize, DateTime? noEarlierThan, DateTime? noLaterThan, DateTime? modifiedNoEarlierThan, DateTime? modifiedNoLaterThan);
+        FeedModel<StrengthTrainingActivitiesFeedItemModel> GetFeedPage(int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null);
+        void GetFeedPageAsync(Action<FeedModel<StrengthTrainingActivitiesFeedItemModel>> success, Action<HealthGraphException> failure, int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null);
         //Get Strength Training Activity (Detailed)
         StrengthTrainingActivitiesPastModel GetActivity(string uri);
         void GetActivityAsync(Action<StrengthTrainingActivitiesPastModel> success, Action<HealthGraphException> failure, string uri);
