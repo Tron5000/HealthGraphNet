@@ -64,11 +64,11 @@ namespace HealthGraphNet
         {
             if (string.IsNullOrEmpty(baseUrl) == false)
             {
-                _client.BaseUrl = baseUrl;
+                _client.BaseUrl = new Uri(baseUrl);
             }
             else
             {
-                _client.BaseUrl = ApiBaseUrl;
+                _client.BaseUrl = new Uri(ApiBaseUrl);
             }
             IRestResponse<T> response = _client.Execute<T>(request);
             //If a particular status code is expected, check for it, otherwise assume we are looking for an OK
@@ -91,11 +91,11 @@ namespace HealthGraphNet
         {
             if (string.IsNullOrEmpty(baseUrl) == false)
             {
-                _client.BaseUrl = baseUrl;
+                _client.BaseUrl = new Uri(baseUrl);
             }
             else
             {
-                _client.BaseUrl = ApiBaseUrl;
+                _client.BaseUrl = new Uri(ApiBaseUrl);
             }
             IRestResponse response = _client.Execute(request);
             //If a particular status code is expected, check for it, otherwise assume we are looking for an OK
@@ -118,18 +118,18 @@ namespace HealthGraphNet
         {
             if (string.IsNullOrEmpty(baseUrl) == false)
             {
-                _client.BaseUrl = baseUrl;
+                _client.BaseUrl = new Uri(baseUrl);
             }
             else
             {
-                _client.BaseUrl = ApiBaseUrl;
+                _client.BaseUrl = new Uri(ApiBaseUrl);
             }
             IRestResponse response = _client.Execute(request);
             if (response.StatusCode != HttpStatusCode.Created)
             {
                 throw new HealthGraphException(response);
             }
-            var locationHeader = response.Headers.Where(h => h.Name == LocationHeaderName).FirstOrDefault();
+            var locationHeader = response.Headers.FirstOrDefault(h => h.Name == LocationHeaderName);
             if (locationHeader == null)
             {
                 return null;
@@ -164,11 +164,11 @@ namespace HealthGraphNet
 
             if (string.IsNullOrEmpty(baseUrl) == false)
             {
-                _client.BaseUrl = baseUrl;
+                _client.BaseUrl = new Uri(baseUrl);
             }
             else
             {
-                _client.BaseUrl = ApiBaseUrl;
+                _client.BaseUrl = new Uri(ApiBaseUrl);
             }
             _client.ExecuteAsync<T>(request, (response, asynchandle) =>
             {
@@ -209,11 +209,11 @@ namespace HealthGraphNet
 
             if (string.IsNullOrEmpty(baseUrl) == false)
             {
-                _client.BaseUrl = baseUrl;
+                _client.BaseUrl = new Uri(baseUrl);
             }
             else
             {
-                _client.BaseUrl = ApiBaseUrl;
+                _client.BaseUrl = new Uri(ApiBaseUrl);
             }
             _client.ExecuteAsync(request, (response, asynchandle) =>
             {
@@ -253,11 +253,11 @@ namespace HealthGraphNet
 
             if (string.IsNullOrEmpty(baseUrl) == false)
             {
-                _client.BaseUrl = baseUrl;
+                _client.BaseUrl = new Uri(baseUrl);
             }
             else
             {
-                _client.BaseUrl = ApiBaseUrl;
+                _client.BaseUrl = new Uri(ApiBaseUrl);
             }
             _client.ExecuteAsync(request, (response, asynchandle) =>
             {
