@@ -6,7 +6,7 @@ using System.IO;
 using System.Globalization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using RestSharp.Serializers;
+using RestSharp.Portable;
 
 namespace HealthGraphNet.RestSharp
 {
@@ -79,5 +79,11 @@ namespace HealthGraphNet.RestSharp
 		public string ContentType { get; set; }
 
         #endregion
+
+        byte[] ISerializer.Serialize(object obj)
+        {
+            var result = Serialize(obj);
+            return Encoding.UTF8.GetBytes(result);
+        }
     }
 }

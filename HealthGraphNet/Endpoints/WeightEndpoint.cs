@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
-using RestSharp;
-using RestSharp.Validation;
-using RestSharp.Serializers;
+using RestSharp.Portable;
+using RestSharp.Portable.Serializers;
 using HealthGraphNet.Models;
 using HealthGraphNet.RestSharp;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace HealthGraphNet
 {
@@ -33,86 +34,42 @@ namespace HealthGraphNet
     
         #region IWeightEndpoint
 
-        public FeedModel<WeightFeedItemModel> GetFeedPage(int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
+        public async Task<FeedModel<WeightFeedItemModel>> GetFeedPage(int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
         {
-            var request = new RestRequest();
-            request.PrepareFeedPageRequest(_user.Weight, pageIndex, pageSize, noEarlierThan, noLaterThan, modifiedNoEarlierThan, modifiedNoLaterThan);
-            return _tokenManager.Execute<FeedModel<WeightFeedItemModel>>(request);
+            var request = ExtensionHelpers.CreateFeedPageRequest(_user.Weight, pageIndex, pageSize, noEarlierThan, noLaterThan, modifiedNoEarlierThan, modifiedNoLaterThan);
+            return await _tokenManager.Execute<FeedModel<WeightFeedItemModel>>(request);
         }
 
-        public void GetFeedPageAsync(Action<FeedModel<WeightFeedItemModel>> success, Action<HealthGraphException> failure, int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
-        {
-            var request = new RestRequest();
-            request.PrepareFeedPageRequest(_user.Weight, pageIndex, pageSize, noEarlierThan, noLaterThan, modifiedNoEarlierThan, modifiedNoLaterThan);
-            _tokenManager.ExecuteAsync<FeedModel<WeightFeedItemModel>>(request, success, failure);
-        }
-
-        public WeightPastModel GetWeight(string uri)
+        public async Task<WeightPastModel> GetWeight(string uri)
         {
             if (uri.Contains(_user.Weight) == false)
             {
                 throw new ArgumentException("The uri must identify a resource on or below the " + _user.Weight + " endpoint.");
             }            
-            var request = new RestRequest(Method.GET);
-            request.Resource = uri;
-            return _tokenManager.Execute<WeightPastModel>(request);
+            var request = new RestRequest(uri, Method.GET);
+            return await _tokenManager.Execute<WeightPastModel>(request);
         }
 
-        public void GetWeightAsync(Action<WeightPastModel> success, Action<HealthGraphException> failure, string uri)
-        {
-            if (uri.Contains(_user.Weight) == false)
-            {
-                throw new ArgumentException("The uri must identify a resource on or below the " + _user.Weight + " endpoint.");
-            }             
-            var request = new RestRequest(Method.GET);
-            request.Resource = uri;
-            _tokenManager.ExecuteAsync<WeightPastModel>(request, success, failure);
-        }
-
-        public WeightPastModel UpdateWeight(WeightPastModel weightToUpdate)
+        public async Task<WeightPastModel> UpdateWeight(WeightPastModel weightToUpdate)
         {
             var request = PrepareWeightUpdateRequest(weightToUpdate);
-            return _tokenManager.Execute<WeightPastModel>(request);
+            return await _tokenManager.Execute<WeightPastModel>(request);
         }
 
-        public void UpdateWeightAsync(Action<WeightPastModel> success, Action<HealthGraphException> failure, WeightPastModel weightToUpdate)
-        {
-            var request = PrepareWeightUpdateRequest(weightToUpdate);
-            _tokenManager.ExecuteAsync<WeightPastModel>(request, success, failure);
-        }
-
-        public string CreateWeight(WeightNewModel weightToCreate)
+        public async Task<string> CreateWeight(WeightNewModel weightToCreate)
         {
             var request = PrepareWeightCreateRequest(weightToCreate);
-            return _tokenManager.ExecuteCreate(request);
+            return await _tokenManager.ExecuteCreate(request);
         }
 
-        public void CreateWeightAsync(Action<string> success, Action<HealthGraphException> failure, WeightNewModel weightToCreate)
-        {
-            var request = PrepareWeightCreateRequest(weightToCreate);
-            _tokenManager.ExecuteCreateAsync(request, success, failure);
-        }
-
-        public void DeleteWeight(string uri)
+        public async Task DeleteWeight(string uri)
         {
             if (uri.Contains(_user.Weight) == false)
             {
                 throw new ArgumentException("The uri must identify a resource on or below the " + _user.Weight + " endpoint.");
             }             
-            var request = new RestRequest(Method.DELETE);
-            request.Resource = uri;
-            _tokenManager.Execute(request, expectedStatusCode: HttpStatusCode.NoContent);
-        }
-
-        public void DeleteWeightAsync(Action success, Action<HealthGraphException> failure, string uri)
-        {
-            if (uri.Contains(_user.Weight) == false)
-            {
-                throw new ArgumentException("The uri must identify a resource on or below the " + _user.Weight + " endpoint.");
-            }             
-            var request = new RestRequest(Method.DELETE);
-            request.Resource = uri;
-            _tokenManager.ExecuteAsync(request, success, failure, expectedStatusCode: HttpStatusCode.NoContent);
+            var request = new RestRequest(uri, Method.DELETE);
+            await _tokenManager.Execute(request, expectedStatusCode: HttpStatusCode.NoContent);
         }
 
         #endregion
@@ -138,8 +95,7 @@ namespace HealthGraphNet
         /// <returns></returns>
         private IRestRequest PrepareWeightCreateRequest(WeightNewModel weightToCreate)
         {
-            var request = new RestRequest(Method.POST);
-            request.Resource = _user.Weight;
+            var request = new RestRequest(_user.Weight, Method.POST);
 
             ValidateModel(weightToCreate);
 
@@ -165,8 +121,7 @@ namespace HealthGraphNet
         /// <returns></returns>
         private IRestRequest PrepareWeightUpdateRequest(WeightPastModel weightToUpdate)
         {
-            var request = new RestRequest(Method.PUT);
-            request.Resource = weightToUpdate.Uri;
+            var request = new RestRequest(weightToUpdate.Uri, Method.PUT);
 
             ValidateModel(weightToUpdate);
 

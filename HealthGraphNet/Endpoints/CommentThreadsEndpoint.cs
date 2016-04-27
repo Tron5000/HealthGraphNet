@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using RestSharp;
-using RestSharp.Validation;
-using RestSharp.Serializers;
+using RestSharp.Portable;
+using RestSharp.Portable.Serializers;
 using HealthGraphNet.Models;
 using HealthGraphNet.RestSharp;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace HealthGraphNet
 {
@@ -30,40 +31,22 @@ namespace HealthGraphNet
 
         #region ICommentThreadsEndpoint
 
-        public CommentThreadsModel GetCommentThread(string uri)
+        public async Task<CommentThreadsModel> GetCommentThread(string uri)
         {
-            var request = new RestRequest(Method.GET);
+            var request = new RestRequest(uri, Method.GET);
             request.Resource = uri;
-            return _tokenManager.Execute<CommentThreadsModel>(request);
+            return await _tokenManager.Execute<CommentThreadsModel>(request);
         }
 
-        public void GetCommentThreadAsync(Action<CommentThreadsModel> success, Action<HealthGraphException> failure, string uri)
-        {
-            var request = new RestRequest(Method.GET);
-            request.Resource = uri;
-            _tokenManager.ExecuteAsync<CommentThreadsModel>(request, success, failure);
-        }
-
-        public void CreateComment(CommentsNewModel commentToCreate, string uri)
+        public async Task CreateComment(CommentsNewModel commentToCreate, string uri)
         {
             var request = PrepareCommentCreateRequest(commentToCreate, uri);
-            _tokenManager.Execute(request);
+            await _tokenManager.Execute(request);
         }
 
-        public void CreateComment(string commentToCreate, string uri)
+        public Task CreateComment(string commentToCreate, string uri)
         {
-            CreateComment(new CommentsNewModel { Comment = commentToCreate }, uri);
-        }
-
-        public void CreateCommentAsync(Action success, Action<HealthGraphException> failure, CommentsNewModel commentToCreate, string uri)
-        {
-            var request = PrepareCommentCreateRequest(commentToCreate, uri);
-            _tokenManager.ExecuteAsync(request, success, failure);
-        }
-
-        public void CreateCommentAsync(Action success, Action<HealthGraphException> failure, string commentToCreate, string uri)
-        {
-            CreateCommentAsync(success, failure, new CommentsNewModel { Comment = commentToCreate }, uri);
+            return CreateComment(new CommentsNewModel { Comment = commentToCreate }, uri);
         }
 
         #endregion
@@ -78,8 +61,7 @@ namespace HealthGraphNet
         /// <returns></returns>
         private IRestRequest PrepareCommentCreateRequest(CommentsNewModel commentToCreate, string uri)
         {
-            var request = new RestRequest(Method.POST);
-            request.Resource = uri;
+            var request = new RestRequest(uri, Method.POST);
 
             //Add body to the request
             request.AddParameter(CommentsNewModel.ContentType, _tokenManager.DefaultJsonSerializer.Serialize(new

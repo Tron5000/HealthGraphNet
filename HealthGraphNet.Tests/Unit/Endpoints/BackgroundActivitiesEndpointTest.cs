@@ -39,7 +39,7 @@ namespace HealthGraphNet.Tests.Unit
 
         #region Tests
 
-        [Test()]
+        [Test]
         public void GetActivity_UriValid_DoesNotThrowArgumentException()
         {
             //Arrange
@@ -47,10 +47,10 @@ namespace HealthGraphNet.Tests.Unit
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             BackgroundActivitiesEndpoint activityRequest = new BackgroundActivitiesEndpoint(tokenManager.Object, new UsersModel { BackgroundActivities = validPath });
             //Act and Assert
-            Assert.DoesNotThrow(() => { activityRequest.GetActivity(validPath); });
+            Assert.DoesNotThrowAsync(async () => { await activityRequest.GetActivity(validPath); });
         }
 
-        [Test()]
+        [Test]
         public void GetActivity_UriNotValid_ArgumentException()
         {
             //Arrange
@@ -58,32 +58,10 @@ namespace HealthGraphNet.Tests.Unit
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             BackgroundActivitiesEndpoint activityRequest = new BackgroundActivitiesEndpoint(tokenManager.Object, new UsersModel { BackgroundActivities = validPath });
             //Act and Assert
-            Assert.Throws(typeof(ArgumentException), () => { activityRequest.GetActivity("Not validPath."); });
+            Assert.ThrowsAsync(typeof(ArgumentException), async () => { await activityRequest.GetActivity("Not validPath."); });
         }
 
-        [Test()]
-        public void GetActivityAsync_UriValid_DoesNotThrowArgumentException()
-        {
-            //Arrange
-            var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            BackgroundActivitiesEndpoint activityRequest = new BackgroundActivitiesEndpoint(tokenManager.Object, new UsersModel { BackgroundActivities = validPath });
-            //Act and Assert
-            Assert.DoesNotThrow(() => { activityRequest.GetActivityAsync((m) => { }, (ex) => { }, validPath); });
-        }
-
-        [Test()]
-        public void GetActivityAsync_UriNotValid_ArgumentException()
-        {
-            //Arrange
-            var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            BackgroundActivitiesEndpoint activityRequest = new BackgroundActivitiesEndpoint(tokenManager.Object, new UsersModel { BackgroundActivities = validPath });
-            //Act and Assert
-            Assert.Throws(typeof(ArgumentException), () => { activityRequest.GetActivityAsync((m) => { }, (ex) => { }, "Not validPath."); });
-        }
-
-        [Test()]
+        [Test]
         public void DeleteActivity_UriValid_DoesNotThrowArgumentException()
         {
             //Arrange
@@ -91,10 +69,10 @@ namespace HealthGraphNet.Tests.Unit
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             BackgroundActivitiesEndpoint activityRequest = new BackgroundActivitiesEndpoint(tokenManager.Object, new UsersModel { BackgroundActivities = validPath });
             //Act and Assert
-            Assert.DoesNotThrow(() => { activityRequest.DeleteActivity(validPath); });
+            Assert.DoesNotThrowAsync(async() => { await activityRequest.DeleteActivity(validPath); });
         }
 
-        [Test()]
+        [Test]
         public void DeleteActivity_UriNotValid_ArgumentException()
         {
             //Arrange
@@ -102,42 +80,21 @@ namespace HealthGraphNet.Tests.Unit
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             BackgroundActivitiesEndpoint activityRequest = new BackgroundActivitiesEndpoint(tokenManager.Object, new UsersModel { BackgroundActivities = validPath });
             //Act and Assert
-            Assert.Throws(typeof(ArgumentException), () => { activityRequest.DeleteActivity("Not validPath."); });
+            Assert.ThrowsAsync(typeof(ArgumentException), async () => { await activityRequest.DeleteActivity("Not validPath."); });
         }
 
-        [Test()]
-        public void DeleteActivityAsync_UriValid_DoesNotThrowArgumentException()
-        {
-            //Arrange
-            var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            BackgroundActivitiesEndpoint activityRequest = new BackgroundActivitiesEndpoint(tokenManager.Object, new UsersModel { BackgroundActivities = validPath });
-            //Act and Assert
-            Assert.DoesNotThrow(() => { activityRequest.DeleteActivityAsync(() => { }, (ex) => { }, validPath); });
-        }
 
-        [Test()]
-        public void DeleteActivityAsync_UriNotValid_ArgumentException()
-        {
-            //Arrange
-            var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            BackgroundActivitiesEndpoint activityRequest = new BackgroundActivitiesEndpoint(tokenManager.Object, new UsersModel { BackgroundActivities = validPath });
-            //Act and Assert
-            Assert.Throws(typeof(ArgumentException), () => { activityRequest.DeleteActivityAsync(() => { }, (ex) => { }, "Not validPath."); });
-        }
-
-        [Test()]
+        [Test]
         public void UpdateActivity_AllPropertiesValid_DoesNotThrowArgumentException()
         {
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             BackgroundActivitiesEndpoint activityRequest = new BackgroundActivitiesEndpoint(tokenManager.Object, new UsersModel());
             //Act and Assert
-            Assert.DoesNotThrow(() => { activityRequest.UpdateActivity(ValidActivity); });
+            Assert.DoesNotThrowAsync(async () => { await activityRequest.UpdateActivity(ValidActivity); });
         }
 
-        [Test()]
+        [Test]
         public void UpdateActivity_AllMeasurementsNull_ArgumentException()
         {
             //Arrange
@@ -147,20 +104,20 @@ namespace HealthGraphNet.Tests.Unit
             ValidActivity.CaloriesBurned = null;
             ValidActivity.Steps = null;
             //Assert
-            Assert.Throws(typeof(ArgumentException), () => { activityRequest.UpdateActivity(ValidActivity); });
+            Assert.ThrowsAsync(typeof(ArgumentException), async () => { await activityRequest.UpdateActivity(ValidActivity); });
         }
 
-        [Test()]
+        [Test]
         public void CreateActivity_AllPropertiesValid_DoesNotThrowArgumentException()
         {
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             BackgroundActivitiesEndpoint activityRequest = new BackgroundActivitiesEndpoint(tokenManager.Object, new UsersModel());
             //Act and Assert
-            Assert.DoesNotThrow(() => { activityRequest.CreateActivity(ValidActivityNew); });
+            Assert.DoesNotThrowAsync(async () => { await activityRequest.CreateActivity(ValidActivityNew); });
         }
 
-        [Test()]
+        [Test]
         public void CreateActivity_AllMeasurementsNull_ArgumentException()
         {
             //Arrange
@@ -170,7 +127,7 @@ namespace HealthGraphNet.Tests.Unit
             ValidActivityNew.CaloriesBurned = null;
             ValidActivityNew.Steps = null;
             //Assert
-            Assert.Throws(typeof(ArgumentException), () => { activityRequest.CreateActivity(ValidActivityNew); });
+            Assert.ThrowsAsync(typeof(ArgumentException), async () => { await activityRequest.CreateActivity(ValidActivityNew); });
         }
 
         #endregion

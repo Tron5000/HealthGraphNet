@@ -1,24 +1,20 @@
 ﻿using System;
 using HealthGraphNet.Models;
+using System.Threading.Tasks;
 
 namespace HealthGraphNet
 {
     public interface INutritionEndpoint
     {
         //Get Nutrition Feed
-        FeedModel<NutritionFeedItemModel> GetFeedPage(int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null);
-        void GetFeedPageAsync(Action<FeedModel<NutritionFeedItemModel>> success, Action<HealthGraphException> failure, int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null);
+        Task<FeedModel<NutritionFeedItemModel>> GetFeedPage(int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null);
         //Get Nutrition (Detailed)
-        NutritionPastModel GetNutrition(string uri);
-        void GetNutritionAsync(Action<NutritionPastModel> success, Action<HealthGraphException> failure, string uri);
+        Task<NutritionPastModel> GetNutrition(string uri);
         //Update Nutrition (Detailed)
-        NutritionPastModel UpdateNutrition(NutritionPastModel nutritionToUpdate);
-        void UpdateNutritionAsync(Action<NutritionPastModel> success, Action<HealthGraphException> failure, NutritionPastModel nutritionToUpdate);
+        Task<NutritionPastModel> UpdateNutrition(NutritionPastModel nutritionToUpdate);
         //Create Nutrition
-        string CreateNutrition(NutritionNewModel nutritionToCreate);
-        void CreateNutritionAsync(Action<string> success, Action<HealthGraphException> failure, NutritionNewModel nutritionToCreate);
+        Task<string> CreateNutrition(NutritionNewModel nutritionToCreate);
         //Delete Nutrition
-        void DeleteNutrition(string uri);
-        void DeleteNutritionAsync(Action success, Action<HealthGraphException> failure, string uri);
+        Task DeleteNutrition(string uri);
     }
 }

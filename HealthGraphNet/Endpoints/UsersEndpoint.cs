@@ -1,6 +1,8 @@
 ﻿using System;
-using RestSharp;
+using RestSharp.Portable;
 using HealthGraphNet.Models;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace HealthGraphNet
 {
@@ -27,18 +29,10 @@ namespace HealthGraphNet
 
         #region IUsersEndpoint
 
-        public UsersModel GetUser()
+        public async Task<UsersModel> GetUser()
         {
-            var request = new RestRequest(Method.GET);
-            request.Resource = UriResource;
-            return _tokenManager.Execute<UsersModel>(request);
-        }
-
-        public void GetUserAsync(Action<UsersModel> success, Action<HealthGraphException> failure)
-        {
-            var request = new RestRequest(Method.GET);
-            request.Resource = UriResource;
-            _tokenManager.ExecuteAsync<UsersModel>(request, success, failure);
+            var request = new RestRequest(UriResource, Method.GET);
+            return await _tokenManager.Execute<UsersModel>(request);
         }
 
         #endregion

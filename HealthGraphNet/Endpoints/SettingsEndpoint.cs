@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using RestSharp;
-using RestSharp.Serializers;
+using RestSharp.Portable;
+using RestSharp.Portable.Serializers;
 using HealthGraphNet.Models;
 using HealthGraphNet.RestSharp;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace HealthGraphNet
 {
@@ -36,30 +38,16 @@ namespace HealthGraphNet
 
         #region ISettingsEndpoint
 
-        public SettingsModel GetSettings()
+        public async Task<SettingsModel> GetSettings()
         {
-            var request = new RestRequest(Method.GET);
-            request.Resource = _user.Settings;
-            return _tokenManager.Execute<SettingsModel>(request);
+            var request = new RestRequest(_user.Settings, Method.GET);
+            return await _tokenManager.Execute<SettingsModel>(request);
         }
 
-        public void GetSettingsAsync(Action<SettingsModel> success, Action<HealthGraphException> failure)
-        {
-            var request = new RestRequest(Method.GET);
-            request.Resource = _user.Settings;
-            _tokenManager.ExecuteAsync<SettingsModel>(request, success, failure);
-        }
-
-        public SettingsModel UpdateSettings(SettingsModel settingsToUpdate)
+        public async Task<SettingsModel> UpdateSettings(SettingsModel settingsToUpdate)
         {
             var request = PrepareUpdateRequest(settingsToUpdate);
-            return _tokenManager.Execute<SettingsModel>(request);
-        }
-
-        public void UpdateSettingsAsync(Action<SettingsModel> success, Action<HealthGraphException> failure, SettingsModel settingsToUpdate)
-        {
-            var request = PrepareUpdateRequest(settingsToUpdate);
-            _tokenManager.ExecuteAsync<SettingsModel>(request, success, failure);
+            return await _tokenManager.Execute<SettingsModel>(request);
         }
 
         #endregion
@@ -73,8 +61,7 @@ namespace HealthGraphNet
         /// <returns></returns>
         private IRestRequest PrepareUpdateRequest(SettingsModel settingsToUpdate)
         {
-            var request = new RestRequest(Method.PUT);
-            request.Resource = _user.Settings;
+            var request = new RestRequest(_user.Settings, Method.PUT);
 
             //Validate settingsToUpdate properties
             ValidateHelper.IsValueValid<string>(settingsToUpdate.ShareFitnessActivities, ValidVisibility, "ShareFitnessActivities");

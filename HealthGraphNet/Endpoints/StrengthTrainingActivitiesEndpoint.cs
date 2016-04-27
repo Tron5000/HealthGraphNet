@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
-using RestSharp;
-using RestSharp.Validation;
-using RestSharp.Serializers;
+using RestSharp.Portable;
+using RestSharp.Portable.Serializers;
 using HealthGraphNet.Models;
 using HealthGraphNet.RestSharp;
+using RestSharp.Portable;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace HealthGraphNet
 {
@@ -22,8 +24,8 @@ namespace HealthGraphNet
         private AccessTokenManagerBase _tokenManager;
         private UsersModel _user;
 
-        #endregion       
-    
+        #endregion
+
         #region Constructors
 
         public StrengthTrainingActivitiesEndpoint(AccessTokenManagerBase tokenManager, UsersModel user)
@@ -32,90 +34,46 @@ namespace HealthGraphNet
             _user = user;
         }
 
-        #endregion    
-    
+        #endregion
+
         #region IStrengthTrainingActivitiesEndpoint
 
-        public FeedModel<StrengthTrainingActivitiesFeedItemModel> GetFeedPage(int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
+        public async Task<FeedModel<StrengthTrainingActivitiesFeedItemModel>> GetFeedPage(int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
         {
-            var request = new RestRequest();
-            request.PrepareFeedPageRequest(_user.StrengthTrainingActivities, pageIndex, pageSize, noEarlierThan, noLaterThan, modifiedNoEarlierThan, modifiedNoLaterThan);
-            return _tokenManager.Execute<FeedModel<StrengthTrainingActivitiesFeedItemModel>>(request);
+            var request = ExtensionHelpers.CreateFeedPageRequest(_user.StrengthTrainingActivities, pageIndex, pageSize, noEarlierThan, noLaterThan, modifiedNoEarlierThan, modifiedNoLaterThan);
+            return await _tokenManager.Execute<FeedModel<StrengthTrainingActivitiesFeedItemModel>>(request);
         }
 
-        public void GetFeedPageAsync(Action<FeedModel<StrengthTrainingActivitiesFeedItemModel>> success, Action<HealthGraphException> failure, int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
-        {
-            var request = new RestRequest();
-            request.PrepareFeedPageRequest(_user.StrengthTrainingActivities, pageIndex, pageSize, noEarlierThan, noLaterThan, modifiedNoEarlierThan, modifiedNoLaterThan);
-            _tokenManager.ExecuteAsync<FeedModel<StrengthTrainingActivitiesFeedItemModel>>(request, success, failure);
-        }
-
-        public StrengthTrainingActivitiesPastModel GetActivity(string uri)
+        public Task<StrengthTrainingActivitiesPastModel> GetActivity(string uri)
         {
             if (uri.Contains(_user.StrengthTrainingActivities) == false)
             {
                 throw new ArgumentException("The uri must identify a resource on or below the " + _user.StrengthTrainingActivities + " endpoint.");
             }
-            var request = new RestRequest(Method.GET);
-            request.Resource = uri;
+            var request = new RestRequest(uri, Method.GET);
             return _tokenManager.Execute<StrengthTrainingActivitiesPastModel>(request);
         }
 
-        public void GetActivityAsync(Action<StrengthTrainingActivitiesPastModel> success, Action<HealthGraphException> failure, string uri)
-        {
-            if (uri.Contains(_user.StrengthTrainingActivities) == false)
-            {
-                throw new ArgumentException("The uri must identify a resource on or below the " + _user.StrengthTrainingActivities + " endpoint.");
-            }
-            var request = new RestRequest(Method.GET);
-            request.Resource = uri;
-            _tokenManager.ExecuteAsync<StrengthTrainingActivitiesPastModel>(request, success, failure);
-        }
-
-        public StrengthTrainingActivitiesPastModel UpdateActivity(StrengthTrainingActivitiesPastModel activityToUpdate)
+        public async Task<StrengthTrainingActivitiesPastModel> UpdateActivity(StrengthTrainingActivitiesPastModel activityToUpdate)
         {
             var request = PrepareActivitiesUpdateRequest(activityToUpdate);
-            return _tokenManager.Execute<StrengthTrainingActivitiesPastModel>(request);
+            return await _tokenManager.Execute<StrengthTrainingActivitiesPastModel>(request);
         }
 
-        public void UpdateActivityAsync(Action<StrengthTrainingActivitiesPastModel> success, Action<HealthGraphException> failure, StrengthTrainingActivitiesPastModel activityToUpdate)
-        {
-            var request = PrepareActivitiesUpdateRequest(activityToUpdate);
-            _tokenManager.ExecuteAsync<StrengthTrainingActivitiesPastModel>(request, success, failure);
-        }
-
-        public string CreateActivity(StrengthTrainingActivitiesNewModel activityToCreate)
+        public async Task<string> CreateActivity(StrengthTrainingActivitiesNewModel activityToCreate)
         {
             var request = PrepareActivitiesCreateRequest(activityToCreate);
-            return _tokenManager.ExecuteCreate(request);
+            return await _tokenManager.ExecuteCreate(request);
         }
 
-        public void CreateActivityAsync(Action<string> success, Action<HealthGraphException> failure, StrengthTrainingActivitiesNewModel activityToCreate)
-        {
-            var request = PrepareActivitiesCreateRequest(activityToCreate);
-            _tokenManager.ExecuteCreateAsync(request, success, failure);
-        }
-
-        public void DeleteActivity(string uri)
+        public async Task DeleteActivity(string uri)
         {
             if (uri.Contains(_user.StrengthTrainingActivities) == false)
             {
                 throw new ArgumentException("The uri must identify a resource on or below the " + _user.StrengthTrainingActivities + " endpoint.");
             }
-            var request = new RestRequest(Method.DELETE);
-            request.Resource = uri;
-            _tokenManager.Execute(request, expectedStatusCode: HttpStatusCode.NoContent);
-        }
-
-        public void DeleteActivityAsync(Action success, Action<HealthGraphException> failure, string uri)
-        {
-            if (uri.Contains(_user.StrengthTrainingActivities) == false)
-            {
-                throw new ArgumentException("The uri must identify a resource on or below the " + _user.StrengthTrainingActivities + " endpoint.");
-            }
-            var request = new RestRequest(Method.DELETE);
-            request.Resource = uri;
-            _tokenManager.ExecuteAsync(request, success, failure, expectedStatusCode: HttpStatusCode.NoContent);
+            var request = new RestRequest(uri, Method.DELETE);
+            await _tokenManager.Execute(request, expectedStatusCode: HttpStatusCode.NoContent);
         }
 
         #endregion
@@ -168,9 +126,7 @@ namespace HealthGraphNet
         /// <returns></returns>
         private IRestRequest PrepareActivitiesCreateRequest(StrengthTrainingActivitiesNewModel activitiesToCreate)
         {
-            var request = new RestRequest(Method.POST);
-            request.Resource = _user.StrengthTrainingActivities;
-
+            var request = new RestRequest(_user.StrengthTrainingActivities, Method.POST);
             ValidateModel(activitiesToCreate);
 
             //Add body to the request
@@ -193,9 +149,7 @@ namespace HealthGraphNet
         /// <returns></returns>
         private IRestRequest PrepareActivitiesUpdateRequest(StrengthTrainingActivitiesPastModel activityToUpdate)
         {
-            var request = new RestRequest(Method.PUT);
-            request.Resource = activityToUpdate.Uri;
-
+            var request = new RestRequest(activityToUpdate.Uri, Method.PUT);
             ValidateModel(activityToUpdate);
 
             //Add body to the request

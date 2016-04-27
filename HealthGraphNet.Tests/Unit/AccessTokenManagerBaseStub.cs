@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Net;
 using System.Linq;
 using System.Text;
-using RestSharp;
+using RestSharp.Portable;
 using HealthGraphNet;
+using System.Threading.Tasks;
 
 namespace HealthGraphNet.Tests.Unit
 {
@@ -15,30 +16,18 @@ namespace HealthGraphNet.Tests.Unit
     {
         #region IRequest Execution
 
-        internal override T Execute<T>(IRestRequest request, string baseUrl = null, HttpStatusCode? expectedStatusCode = null)
+        internal override async Task<T> Execute<T>(IRestRequest request, string baseUrl = null, HttpStatusCode? expectedStatusCode = null)
         {
             return new T();
         }
 
-        internal override void Execute(IRestRequest request, string baseUrl = null, HttpStatusCode? expectedStatusCode = null)
+        internal override async Task Execute(IRestRequest request, string baseUrl = null, HttpStatusCode? expectedStatusCode = null)
         {
         }
 
-        internal override string ExecuteCreate(IRestRequest request, string baseUrl = null)
+        internal override async Task<string> ExecuteCreate(IRestRequest request, string baseUrl = null)
         {
             return string.Empty;
-        }
-
-        internal override void ExecuteAsync<T>(IRestRequest request, Action<T> success, Action<HealthGraphException> failure, string baseUrl = null, HttpStatusCode? expectedStatusCode = null)
-        {
-        }
-
-        internal override void ExecuteAsync(IRestRequest request, Action success, Action<HealthGraphException> failure, string baseUrl = null, HttpStatusCode? expectedStatusCode = null)
-        {
-        }
-
-        internal override void ExecuteCreateAsync(IRestRequest request, Action<string> success, Action<HealthGraphException> failure, string baseUrl = null)
-        {
         }
 
         #endregion          

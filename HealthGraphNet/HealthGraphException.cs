@@ -1,5 +1,5 @@
 ﻿﻿using System;
-using RestSharp;
+using RestSharp.Portable;
 using System.Net;
 
 namespace HealthGraphNet
@@ -17,7 +17,7 @@ namespace HealthGraphNet
         {
         }
 
-        public HealthGraphException(IRestResponse response) : base(response.ErrorMessage)
+        public HealthGraphException(IRestResponse response) : base(response.StatusDescription)
         {
             StatusCode = response.StatusCode;
             Response = response;            

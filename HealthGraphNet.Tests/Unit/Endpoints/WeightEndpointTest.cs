@@ -25,7 +25,7 @@ namespace HealthGraphNet.Tests.Unit
             {
                 Weight = 10
             };
-            
+
             ValidWeightNew = new WeightNewModel
             {
                 Timestamp = DateTime.Now,
@@ -39,7 +39,7 @@ namespace HealthGraphNet.Tests.Unit
 
         #region Tests
 
-        [Test()]
+        [Test]
         public void GetWeight_UriValid_DoesNotThrowArgumentException()
         {
             //Arrange
@@ -47,10 +47,10 @@ namespace HealthGraphNet.Tests.Unit
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             WeightEndpoint weightRequest = new WeightEndpoint(tokenManager.Object, new UsersModel { Weight = validPath });
             //Act and Assert
-            Assert.DoesNotThrow(() => { weightRequest.GetWeight(validPath); });
+            Assert.DoesNotThrowAsync(async () => { await weightRequest.GetWeight(validPath); });
         }
 
-        [Test()]
+        [Test]
         public void GetWeight_UriNotValid_ArgumentException()
         {
             //Arrange
@@ -58,32 +58,10 @@ namespace HealthGraphNet.Tests.Unit
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             WeightEndpoint weightRequest = new WeightEndpoint(tokenManager.Object, new UsersModel { Weight = validPath });
             //Act and Assert
-            Assert.Throws(typeof(ArgumentException), () => { weightRequest.GetWeight("Not validPath."); });
+            Assert.ThrowsAsync(typeof(ArgumentException), async () => { await weightRequest.GetWeight("Not validPath."); });
         }
 
-        [Test()]
-        public void GetWeightAsync_UriValid_DoesNotThrowArgumentException()
-        {
-            //Arrange
-            var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            WeightEndpoint weightRequest = new WeightEndpoint(tokenManager.Object, new UsersModel { Weight = validPath });
-            //Act and Assert
-            Assert.DoesNotThrow(() => { weightRequest.GetWeightAsync((m) => { }, (ex) => { }, validPath); });
-        }
-
-        [Test()]
-        public void GetWeightAsync_UriNotValid_ArgumentException()
-        {
-            //Arrange
-            var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            WeightEndpoint weightRequest = new WeightEndpoint(tokenManager.Object, new UsersModel { Weight = validPath });
-            //Act and Assert
-            Assert.Throws(typeof(ArgumentException), () => { weightRequest.GetWeightAsync((m) => { }, (ex) => { }, "Not validPath."); });
-        }
-
-        [Test()]
+        [Test]
         public void DeleteWeight_UriValid_DoesNotThrowArgumentException()
         {
             //Arrange
@@ -91,10 +69,10 @@ namespace HealthGraphNet.Tests.Unit
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             WeightEndpoint weightRequest = new WeightEndpoint(tokenManager.Object, new UsersModel { Weight = validPath });
             //Act and Assert
-            Assert.DoesNotThrow(() => { weightRequest.DeleteWeight(validPath); });
+            Assert.DoesNotThrowAsync(async () => { await weightRequest.DeleteWeight(validPath); });
         }
 
-        [Test()]
+        [Test]
         public void DeleteWeight_UriNotValid_ArgumentException()
         {
             //Arrange
@@ -102,42 +80,20 @@ namespace HealthGraphNet.Tests.Unit
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             WeightEndpoint weightRequest = new WeightEndpoint(tokenManager.Object, new UsersModel { Weight = validPath });
             //Act and Assert
-            Assert.Throws(typeof(ArgumentException), () => { weightRequest.DeleteWeight("Not validPath."); });
+            Assert.ThrowsAsync(typeof(ArgumentException), async () => { await weightRequest.DeleteWeight("Not validPath."); });
         }
 
-        [Test()]
-        public void DeleteWeightAsync_UriValid_DoesNotThrowArgumentException()
-        {
-            //Arrange
-            var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            WeightEndpoint weightRequest = new WeightEndpoint(tokenManager.Object, new UsersModel { Weight = validPath });
-            //Act and Assert
-            Assert.DoesNotThrow(() => { weightRequest.DeleteWeightAsync(() => { }, (ex) => { }, validPath); });
-        }
-
-        [Test()]
-        public void DeleteWeightAsync_UriNotValid_ArgumentException()
-        {
-            //Arrange
-            var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            WeightEndpoint weightRequest = new WeightEndpoint(tokenManager.Object, new UsersModel { Weight = validPath });
-            //Act and Assert
-            Assert.Throws(typeof(ArgumentException), () => { weightRequest.DeleteWeightAsync(() => { }, (ex) => { }, "Not validPath."); });
-        }
-
-        [Test()]
+        [Test]
         public void UpdateWeight_AllPropertiesValid_DoesNotThrowArgumentException()
         {
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             WeightEndpoint weightRequest = new WeightEndpoint(tokenManager.Object, new UsersModel());
             //Act and Assert
-            Assert.DoesNotThrow(() => { weightRequest.UpdateWeight(ValidWeight); });
+            Assert.DoesNotThrowAsync(async () => { await weightRequest.UpdateWeight(ValidWeight); });
         }
 
-        [Test()]
+        [Test]
         public void UpdateWeight_AllMeasurementsNull_ArgumentException()
         {
             //Arrange
@@ -150,20 +106,20 @@ namespace HealthGraphNet.Tests.Unit
             ValidWeight.MassWeight = null;
             ValidWeight.Weight = null;
             //Assert
-            Assert.Throws(typeof(ArgumentException), () => { weightRequest.UpdateWeight(ValidWeight); });
+            Assert.ThrowsAsync(typeof(ArgumentException), async () => { await weightRequest.UpdateWeight(ValidWeight); });
         }
 
-        [Test()]
+        [Test]
         public void CreateWeight_AllPropertiesValid_DoesNotThrowArgumentException()
         {
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             WeightEndpoint weightRequest = new WeightEndpoint(tokenManager.Object, new UsersModel());
             //Act and Assert
-            Assert.DoesNotThrow(() => { weightRequest.CreateWeight(ValidWeightNew); });
+            Assert.DoesNotThrowAsync(async () => { await weightRequest.CreateWeight(ValidWeightNew); });
         }
 
-        [Test()]
+        [Test]
         public void CreateWeight_AllMeasurementsNull_ArgumentException()
         {
             //Arrange
@@ -176,7 +132,7 @@ namespace HealthGraphNet.Tests.Unit
             ValidWeightNew.MassWeight = null;
             ValidWeightNew.Weight = null;
             //Assert
-            Assert.Throws(typeof(ArgumentException), () => { weightRequest.CreateWeight(ValidWeightNew); });
+            Assert.ThrowsAsync(typeof(ArgumentException), async () => { await weightRequest.CreateWeight(ValidWeightNew); });
         }
 
         #endregion

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Linq;
-using RestSharp;
+using System.Net;
+using System.Threading.Tasks;
+using RestSharp.Portable;
+using RestSharp.Portable.Authenticators;
 
 namespace HealthGraphNet.RestSharp
 {
@@ -10,24 +13,38 @@ namespace HealthGraphNet.RestSharp
     /// </summary>
     internal class OAuth2RequestHeaderAuthenticator : OAuth2Authenticator
     {
-        /// <summary>
-        /// Stores the Authoriztion header value as "OAuth accessToken". used for performance.
-        /// </summary>
-        private readonly string _authorizationValue;
+        public string AccessToken { get; set; }
+        public string TokenType { get; set; }
 
-        public OAuth2RequestHeaderAuthenticator(string tokenType, string accessToken) : base(accessToken)
+        public OAuth2RequestHeaderAuthenticator(HealthGraphClient client) : base(client)
         {
-            // Conatenate during constructor so that it is only done once. can improve performance.
-            _authorizationValue = tokenType + " " + accessToken;
         }
 
-        public override void Authenticate(IRestClient client, IRestRequest request)
+        public override bool CanPreAuthenticate(IRestClient client, IRestRequest request, ICredentials credentials)
         {
-            // only add the Authorization parameter if it hasn't been added.
-            if (!request.Parameters.Any(p => p.Name.Equals("Authorization", StringComparison.OrdinalIgnoreCase)))
+            return true;
+        }
+
+        public override bool CanPreAuthenticate(IHttpClient client, IHttpRequestMessage request, ICredentials credentials)
+        {
+            return false;
+        }
+
+        public override Task PreAuthenticate(IRestClient client, IRestRequest request, ICredentials credentials)
+        {
+            return Task.Run(() =>
             {
-                request.AddParameter("Authorization", _authorizationValue, ParameterType.HttpHeader);
-            }
+                // only add the Authorization parameter if it hasn't been added.
+                if (!request.Parameters.Any(p => p.Name.Equals("Authorization", StringComparison.OrdinalIgnoreCase)))
+                {
+                    request.AddParameter("Authorization", string.Format("{0} {1}", TokenType, AccessToken), ParameterType.HttpHeader);
+                }
+            });
+        }
+
+        public override Task PreAuthenticate(IHttpClient client, IHttpRequestMessage request, ICredentials credentials)
+        {
+            throw new NotImplementedException();
         }
     }
 }

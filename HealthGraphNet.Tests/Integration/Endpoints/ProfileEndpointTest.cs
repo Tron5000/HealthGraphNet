@@ -5,6 +5,7 @@ using System.Text;
 using NUnit.Framework;
 using HealthGraphNet;
 using HealthGraphNet.Models;
+using System.Threading.Tasks;
 
 namespace HealthGraphNet.Tests.Integration
 {
@@ -17,11 +18,11 @@ namespace HealthGraphNet.Tests.Integration
 
         protected IProfileEndpoint ProfileRequest { get; set; }
 
-        [SetUp()]
+        [SetUp]
         public void Init()
         {
             UserRequest = new UsersEndpoint(TokenManager);
-            var user = UserRequest.GetUser();
+            var user = UserRequest.GetUser().Result;
             ProfileRequest = new ProfileEndpoint(TokenManager, user);
         }
 
@@ -29,22 +30,22 @@ namespace HealthGraphNet.Tests.Integration
 
         #region Tests
 
-        [Test()]
-        public void GetProfile_NotOptionalPropertiesPresent()
+        [Test]
+        public async Task GetProfile_NotOptionalPropertiesPresent()
         {
             //Arrange
             //Act
-            var profile = ProfileRequest.GetProfile();
+            var profile = await ProfileRequest.GetProfile();
             //Assert
             Assert.IsTrue(!string.IsNullOrEmpty(profile.Name));
             Assert.IsTrue(!string.IsNullOrEmpty(profile.Profile));
         }
 
-        [Test()]
-        public void UpdateProfile_AthleteTypeUpdated()
+        [Test]
+        public async Task UpdateProfile_AthleteTypeUpdated()
         {
             //Arrange
-            var profile = ProfileRequest.GetProfile();
+            var profile = await ProfileRequest.GetProfile();
             string originalAthleteType = profile.AthleteType;
             string newAthleteType;
             var athleteTypeCount = 0;
@@ -56,13 +57,13 @@ namespace HealthGraphNet.Tests.Integration
             } while (newAthleteType == originalAthleteType);
             //Act
             profile.AthleteType = newAthleteType;
-            profile = ProfileRequest.UpdateProfile(profile);
+            profile = await ProfileRequest.UpdateProfile(profile);
             //Assert
             Assert.AreEqual(newAthleteType, profile.AthleteType);
-            
+
             //Cleanup - set profile type back to original value.
             profile.AthleteType = originalAthleteType;
-            profile = ProfileRequest.UpdateProfile(profile);
+            profile = await ProfileRequest.UpdateProfile(profile);
         }
 
         #endregion

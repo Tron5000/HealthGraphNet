@@ -17,7 +17,7 @@ namespace HealthGraphNet.Tests.Integration
         // In order to create an application, go to the HealthGraph Applications Portal: http://runkeeper.com/partner/applications
         protected const string ClientId = "";
         protected const string ClientSecret = "";
-        protected const string RequestUri = "";
+        protected const string RequestUri = "https://runkeeper.com/apps/authorize";
         protected const string AccessToken = "";
 
         public AccessTokenManager TokenManager { get; set; }
@@ -26,7 +26,7 @@ namespace HealthGraphNet.Tests.Integration
         /// Prior to any other setup make sure that ClientId, ClientSecret, RequestUri and AccessToken have been defined.
         /// If so, create and initialize the token manager so it will be ready to be used in subclasses.
         /// </summary>
-        [TestFixtureSetUp()]
+        [OneTimeSetUp]
         public void Init()
         {
             if ((string.IsNullOrEmpty(ClientId)) || (string.IsNullOrEmpty(ClientSecret)) || (string.IsNullOrEmpty(RequestUri)) || (string.IsNullOrEmpty(AccessToken)))

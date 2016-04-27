@@ -1,17 +1,15 @@
 ﻿using System;
 using HealthGraphNet.Models;
+using System.Threading.Tasks;
 
 namespace HealthGraphNet
 {
     public interface ICommentThreadsEndpoint
     {
         //Get Comment Thread
-        CommentThreadsModel GetCommentThread(string uri);
-        void GetCommentThreadAsync(Action<CommentThreadsModel> success, Action<HealthGraphException> failure, string uri);
+        Task<CommentThreadsModel> GetCommentThread(string uri);
         //Create Comment
-        void CreateComment(CommentsNewModel commentToCreate, string uri);
-        void CreateComment(string commentToCreate, string uri);
-        void CreateCommentAsync(Action success, Action<HealthGraphException> failure, CommentsNewModel commentToCreate, string uri);
-        void CreateCommentAsync(Action success, Action<HealthGraphException> failure, string commentToCreate, string uri);
+        Task CreateComment(CommentsNewModel commentToCreate, string uri);
+        Task CreateComment(string commentToCreate, string uri);
     }
 }

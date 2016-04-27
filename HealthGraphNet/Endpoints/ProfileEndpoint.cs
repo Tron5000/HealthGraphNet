@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using RestSharp;
-using RestSharp.Serializers;
+using RestSharp.Portable;
+using RestSharp.Portable.Serializers;
 using HealthGraphNet.Models;
 using HealthGraphNet.RestSharp;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace HealthGraphNet
 {
@@ -33,40 +35,21 @@ namespace HealthGraphNet
         
         #region IProfileEndpoint
 
-        public ProfileModel GetProfile()
+        public async Task<ProfileModel> GetProfile()
         {
-            var request = new RestRequest(Method.GET);
-            request.Resource = _user.Profile;
-            return _tokenManager.Execute<ProfileModel>(request);
+            var request = new RestRequest(_user.Profile, Method.GET);
+            return await _tokenManager.Execute<ProfileModel>(request);
         }
 
-        public void GetProfileAsync(Action<ProfileModel> success, Action<HealthGraphException> failure)
-        {
-            var request = new RestRequest(Method.GET);
-            request.Resource = _user.Profile;
-            _tokenManager.ExecuteAsync<ProfileModel>(request, success, failure);
-        }
-
-		public ProfileModel UpdateProfile(ProfileModel profileToUpdate)
+		public async Task<ProfileModel> UpdateProfile(ProfileModel profileToUpdate)
 		{
             var request = PrepareUpdateRequest(profileToUpdate);
-            return _tokenManager.Execute<ProfileModel>(request);
+            return await _tokenManager.Execute<ProfileModel>(request);
 		}
 
-        public ProfileModel UpdateProfile(string athleteType)
+        public Task<ProfileModel> UpdateProfile(string athleteType)
         {
             return UpdateProfile(new ProfileModel { AthleteType = athleteType });
-        }
-
-		public void UpdateProfileAsync(Action<ProfileModel> success, Action<HealthGraphException> failure, ProfileModel profileToUpdate)
-		{
-            var request = PrepareUpdateRequest(profileToUpdate);
-            _tokenManager.ExecuteAsync<ProfileModel>(request, success, failure);
-		}
-
-        public void UpdateProfileAsync(Action<ProfileModel> success, Action<HealthGraphException> failure, string athleteType)
-        {
-            UpdateProfileAsync(success, failure, new ProfileModel { AthleteType = athleteType });
         }
 
         #endregion
@@ -80,8 +63,7 @@ namespace HealthGraphNet
         /// <returns></returns>
         private IRestRequest PrepareUpdateRequest(ProfileModel profileToUpdate)
         {
-            var request = new RestRequest(Method.PUT);
-            request.Resource = _user.Profile;
+            var request = new RestRequest(_user.Profile, Method.PUT);
             ValidateHelper.IsValueValid<string>(profileToUpdate.AthleteType, ValidAthleteType, "AthleteType");
             request.AddParameter(ProfileModel.ContentType, _tokenManager.DefaultJsonSerializer.Serialize(new 
             { 

@@ -14,24 +14,24 @@ namespace HealthGraphNet.Tests.Unit
     {
         #region Tests
 
-        [Test()]
+        [Test]
         public void UpdateProfile_AthleteTypeNotValid_ArgumentException()
         {
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             ProfileEndpoint profileRequest = new ProfileEndpoint(tokenManager.Object, new UsersModel());
             //Act and Assert
-            Assert.Throws(typeof(ArgumentException), () => { profileRequest.UpdateProfile("This is not a valid Athlete Type."); });
+            Assert.ThrowsAsync(typeof(ArgumentException), async () => { await profileRequest.UpdateProfile("This is not a valid Athlete Type."); });
         }
 
-        [Test()]
+        [Test]
         public void UpdateProfile_AthleteTypeValid_DoesNotThrowArgumentException()
         {
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             ProfileEndpoint profileRequest = new ProfileEndpoint(tokenManager.Object, new UsersModel());
             //Act and Assert
-            Assert.DoesNotThrow(() => { profileRequest.UpdateProfile(ProfileEndpoint.ValidAthleteType.First()); });
+            Assert.DoesNotThrowAsync(async () => { await profileRequest.UpdateProfile(ProfileEndpoint.ValidAthleteType.First()); });
         }
 
         #endregion

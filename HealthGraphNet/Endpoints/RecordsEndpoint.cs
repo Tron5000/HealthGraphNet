@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using RestSharp;
+using RestSharp.Portable;
 using HealthGraphNet.Models;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace HealthGraphNet
 {
@@ -29,19 +31,12 @@ namespace HealthGraphNet
 
         #region IRecordsEndpoint
 
-        public List<RecordsFeedItemModel> GetRecordsFeed()
+        public async Task<List<RecordsFeedItemModel>> GetRecordsFeed()
         {
-            var request = new RestRequest(Method.GET);
-            request.Resource = _user.Records;
-            return _tokenManager.Execute<List<RecordsFeedItemModel>>(request);
+            var request = new RestRequest(_user.Records) { Method = Method.GET };
+            return await _tokenManager.Execute<List<RecordsFeedItemModel>>(request);
         }
 
-        public void GetRecordsFeedAsync(Action<List<RecordsFeedItemModel>> success, Action<HealthGraphException> failure)
-        {
-            var request = new RestRequest(Method.GET);
-            request.Resource = _user.Records;
-            _tokenManager.ExecuteAsync<List<RecordsFeedItemModel>>(request, success, failure);
-        }
 
         #endregion
     }

@@ -5,10 +5,11 @@ using System.Text;
 using NUnit.Framework;
 using HealthGraphNet;
 using HealthGraphNet.Models;
+using System.Threading.Tasks;
 
 namespace HealthGraphNet.Tests.Integration
 {
-    [TestFixture()]    
+    [TestFixture()]
     public class FitnessActivitiesEndpointTest : AccessTokenManagerSetupBase
     {
         #region Fields, Properties and Setup
@@ -17,20 +18,22 @@ namespace HealthGraphNet.Tests.Integration
 
         protected IFitnessActivitiesEndpoint ActivitiesRequest { get; set; }
 
-        [SetUp()]
+        [SetUp]
         public void Init()
         {
             UserRequest = new UsersEndpoint(TokenManager);
-            var user = UserRequest.GetUser();
+            var taskUser = UserRequest.GetUser();
+            taskUser.Wait();
+            var user = taskUser.Result;
             ActivitiesRequest = new FitnessActivitiesEndpoint(TokenManager, user);
         }
 
-        #endregion    
-    
+        #endregion
+
         #region Tests
 
-        [Test()]
-        public void FitnessActivity_CRUD()
+        [Test]
+        public async Task FitnessActivity_CRUD()
         {
             // FYI - For comparing dates Healthgraph API doesn't seem to support fidelity down to the millisecond level.            
             //Create
@@ -43,7 +46,7 @@ namespace HealthGraphNet.Tests.Integration
                 Duration = 120,
                 AverageHeartRate = 100,
                 HeartRate = new List<HeartRateModel> { new HeartRateModel { Timestamp = 60, HeartRate = 100 } },
-                TotalCalories = 44,                
+                TotalCalories = 44,
                 Notes = "Integration test!",
                 Path = new List<PathModel> 
                 { 
@@ -54,11 +57,12 @@ namespace HealthGraphNet.Tests.Integration
                 PostToTwitter = false,
                 DetectPauses = false
             };
-            var uri = ActivitiesRequest.CreateActivity(newActivity);
+            var uri = await ActivitiesRequest.CreateActivity(newActivity);
             Assert.IsTrue(!string.IsNullOrEmpty(uri));
 
             //Read from Feed
-            var activitiesItem = ActivitiesRequest.GetFeedPage().Items.FirstOrDefault();
+            var activities = await ActivitiesRequest.GetFeedPage();
+            var activitiesItem = activities.Items.FirstOrDefault();
             Assert.IsNotNull(activitiesItem);
             Assert.AreEqual(newActivity.Type, activitiesItem.Type);
             Assert.AreEqual(newActivity.StartTime.ToString(), activitiesItem.StartTime.ToString());
@@ -82,9 +86,9 @@ namespace HealthGraphNet.Tests.Integration
             Assert.AreEqual(activitiesDetail.TotalCalories, activitiesDetailUpdated.TotalCalories);
             Assert.AreEqual(uri, activitiesDetailUpdated.Uri);
             */
-              
+
             //Delete
-            ActivitiesRequest.DeleteActivity(uri);           
+            await ActivitiesRequest.DeleteActivity(uri);
         }
 
         #endregion
@@ -122,7 +126,7 @@ namespace HealthGraphNet.Tests.Integration
             Assert.AreEqual(expected.Path[1].Type, actual.Path[1].Type);
         }
         */
-          
+
         #endregion
     }
 }

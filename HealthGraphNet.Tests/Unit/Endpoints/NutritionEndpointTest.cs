@@ -39,7 +39,7 @@ namespace HealthGraphNet.Tests.Unit
 
         #region Tests
 
-        [Test()]
+        [Test]
         public void GetNutrition_UriValid_DoesNotThrowArgumentException()
         {
             //Arrange
@@ -47,10 +47,10 @@ namespace HealthGraphNet.Tests.Unit
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             NutritionEndpoint nutritionRequest = new NutritionEndpoint(tokenManager.Object, new UsersModel { Nutrition = validPath });
             //Act and assert
-            Assert.DoesNotThrow(() => { nutritionRequest.GetNutrition(validPath); });
+            Assert.DoesNotThrowAsync(async() => { await nutritionRequest.GetNutrition(validPath); });
         }
 
-        [Test()]
+        [Test]
         public void GetNutrition_UriNotValid_ArgumentException()
         {
             //Arrange
@@ -58,32 +58,10 @@ namespace HealthGraphNet.Tests.Unit
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             NutritionEndpoint nutritionRequest = new NutritionEndpoint(tokenManager.Object, new UsersModel { Nutrition = validPath });
             //Act and assert
-            Assert.Throws(typeof(ArgumentException), () => { nutritionRequest.GetNutrition("Not validPath."); });
+            Assert.ThrowsAsync(typeof(ArgumentException), async () => { await nutritionRequest.GetNutrition("Not validPath."); });
         }
 
-        [Test()]
-        public void GetNutritionAsync_UriValid_DoesNotThrowArgumentException()
-        {
-            //Arrange
-            var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            NutritionEndpoint nutritionRequest = new NutritionEndpoint(tokenManager.Object, new UsersModel { Nutrition = validPath });
-            //Act and assert
-            Assert.DoesNotThrow(() => { nutritionRequest.GetNutritionAsync((m) => { }, (ex) => { }, validPath); });
-        }
-
-        [Test()]
-        public void GetNutritionAsync_UriNotValid_ArgumentException()
-        {
-            //Arrange
-            var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            NutritionEndpoint nutritionRequest = new NutritionEndpoint(tokenManager.Object, new UsersModel { Nutrition = validPath });
-            //Act and assert
-            Assert.Throws(typeof(ArgumentException), () => { nutritionRequest.GetNutritionAsync((m) => { }, (ex) => { }, "Not validPath."); });
-        }
-
-        [Test()]
+        [Test]
         public void DeleteNutrition_UriValid_DoesNotThrowArgumentException()
         {
             //Arrange
@@ -91,10 +69,10 @@ namespace HealthGraphNet.Tests.Unit
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             NutritionEndpoint nutritionRequest = new NutritionEndpoint(tokenManager.Object, new UsersModel { Nutrition = validPath });
             //Act and assert
-            Assert.DoesNotThrow(() => { nutritionRequest.DeleteNutrition(validPath); });
+            Assert.DoesNotThrowAsync(async () => { await nutritionRequest.DeleteNutrition(validPath); });
         }
 
-        [Test()]
+        [Test]
         public void DeleteNutrition_UriNotValid_ArgumentException()
         {
             //Arrange
@@ -102,42 +80,20 @@ namespace HealthGraphNet.Tests.Unit
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             NutritionEndpoint nutritionRequest = new NutritionEndpoint(tokenManager.Object, new UsersModel { Nutrition = validPath });
             //Act and assert
-            Assert.Throws(typeof(ArgumentException), () => { nutritionRequest.DeleteNutrition("Not validPath."); });
+            Assert.ThrowsAsync(typeof(ArgumentException), async () => { await nutritionRequest.DeleteNutrition("Not validPath."); });
         }
 
-        [Test()]
-        public void DeleteNutritionAsync_UriValid_DoesNotThrowArgumentException()
-        {
-            //Arrange
-            var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            NutritionEndpoint nutritionRequest = new NutritionEndpoint(tokenManager.Object, new UsersModel { Nutrition = validPath });
-            //Act and assert
-            Assert.DoesNotThrow(() => { nutritionRequest.DeleteNutritionAsync(() => { }, (ex) => { }, validPath); });
-        }
-
-        [Test()]
-        public void DeleteNutritionAsync_UriNotValid_ArgumentException()
-        {
-            //Arrange
-            var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            NutritionEndpoint nutritionRequest = new NutritionEndpoint(tokenManager.Object, new UsersModel { Nutrition = validPath });
-            //Act and assert
-            Assert.Throws(typeof(ArgumentException), () => { nutritionRequest.DeleteNutritionAsync(() => { }, (ex) => { }, "Not validPath."); });
-        }
-
-        [Test()]
+        [Test]
         public void UpdateNutrition_AllPropertiesValid_DoesNotThrowArgumentException()
         {
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             NutritionEndpoint nutritionRequest = new NutritionEndpoint(tokenManager.Object, new UsersModel());
             //Act and Assert
-            Assert.DoesNotThrow(() => { nutritionRequest.UpdateNutrition(ValidNutrition); });
+            Assert.DoesNotThrowAsync(async () => { await nutritionRequest.UpdateNutrition(ValidNutrition); });
         }
 
-        [Test()]
+        [Test]
         public void UpdateNutrition_AllMeasurementsNull_ArgumentException()
         {
             //Arrange
@@ -152,25 +108,25 @@ namespace HealthGraphNet.Tests.Unit
             ValidNutrition.Sodium = null;
             ValidNutrition.Water = null;
             //Assert
-            Assert.Throws(typeof(ArgumentException), () => { nutritionRequest.UpdateNutrition(ValidNutrition); });
+            Assert.ThrowsAsync(typeof(ArgumentException), async () => { await nutritionRequest.UpdateNutrition(ValidNutrition); });
         }
 
-        [Test()]
+        [Test]
         public void CreateNutrition_AllPropertiesValid_DoesNotThrowArgumentException()
         {
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             NutritionEndpoint nutritionRequest = new NutritionEndpoint(tokenManager.Object, new UsersModel());
             //Act and Assert
-            Assert.DoesNotThrow(() => { nutritionRequest.CreateNutrition(ValidNutritionNew); });
+            Assert.DoesNotThrowAsync(async () => { await nutritionRequest.CreateNutrition(ValidNutritionNew); });
         }
 
-        [Test()]
+        [Test]
         public void CreateNutrition_AllMeasurementsNull_ArgumentException()
         {
             //Arrange
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            NutritionEndpoint nutritionRequest = new NutritionEndpoint(tokenManager.Object, new UsersModel());
+            var nutritionRequest = new NutritionEndpoint(tokenManager.Object, new UsersModel());
             //Act
             ValidNutritionNew.Calories = null;
             ValidNutritionNew.Carbohydrates = null;
@@ -180,7 +136,7 @@ namespace HealthGraphNet.Tests.Unit
             ValidNutritionNew.Sodium = null;
             ValidNutritionNew.Water = null;
             //Assert
-            Assert.Throws(typeof(ArgumentException), () => { nutritionRequest.CreateNutrition(ValidNutritionNew); });
+            Assert.ThrowsAsync(typeof(ArgumentException), async () => { await nutritionRequest.CreateNutrition(ValidNutritionNew); });
         }
 
         #endregion

@@ -14,7 +14,7 @@ namespace HealthGraphNet.Tests.Unit
     {
         #region Tests
 
-        [Test()]
+        [Test]
         public void GetStreetTeam_UriValid_DoesNotThrowArgumentException()
         {
             //Arrange
@@ -22,10 +22,10 @@ namespace HealthGraphNet.Tests.Unit
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             StreetTeamEndpoint streetTeamRequest = new StreetTeamEndpoint(tokenManager.Object, new UsersModel { Team = validPath });
             //Act and Assert
-            Assert.DoesNotThrow(() => { streetTeamRequest.GetStreetTeam(validPath); });
+            Assert.DoesNotThrowAsync(async () => { await streetTeamRequest.GetStreetTeam(validPath); });
         }
 
-        [Test()]
+        [Test]
         public void GetStreetTeam_UriNotValid_ArgumentException()
         {
             //Arrange
@@ -33,29 +33,7 @@ namespace HealthGraphNet.Tests.Unit
             Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
             StreetTeamEndpoint streetTeamRequest = new StreetTeamEndpoint(tokenManager.Object, new UsersModel { Team = validPath });
             //Act and Assert
-            Assert.Throws(typeof(ArgumentException), () => { streetTeamRequest.GetStreetTeam("Not validPath."); });
-        }
-
-        [Test()]
-        public void GetStreetTeamAsync_UriValid_DoesNotThrowArgumentException()
-        {
-            //Arrange
-            var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            StreetTeamEndpoint streetTeamRequest = new StreetTeamEndpoint(tokenManager.Object, new UsersModel { Team = validPath });
-            //Act and Assert
-            Assert.DoesNotThrow(() => { streetTeamRequest.GetStreetTeamAsync((m) => {}, (ex) => {}, validPath); });
-        }
-
-        [Test()]
-        public void GetStreetTeamAsync_UriNotValid_ArgumentException()
-        {
-            //Arrange
-            var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            StreetTeamEndpoint streetTeamRequest = new StreetTeamEndpoint(tokenManager.Object, new UsersModel { Team = validPath });
-            //Act and Assert
-            Assert.Throws(typeof(ArgumentException), () => { streetTeamRequest.GetStreetTeamAsync((m) => { }, (ex) => { }, "Not validPath."); });
+            Assert.ThrowsAsync(typeof(ArgumentException), async () => { await streetTeamRequest.GetStreetTeam("Not validPath."); });
         }
 
         #endregion
