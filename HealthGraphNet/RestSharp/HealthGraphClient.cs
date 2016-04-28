@@ -11,11 +11,24 @@ namespace HealthGraphNet.RestSharp
     /// </summary>
     public class HealthGraphClient : OAuth2Client
     {
-        public const string ApiBaseUrl = "https://api.runkeeper.com";
+        private const string BaseUrl = "https://runkeeper.com";
+        private const string ApiBaseUrl = "https://api.runkeeper.com";
 
         public HealthGraphClient(IRequestFactory factory, IClientConfiguration configuration)
             : base(factory, configuration)
         {
+        }
+
+        public static HealthGraphClient Create(string clientId, string clientSecret, string redirectUri)
+        { 
+            var config = new global::RestSharp.Portable.Authenticators.OAuth2.Configuration.RuntimeClientConfiguration();
+            config.IsEnabled = false;
+            config.ClientId = clientId;
+            config.ClientSecret = clientSecret;
+            config.RedirectUri = redirectUri;
+            var client = new HealthGraphClient(new RequestFactory(), config);
+
+            return client;
         }
 
         protected override Endpoint AccessCodeServiceEndpoint
@@ -24,7 +37,7 @@ namespace HealthGraphNet.RestSharp
             {
                 return new Endpoint
                 {
-                    BaseUri =  ApiBaseUrl,
+                    BaseUri =  BaseUrl,
                     Resource = "apps/authorize"
                 };
             }
@@ -36,7 +49,7 @@ namespace HealthGraphNet.RestSharp
             {
                 return new Endpoint
                 {
-                    BaseUri = ApiBaseUrl,
+                    BaseUri = BaseUrl,
                     Resource = "/apps/token"
                 };
             }
@@ -60,7 +73,9 @@ namespace HealthGraphNet.RestSharp
 
         protected override void BeforeGetUserInfo(BeforeAfterRequestArgs args)
         {
-            args.Request.Parameters.Add(new Parameter { Name = "access_token", Value = AccessToken, Type = ParameterType.GetOrPost });
+            args.Request.AddHeader("Authorization", "Bearer " + AccessToken);
+            args.Request.AddHeader("Accept", "application/vnd.com.runkeeper.User+json");
+            //args.Request.Parameters.Add(new Parameter { Name = "access_token", Value = AccessToken, Type = ParameterType.GetOrPost });
             base.BeforeGetUserInfo(args);
         }
 

@@ -107,6 +107,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)RestSharp\JsonNETSerializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RestSharp\OAuth2RequestHeaderAuthenticator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RestSharp\RequestFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RestSharp\StaticAuthenticator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RestSharp\ValidateHelper.cs" />
   </ItemGroup>
 </Project>

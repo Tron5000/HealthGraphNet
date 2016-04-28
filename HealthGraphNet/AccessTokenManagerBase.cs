@@ -22,8 +22,8 @@ namespace HealthGraphNet
     {
         #region Abstract Members
 
-        //public abstract AccessTokenModel Token { get; set; }
-        //public abstract Task InitAccessToken(string code);
+        public abstract AccessTokenModel Token { get; set; }
+        public abstract Task InitAccessToken(string code);
 
         internal readonly ISerializer DefaultJsonSerializer = new JsonNETSerializer();
         private const string LocationHeaderName = "Location";
@@ -34,7 +34,7 @@ namespace HealthGraphNet
 
         private const string ApiBaseUrl = "https://api.runkeeper.com";
 
-        private RestClient _client { get; set; }
+        protected RestClient Client { get; private set; }
 
         #endregion
 
@@ -43,9 +43,9 @@ namespace HealthGraphNet
         public AccessTokenManagerBase()
         {
             //Initialize the rest client
-            _client = new RestClient();
-            _client.ClearHandlers();
-            _client.AddHandler("*", new JsonNETDeserializer());
+            Client = new RestClient();
+            Client.ClearHandlers();
+            Client.AddHandler("*", new JsonNETDeserializer());
         }
 
         #endregion
@@ -65,13 +65,13 @@ namespace HealthGraphNet
         {
             if (string.IsNullOrEmpty(baseUrl) == false)
             {
-                _client.BaseUrl = new Uri(baseUrl);
+                Client.BaseUrl = new Uri(baseUrl);
             }
             else
             {
-                _client.BaseUrl = new Uri(ApiBaseUrl);
+                Client.BaseUrl = new Uri(ApiBaseUrl);
             }
-            IRestResponse<T> response = await _client.Execute<T>(request);
+            IRestResponse<T> response = await Client.Execute<T>(request);
             //If a particular status code is expected, check for it, otherwise assume we are looking for an OK
             HttpStatusCode codeToCheckAgainst = expectedStatusCode.HasValue ? expectedStatusCode.Value : HttpStatusCode.OK;
             if (response.StatusCode != codeToCheckAgainst)
@@ -92,13 +92,13 @@ namespace HealthGraphNet
         {
             if (string.IsNullOrEmpty(baseUrl) == false)
             {
-                _client.BaseUrl = new Uri(baseUrl);
+                Client.BaseUrl = new Uri(baseUrl);
             }
             else
             {
-                _client.BaseUrl = new Uri(ApiBaseUrl);
+                Client.BaseUrl = new Uri(ApiBaseUrl);
             }
-            IRestResponse response = await _client.Execute(request);
+            IRestResponse response = await Client.Execute(request);
             //If a particular status code is expected, check for it, otherwise assume we are looking for an OK
             HttpStatusCode codeToCheckAgainst = expectedStatusCode.HasValue ? expectedStatusCode.Value : HttpStatusCode.OK;
             if (response.StatusCode != codeToCheckAgainst)
@@ -119,13 +119,13 @@ namespace HealthGraphNet
         {
             if (string.IsNullOrEmpty(baseUrl) == false)
             {
-                _client.BaseUrl = new Uri(baseUrl);
+                Client.BaseUrl = new Uri(baseUrl);
             }
             else
             {
-                _client.BaseUrl = new Uri(ApiBaseUrl);
+                Client.BaseUrl = new Uri(ApiBaseUrl);
             }
-            IRestResponse response = await _client.Execute(request);
+            IRestResponse response = await Client.Execute(request);
             if (response.StatusCode != HttpStatusCode.Created)
             {
                 throw new HealthGraphException(response);
