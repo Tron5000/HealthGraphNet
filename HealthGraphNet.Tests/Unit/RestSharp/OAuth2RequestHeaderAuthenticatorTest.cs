@@ -15,11 +15,11 @@ namespace HealthGraphNet.Tests.Unit.RestSharp
     {
         #region Tests
 
-
         private HealthGraphClient CreateClient()
         {
             return new HealthGraphClient(new RequestFactory(), null);
         }
+
         [Test]
 
         public async Task Authenticate_EmptyParameterRequest_AddsAccessTokenAsHeaderParameter()

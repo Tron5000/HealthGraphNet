@@ -7,6 +7,7 @@ using MonoTouch.UIKit;
 using MonoTouch.Dialog;
 using HealthGraphNet;
 using HealthGraphNet.Models;
+using HealthGraphNet.RestSharp;
 
 namespace HealthGraphNet.Samples.MonoTouch
 {
@@ -82,22 +83,22 @@ namespace HealthGraphNet.Samples.MonoTouch
 				var authorizeWebView = new UIWebView(secondPage.View.Frame);
 				secondPage.View.AddSubview(authorizeWebView);
 				viewController.VisibleViewController.NavigationController.PushViewController(secondPage, true);
-				authorizeWebView.LoadFinished += delegate(object s, EventArgs ev) {
+				authorizeWebView.LoadFinished += async delegate(object s, EventArgs ev) {
 					string currentUrl = authorizeWebView.Request.Url.AbsoluteString;
 					const string CodeIdentifier = "code=";
 					if (currentUrl.Contains(CodeIdentifier))
 					{
 						//We've received an authorization code - initialize the token manager to get a create a token
 						Code = currentUrl.Substring(currentUrl.IndexOf(CodeIdentifier) + CodeIdentifier.Length);
-						TokenManager = new AccessTokenManager(ClientId, ClientSecret, RequestUri);
+						TokenManager = new AccessTokenManager(new WebViewAuthenticator(HealthGraphClient.Create(ClientId, ClientSecret, RequestUri)));
 						InvokeOnMainThread(() => {
 							UIApplication.SharedApplication.NetworkActivityIndicatorVisible = true;
 						});
-						TokenManager.InitAccessToken(Code);
+						//TokenManager.InitAccessToken(Code);
 						var userRequest = new UsersEndpoint(TokenManager);
-						User = userRequest.GetUser();
+						User = await userRequest.GetUser();
 						var profileRequest = new ProfileEndpoint(TokenManager, User);
-						Profile = profileRequest.GetProfile();
+						Profile = await profileRequest.GetProfile();
 						InvokeOnMainThread(() => {
 							UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
 						});

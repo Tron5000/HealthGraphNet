@@ -94,8 +94,8 @@ namespace HealthGraphNet.Samples.Web
         protected async void Page_Load(object sender, EventArgs e)
         {
             //Setup the auth url
-            string authUrl = "https://runkeeper.com/apps/authorize?client_id=" + ClientId + "&redirect_uri=" + HttpUtility.UrlEncode(RedirectUri) + "&response_type=code";
-            AAuthAnchor.HRef = authUrl;
+            //string authUrl = "https://runkeeper.com/apps/authorize?client_id=" + ClientId + "&redirect_uri=" + HttpUtility.UrlEncode(RedirectUri) + "&response_type=code";
+            //AAuthAnchor.HRef = authUrl;
 
             if (Authenticator == null)
                 Authenticator = new WebAuthenticator(HealthGraphClient.Create(ClientId, ClientSecret, RedirectUri));

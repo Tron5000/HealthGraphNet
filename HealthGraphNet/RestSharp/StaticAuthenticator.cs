@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 
 namespace HealthGraphNet.RestSharp
 {
+    /// <summary>
+    /// Authenticator using the supplied access token. UI and platform independent
+    /// </summary>
     public class StaticAuthenticator : IAuthenticator
     {
         public string AccessToken { get; set; }

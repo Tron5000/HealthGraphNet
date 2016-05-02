@@ -22,8 +22,8 @@ namespace HealthGraphNet
     {
         #region Abstract Members
 
-        public abstract AccessTokenModel Token { get; set; }
-        public abstract Task InitAccessToken(string code);
+        //public abstract AccessTokenModel Token { get; set; }
+        //public abstract Task InitAccessToken(string code);
 
         internal readonly ISerializer DefaultJsonSerializer = new JsonNETSerializer();
         private const string LocationHeaderName = "Location";

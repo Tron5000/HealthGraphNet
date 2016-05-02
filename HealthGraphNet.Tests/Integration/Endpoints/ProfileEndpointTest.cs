@@ -41,30 +41,30 @@ namespace HealthGraphNet.Tests.Integration
             Assert.IsTrue(!string.IsNullOrEmpty(profile.Profile));
         }
 
-        [Test]
-        public async Task UpdateProfile_AthleteTypeUpdated()
-        {
-            //Arrange
-            var profile = await ProfileRequest.GetProfile();
-            string originalAthleteType = profile.AthleteType;
-            string newAthleteType;
-            var athleteTypeCount = 0;
-            // Make sure the new athlete type doesn't match whatever's already there.
-            do
-            {
-                newAthleteType = ProfileEndpoint.ValidAthleteType.ElementAt(athleteTypeCount);
-                athleteTypeCount++;
-            } while (newAthleteType == originalAthleteType);
-            //Act
-            profile.AthleteType = newAthleteType;
-            profile = await ProfileRequest.UpdateProfile(profile);
-            //Assert
-            Assert.AreEqual(newAthleteType, profile.AthleteType);
+        //[Test]
+        //public async Task UpdateProfile_AthleteTypeUpdated()
+        //{
+        //    //Arrange
+        //    var profile = await ProfileRequest.GetProfile();
+        //    string originalAthleteType = profile.AthleteType;
+        //    string newAthleteType;
+        //    var athleteTypeCount = 0;
+        //    // Make sure the new athlete type doesn't match whatever's already there.
+        //    do
+        //    {
+        //        newAthleteType = ProfileEndpoint.ValidAthleteType.ElementAt(athleteTypeCount);
+        //        athleteTypeCount++;
+        //    } while (newAthleteType == originalAthleteType);
+        //    //Act
+        //    profile.AthleteType = newAthleteType;
+        //    profile = await ProfileRequest.UpdateProfile(profile);
+        //    //Assert
+        //    Assert.AreEqual(newAthleteType, profile.AthleteType);
 
-            //Cleanup - set profile type back to original value.
-            profile.AthleteType = originalAthleteType;
-            profile = await ProfileRequest.UpdateProfile(profile);
-        }
+        //    //Cleanup - set profile type back to original value.
+        //    profile.AthleteType = originalAthleteType;
+        //    profile = await ProfileRequest.UpdateProfile(profile);
+        //}
 
         #endregion
     }

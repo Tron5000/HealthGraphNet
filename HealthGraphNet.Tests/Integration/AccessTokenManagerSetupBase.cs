@@ -5,20 +5,23 @@ using System.Text;
 using NUnit.Framework;
 using HealthGraphNet;
 using HealthGraphNet.Models;
+using HealthGraphNet.RestSharp;
+using System.Configuration;
 
 namespace HealthGraphNet.Tests.Integration
 {
-    [TestFixture()]
+    [TestFixture]
     public abstract class AccessTokenManagerSetupBase
     {
         #region Fields, Properties and Setup.
 
-        // In order to run integration tests, ClientId, ClientSecret, RequestUri and AccessToken of your app must be provided.
-        // In order to create an application, go to the HealthGraph Applications Portal: http://runkeeper.com/partner/applications
-        protected const string ClientId = "";
-        protected const string ClientSecret = "";
-        protected const string RequestUri = "https://runkeeper.com/apps/authorize";
-        protected const string AccessToken = "";
+        protected string AccessToken
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["AccessToken"];
+            }
+        }
 
         public AccessTokenManager TokenManager { get; set; }
 
@@ -29,11 +32,13 @@ namespace HealthGraphNet.Tests.Integration
         [OneTimeSetUp]
         public void Init()
         {
-            if ((string.IsNullOrEmpty(ClientId)) || (string.IsNullOrEmpty(ClientSecret)) || (string.IsNullOrEmpty(RequestUri)) || (string.IsNullOrEmpty(AccessToken)))
+            if (string.IsNullOrEmpty(AccessToken))
             {
-                throw new ArgumentException("In order to run integration tests, please define ClientId, ClientSecret, RequestUri and AccessToken constants in AccessTokenManagerSetupBase.");
+                throw new ArgumentException("In order to run integration tests, AccessToken in the app.config file!");
             }
-            TokenManager = new AccessTokenManager(ClientId, ClientSecret, RequestUri, AccessToken);
+
+            var authenticator = new StaticAuthenticator() { AccessToken = AccessToken };
+            TokenManager = new AccessTokenManager(authenticator);
         }
 
         #endregion
