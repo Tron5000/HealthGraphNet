@@ -13,9 +13,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthGraphNet.NET45", "Hea
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthGraphNet.iOS", "HealthGraphNet.iOS\HealthGraphNet.iOS.csproj", "{D92BD45B-E133-4F5F-8DA5-EA60588A8965}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthGraphNet.Droid", "HealthGraphNet.Droid\HealthGraphNet.Droid.csproj", "{616CD761-D77C-446D-9F9A-6CDBAB4DF8F7}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		HealthGraphNet\HealthGraphNet_.projitems*{d92bd45b-e133-4f5f-8da5-ea60588a8965}*SharedItemsImports = 4
+		HealthGraphNet\HealthGraphNet_.projitems*{616cd761-d77c-446d-9f9a-6cdbab4df8f7}*SharedItemsImports = 4
 		HealthGraphNet\HealthGraphNet_.projitems*{1dfab556-6818-415f-ae78-5d7b093b602c}*SharedItemsImports = 13
 		HealthGraphNet\HealthGraphNet_.projitems*{e3c06b77-752e-4167-adc8-a6d587c4d3b6}*SharedItemsImports = 4
 		HealthGraphNet\HealthGraphNet_.projitems*{6bc608fa-30e3-4097-ac5b-3043d8c09834}*SharedItemsImports = 4
@@ -131,6 +134,30 @@ Global
 		{D92BD45B-E133-4F5F-8DA5-EA60588A8965}.Release|iPhone.Build.0 = Release|Any CPU
 		{D92BD45B-E133-4F5F-8DA5-EA60588A8965}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{D92BD45B-E133-4F5F-8DA5-EA60588A8965}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{616CD761-D77C-446D-9F9A-6CDBAB4DF8F7}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
+		{616CD761-D77C-446D-9F9A-6CDBAB4DF8F7}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
+		{616CD761-D77C-446D-9F9A-6CDBAB4DF8F7}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
+		{616CD761-D77C-446D-9F9A-6CDBAB4DF8F7}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{616CD761-D77C-446D-9F9A-6CDBAB4DF8F7}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{616CD761-D77C-446D-9F9A-6CDBAB4DF8F7}.Ad-Hoc|iPhoneSimulator.Build.0 = Release|Any CPU
+		{616CD761-D77C-446D-9F9A-6CDBAB4DF8F7}.AppStore|Any CPU.ActiveCfg = Release|Any CPU
+		{616CD761-D77C-446D-9F9A-6CDBAB4DF8F7}.AppStore|Any CPU.Build.0 = Release|Any CPU
+		{616CD761-D77C-446D-9F9A-6CDBAB4DF8F7}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{616CD761-D77C-446D-9F9A-6CDBAB4DF8F7}.AppStore|iPhone.Build.0 = Release|Any CPU
+		{616CD761-D77C-446D-9F9A-6CDBAB4DF8F7}.AppStore|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{616CD761-D77C-446D-9F9A-6CDBAB4DF8F7}.AppStore|iPhoneSimulator.Build.0 = Release|Any CPU
+		{616CD761-D77C-446D-9F9A-6CDBAB4DF8F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{616CD761-D77C-446D-9F9A-6CDBAB4DF8F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{616CD761-D77C-446D-9F9A-6CDBAB4DF8F7}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{616CD761-D77C-446D-9F9A-6CDBAB4DF8F7}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{616CD761-D77C-446D-9F9A-6CDBAB4DF8F7}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{616CD761-D77C-446D-9F9A-6CDBAB4DF8F7}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{616CD761-D77C-446D-9F9A-6CDBAB4DF8F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{616CD761-D77C-446D-9F9A-6CDBAB4DF8F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{616CD761-D77C-446D-9F9A-6CDBAB4DF8F7}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{616CD761-D77C-446D-9F9A-6CDBAB4DF8F7}.Release|iPhone.Build.0 = Release|Any CPU
+		{616CD761-D77C-446D-9F9A-6CDBAB4DF8F7}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{616CD761-D77C-446D-9F9A-6CDBAB4DF8F7}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
