@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthGraphNet.Tests", "HealthGraphNet.Tests\HealthGraphNet.Tests.csproj", "{DE67C16F-DD10-4044-9966-E392A12EEBDD}"
 EndProject
@@ -14,6 +14,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthGraphNet.iOS", "HealthGraphNet.iOS\HealthGraphNet.iOS.csproj", "{D92BD45B-E133-4F5F-8DA5-EA60588A8965}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthGraphNet.Droid", "HealthGraphNet.Droid\HealthGraphNet.Droid.csproj", "{616CD761-D77C-446D-9F9A-6CDBAB4DF8F7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E61F1DF3-6993-42E6-A1DD-010DA44C89E6}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
