@@ -21,14 +21,14 @@ namespace HealthGraphNet
         public static readonly List<string> ValidWeightUnit = new List<string> { "lbs", "kg" };
         public static readonly List<string> ValidFirstDayOfWeek = new List<string> { "Sunday", "Monday" };
 
-        private AccessTokenManagerBase _tokenManager;
+        private Client _tokenManager;
         private UsersModel _user;
 
         #endregion
 
         #region Constructors
 
-        public SettingsEndpoint(AccessTokenManagerBase tokenManager, UsersModel user)
+        public SettingsEndpoint(Client tokenManager, UsersModel user)
         {
             _tokenManager = tokenManager;
             _user = user;

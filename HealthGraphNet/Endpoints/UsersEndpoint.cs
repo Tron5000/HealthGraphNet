@@ -14,13 +14,13 @@ namespace HealthGraphNet
         #region Fields and Properties
 
         private const string UriResource = "user"; 
-        private AccessTokenManagerBase _tokenManager;
+        private Client _tokenManager;
 
         #endregion
 
         #region Constructors
 
-        public UsersEndpoint(AccessTokenManagerBase tokenManager)
+        public UsersEndpoint(Client tokenManager)
         {
             _tokenManager = tokenManager;
         }

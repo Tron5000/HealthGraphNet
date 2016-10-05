@@ -17,14 +17,14 @@ namespace HealthGraphNet
     {
         #region Fields and Properties
 
-        private AccessTokenManagerBase _tokenManager;
+        private Client _tokenManager;
         private UsersModel _user;
 
         #endregion
 
         #region Constructors
 
-        public NutritionEndpoint(AccessTokenManagerBase tokenManager, UsersModel user)
+        public NutritionEndpoint(Client tokenManager, UsersModel user)
         {
             _tokenManager = tokenManager;
             _user = user;

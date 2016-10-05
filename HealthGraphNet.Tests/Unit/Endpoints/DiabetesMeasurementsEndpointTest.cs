@@ -44,7 +44,7 @@ namespace HealthGraphNet.Tests.Unit
         {
             //Arrange
             var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            Mock<ClientStub> tokenManager = new Mock<ClientStub>();
             DiabetesMeasurementsEndpoint measurementRequest = new DiabetesMeasurementsEndpoint(tokenManager.Object, new UsersModel { Diabetes = validPath });
             //Act and Assert
             Assert.DoesNotThrowAsync(async () => { await measurementRequest.GetMeasurement(validPath); });
@@ -55,7 +55,7 @@ namespace HealthGraphNet.Tests.Unit
         {
             //Arrange
             var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            Mock<ClientStub> tokenManager = new Mock<ClientStub>();
             DiabetesMeasurementsEndpoint measurementRequest = new DiabetesMeasurementsEndpoint(tokenManager.Object, new UsersModel { Diabetes = validPath });
             //Act and Assert
             Assert.ThrowsAsync(typeof(ArgumentException), async () => { await measurementRequest.GetMeasurement("Not validPath."); });
@@ -66,7 +66,7 @@ namespace HealthGraphNet.Tests.Unit
         {
             //Arrange
             var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            Mock<ClientStub> tokenManager = new Mock<ClientStub>();
             DiabetesMeasurementsEndpoint measurementRequest = new DiabetesMeasurementsEndpoint(tokenManager.Object, new UsersModel { Diabetes = validPath });
             //Act and Assert
             Assert.DoesNotThrowAsync(async() => { await measurementRequest.DeleteMeasurement(validPath); });
@@ -77,7 +77,7 @@ namespace HealthGraphNet.Tests.Unit
         {
             //Arrange
             var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            Mock<ClientStub> tokenManager = new Mock<ClientStub>();
             DiabetesMeasurementsEndpoint measurementRequest = new DiabetesMeasurementsEndpoint(tokenManager.Object, new UsersModel { Diabetes = validPath });
             //Act and Assert
             Assert.ThrowsAsync(typeof(ArgumentException), async () => { await measurementRequest.DeleteMeasurement("Not validPath."); });
@@ -87,7 +87,7 @@ namespace HealthGraphNet.Tests.Unit
         public void UpdateMeasurement_AllPropertiesValid_DoesNotThrowArgumentException()
         {
             //Arrange
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            Mock<ClientStub> tokenManager = new Mock<ClientStub>();
             DiabetesMeasurementsEndpoint measurementRequest = new DiabetesMeasurementsEndpoint(tokenManager.Object, new UsersModel());
             //Act and Assert
             Assert.DoesNotThrowAsync(async () => { await measurementRequest.UpdateMeasurement(ValidMeasurement); });
@@ -97,7 +97,7 @@ namespace HealthGraphNet.Tests.Unit
         public void UpdateMeasurement_AllMeasurementsNull_ArgumentException()
         {
             //Arrange
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            Mock<ClientStub> tokenManager = new Mock<ClientStub>();
             DiabetesMeasurementsEndpoint measurementRequest = new DiabetesMeasurementsEndpoint(tokenManager.Object, new UsersModel());
             //Act
             ValidMeasurement.CPeptide = null;
@@ -115,7 +115,7 @@ namespace HealthGraphNet.Tests.Unit
         public void CreateMeasurement_AllPropertiesValid_DoesNotThrowArgumentException()
         {
             //Arrange
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            Mock<ClientStub> tokenManager = new Mock<ClientStub>();
             DiabetesMeasurementsEndpoint measurementRequest = new DiabetesMeasurementsEndpoint(tokenManager.Object, new UsersModel());
             //Act and Assert
             Assert.DoesNotThrowAsync(async () => { await measurementRequest.CreateMeasurement(ValidMeasurementNew); });
@@ -125,7 +125,7 @@ namespace HealthGraphNet.Tests.Unit
         public void CreateMeasurement_AllMeasurementsNull_ArgumentException()
         {
             //Arrange
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            Mock<ClientStub> tokenManager = new Mock<ClientStub>();
             DiabetesMeasurementsEndpoint measurementRequest = new DiabetesMeasurementsEndpoint(tokenManager.Object, new UsersModel());
             //Act
             ValidMeasurementNew.CPeptide = null;

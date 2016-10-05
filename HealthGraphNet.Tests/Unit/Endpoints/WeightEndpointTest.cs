@@ -44,7 +44,7 @@ namespace HealthGraphNet.Tests.Unit
         {
             //Arrange
             var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            Mock<ClientStub> tokenManager = new Mock<ClientStub>();
             WeightEndpoint weightRequest = new WeightEndpoint(tokenManager.Object, new UsersModel { Weight = validPath });
             //Act and Assert
             Assert.DoesNotThrowAsync(async () => { await weightRequest.GetWeight(validPath); });
@@ -55,7 +55,7 @@ namespace HealthGraphNet.Tests.Unit
         {
             //Arrange
             var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            Mock<ClientStub> tokenManager = new Mock<ClientStub>();
             WeightEndpoint weightRequest = new WeightEndpoint(tokenManager.Object, new UsersModel { Weight = validPath });
             //Act and Assert
             Assert.ThrowsAsync(typeof(ArgumentException), async () => { await weightRequest.GetWeight("Not validPath."); });
@@ -66,7 +66,7 @@ namespace HealthGraphNet.Tests.Unit
         {
             //Arrange
             var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            Mock<ClientStub> tokenManager = new Mock<ClientStub>();
             WeightEndpoint weightRequest = new WeightEndpoint(tokenManager.Object, new UsersModel { Weight = validPath });
             //Act and Assert
             Assert.DoesNotThrowAsync(async () => { await weightRequest.DeleteWeight(validPath); });
@@ -77,7 +77,7 @@ namespace HealthGraphNet.Tests.Unit
         {
             //Arrange
             var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            Mock<ClientStub> tokenManager = new Mock<ClientStub>();
             WeightEndpoint weightRequest = new WeightEndpoint(tokenManager.Object, new UsersModel { Weight = validPath });
             //Act and Assert
             Assert.ThrowsAsync(typeof(ArgumentException), async () => { await weightRequest.DeleteWeight("Not validPath."); });
@@ -87,7 +87,7 @@ namespace HealthGraphNet.Tests.Unit
         public void UpdateWeight_AllPropertiesValid_DoesNotThrowArgumentException()
         {
             //Arrange
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            Mock<ClientStub> tokenManager = new Mock<ClientStub>();
             WeightEndpoint weightRequest = new WeightEndpoint(tokenManager.Object, new UsersModel());
             //Act and Assert
             Assert.DoesNotThrowAsync(async () => { await weightRequest.UpdateWeight(ValidWeight); });
@@ -97,7 +97,7 @@ namespace HealthGraphNet.Tests.Unit
         public void UpdateWeight_AllMeasurementsNull_ArgumentException()
         {
             //Arrange
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            Mock<ClientStub> tokenManager = new Mock<ClientStub>();
             WeightEndpoint weightRequest = new WeightEndpoint(tokenManager.Object, new UsersModel());
             //Act
             ValidWeight.Bmi = null;
@@ -113,7 +113,7 @@ namespace HealthGraphNet.Tests.Unit
         public void CreateWeight_AllPropertiesValid_DoesNotThrowArgumentException()
         {
             //Arrange
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            Mock<ClientStub> tokenManager = new Mock<ClientStub>();
             WeightEndpoint weightRequest = new WeightEndpoint(tokenManager.Object, new UsersModel());
             //Act and Assert
             Assert.DoesNotThrowAsync(async () => { await weightRequest.CreateWeight(ValidWeightNew); });
@@ -123,7 +123,7 @@ namespace HealthGraphNet.Tests.Unit
         public void CreateWeight_AllMeasurementsNull_ArgumentException()
         {
             //Arrange
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            Mock<ClientStub> tokenManager = new Mock<ClientStub>();
             WeightEndpoint weightRequest = new WeightEndpoint(tokenManager.Object, new UsersModel());
             //Act
             ValidWeightNew.Bmi = null;

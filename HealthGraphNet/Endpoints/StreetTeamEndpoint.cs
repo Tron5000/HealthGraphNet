@@ -17,14 +17,14 @@ namespace HealthGraphNet
     {
         #region Fields and Properties
 
-        private AccessTokenManagerBase _tokenManager;
+        private Client _tokenManager;
         private UsersModel _user;
 
         #endregion      
 
         #region Constructors
 
-        public StreetTeamEndpoint(AccessTokenManagerBase tokenManager, UsersModel user)
+        public StreetTeamEndpoint(Client tokenManager, UsersModel user)
         {
             _tokenManager = tokenManager;
             _user = user;

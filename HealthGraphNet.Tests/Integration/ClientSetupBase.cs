@@ -7,11 +7,12 @@ using HealthGraphNet;
 using HealthGraphNet.Models;
 using HealthGraphNet.RestSharp;
 using System.Configuration;
+using HealthGraphNet.Tests.Unit.RestSharp;
 
 namespace HealthGraphNet.Tests.Integration
 {
     [TestFixture]
-    public abstract class AccessTokenManagerSetupBase
+    public abstract class ClientSetupBase
     {
         #region Fields, Properties and Setup.
 
@@ -23,7 +24,7 @@ namespace HealthGraphNet.Tests.Integration
             }
         }
 
-        public AccessTokenManager TokenManager { get; set; }
+        public Client TokenManager { get; set; }
 
         /// <summary>
         /// Prior to any other setup make sure that ClientId, ClientSecret, RequestUri and AccessToken have been defined.
@@ -38,7 +39,7 @@ namespace HealthGraphNet.Tests.Integration
             }
 
             var authenticator = new StaticAuthenticator() { AccessToken = AccessToken };
-            TokenManager = new AccessTokenManager(authenticator);
+            TokenManager = new Client(authenticator);
         }
 
         #endregion

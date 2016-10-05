@@ -19,18 +19,6 @@ namespace HealthGraphNet.RestSharp
         {
         }
 
-        public static HealthGraphClient Create(string clientId, string clientSecret, string redirectUri)
-        { 
-            var config = new global::RestSharp.Portable.Authenticators.OAuth2.Configuration.RuntimeClientConfiguration();
-            config.IsEnabled = false;
-            config.ClientId = clientId;
-            config.ClientSecret = clientSecret;
-            config.RedirectUri = redirectUri;
-            var client = new HealthGraphClient(new RequestFactory(), config);
-
-            return client;
-        }
-
         protected override Endpoint AccessCodeServiceEndpoint
         {
             get
@@ -75,7 +63,6 @@ namespace HealthGraphNet.RestSharp
         {
             args.Request.AddHeader("Authorization", "Bearer " + AccessToken);
             args.Request.AddHeader("Accept", "application/vnd.com.runkeeper.User+json");
-            //args.Request.Parameters.Add(new Parameter { Name = "access_token", Value = AccessToken, Type = ParameterType.GetOrPost });
             base.BeforeGetUserInfo(args);
         }
 

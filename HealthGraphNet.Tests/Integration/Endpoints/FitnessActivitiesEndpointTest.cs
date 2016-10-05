@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace HealthGraphNet.Tests.Integration
 {
     [TestFixture()]
-    public class FitnessActivitiesEndpointTest : AccessTokenManagerSetupBase
+    public class FitnessActivitiesEndpointTest : ClientSetupBase
     {
         #region Fields, Properties and Setup
 
@@ -39,7 +39,7 @@ namespace HealthGraphNet.Tests.Integration
             //Create
             var newActivity = new FitnessActivitiesNewModel
             {
-                Type = "Running",
+                Type = FitnessActivityType.Cycling,
                 Equipment = "Treadmill",
                 StartTime = DateTime.Now,
                 TotalDistance = 237903.79842947799d,

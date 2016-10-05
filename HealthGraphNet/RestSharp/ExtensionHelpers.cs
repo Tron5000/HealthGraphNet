@@ -12,8 +12,8 @@ namespace HealthGraphNet.RestSharp
         /// <summary>
         /// Adds filtering parameters for the retrieval of a feed page.
         /// </summary>
-        /// <param name="pageIndex"></param>
-        /// <param name="pageSize"></param>
+        /// <param name="pageIndex">Zero based index of the page.</param>
+        /// <param name="pageSize">Size of the page.</param>
         /// <param name="noEarlierThan"></param>
         /// <param name="noLaterThan"></param>
         /// <param name="modifiedNoEarlierThan"></param>
@@ -24,11 +24,11 @@ namespace HealthGraphNet.RestSharp
             IRestRequest target = new RestRequest(uri, Method.GET);
             if (pageIndex.HasValue)
             {
-                target.AddUrlSegment("page", pageIndex.Value.ToString());
+                target.AddParameter("page", pageIndex.Value);
             }
             if (pageSize.HasValue)
             {
-                target.AddUrlSegment("pageSize", pageSize.Value.ToString());
+                target.AddParameter("pageSize", pageSize.Value);
             }
             if (noEarlierThan.HasValue)
             {

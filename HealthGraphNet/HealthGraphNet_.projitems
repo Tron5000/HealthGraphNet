@@ -9,11 +9,11 @@
     <Import_RootNamespace>HealthGraphNet</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)AccessTokenManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)AccessTokenManagerBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Client.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Endpoints\BackgroundActivitiesEndpoint.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Endpoints\CommentThreadsEndpoint.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Endpoints\DiabetesMeasurementsEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\EndPointBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Endpoints\FitnessActivitiesEndpoint.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Endpoints\GeneralMeasurementsEndpoint.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Endpoints\Interfaces\IBackgroundActivitiesEndpoint.cs" />
@@ -60,6 +60,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\FitnessActivities\FitnessActivitiesFeedItemModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\FitnessActivities\FitnessActivitiesNewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\FitnessActivities\FitnessActivitiesPastModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\FitnessActivities\FitnessActivityType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\FitnessActivities\HeartRateModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\FitnessActivities\IFitnessActivitiesModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\FitnessActivities\ImageModel.cs" />
@@ -106,7 +107,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)RestSharp\JsonNETDeserializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RestSharp\JsonNETSerializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RestSharp\OAuth2RequestHeaderAuthenticator.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)RestSharp\RequestFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RestSharp\StaticAuthenticator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RestSharp\ValidateHelper.cs" />
   </ItemGroup>

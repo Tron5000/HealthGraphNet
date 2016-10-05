@@ -13,23 +13,22 @@ namespace HealthGraphNet
     /// <summary>
     /// Endpoint for retrieving and updating a user's profile. http://runkeeper.com/developer/healthgraph/profile
     /// </summary>
-    public class ProfileEndpoint : IProfileEndpoint
+    public class ProfileEndpoint : EndPointBase, IProfileEndpoint
     {
         #region Fields and Properties
 
         public static readonly List<string> ValidAthleteType = new List<string> { "Athlete", "Runner", "Marathoner", "Ultra Marathoner", "Cyclist", "Tri-Athlete, Walker", "Hiker", "Skier", "Snowboarder", "Skater", "Swimmer", "Rower", null };
 
-        private AccessTokenManagerBase _tokenManager;
-        private UsersModel _user;
-
         #endregion
 
         #region Constructors
 
-        public ProfileEndpoint(AccessTokenManagerBase tokenManager, UsersModel user)
+        public ProfileEndpoint(Client client, UsersModel user) : base(client, user)
         {
-            _tokenManager = tokenManager;
-            _user = user;
+        }
+
+        public ProfileEndpoint(Client client, Func<Task<UsersModel>> functionGetUser) : base(client, functionGetUser)
+        {
         }
 
         #endregion
@@ -38,8 +37,9 @@ namespace HealthGraphNet
 
         public async Task<ProfileModel> GetProfile()
         {
-            var request = new RestRequest(_user.Profile, Method.GET);
-            return await _tokenManager.Execute<ProfileModel>(request);
+            var user = await GetUser();
+            var request = new RestRequest(user.Profile, Method.GET);
+            return await Client.Execute<ProfileModel>(request);
         }
 
         #endregion

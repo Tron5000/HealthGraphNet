@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace HealthGraphNet.Tests.Integration
 {
     [TestFixture()]
-    public class UsersEndpointTest : AccessTokenManagerSetupBase
+    public class UsersEndpointTest : ClientSetupBase
     {        
         #region Tests
 

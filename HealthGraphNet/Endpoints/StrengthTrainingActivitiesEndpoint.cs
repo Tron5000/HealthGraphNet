@@ -21,14 +21,14 @@ namespace HealthGraphNet
         public static readonly List<string> ValidExerciseType = new List<string> { "Barbell Curl", "Dumbbell Curl", "Barbell Tricep Press", "Dumbbell Tricep Press", "Overhead Press", "Wrist Curl", "Tricep Kickback", "Bench Press", "Cable Crossover", "Dumbbell Fly", "Incline Bench", "Dips", "Pushup", "Pullup", "Back Raise", "Bent-Over Row", "Seated Row", "Chinup", "Lat Pulldown", "Seated Reverse Fly", "Military Press", "Upright Row", "Front Raise", "Side Lateral Raise", "Snatch", "Push Press", "Shrug", "Crunch Machine", "Crunch", "Ab Twist", "Bicycle Kick", "Hanging Leg Raise", "Hanging Knee Raise", "Reverse Crunch", "V Up", "Situp", "Squat", "Lunge", "Dead Lift", "Hamstring Curl", "Good Morning", "Clean", "Leg Press", "Leg Extension", "Other" };
         public static readonly List<string> ValidMuscleGroup = new List<string> { "Arms", "Chest", "Back", "Shoulders", "Abs", "Legs" };
 
-        private AccessTokenManagerBase _tokenManager;
+        private Client _tokenManager;
         private UsersModel _user;
 
         #endregion
 
         #region Constructors
 
-        public StrengthTrainingActivitiesEndpoint(AccessTokenManagerBase tokenManager, UsersModel user)
+        public StrengthTrainingActivitiesEndpoint(Client tokenManager, UsersModel user)
         {
             _tokenManager = tokenManager;
             _user = user;

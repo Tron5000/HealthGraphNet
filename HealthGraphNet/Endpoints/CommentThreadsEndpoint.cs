@@ -16,13 +16,13 @@ namespace HealthGraphNet
     {
         #region Fields and Properties
 
-        private AccessTokenManagerBase _tokenManager;
+        private Client _tokenManager;
 
         #endregion
 
         #region Constructors
 
-        public CommentThreadsEndpoint(AccessTokenManagerBase tokenManager)
+        public CommentThreadsEndpoint(Client tokenManager)
         {
             _tokenManager = tokenManager;
         }
