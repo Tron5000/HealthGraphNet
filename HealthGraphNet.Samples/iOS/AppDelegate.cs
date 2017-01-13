@@ -2,12 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.Dialog;
-using HealthGraphNet;
+using Foundation;
 using HealthGraphNet.Models;
 using HealthGraphNet.RestSharp;
+using UIKit;
 
 namespace HealthGraphNet.Samples.MonoTouch
 {

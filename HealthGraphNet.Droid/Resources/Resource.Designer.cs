@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("HealthGraphNet.Droid.Resource", IsApplication=false)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("HealthGraphNet.Resource", IsApplication=false)]
 
-namespace HealthGraphNet.Droid
+namespace HealthGraphNet
 {
 	
 	

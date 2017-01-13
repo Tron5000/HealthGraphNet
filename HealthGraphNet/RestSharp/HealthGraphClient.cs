@@ -1,8 +1,9 @@
-﻿using RestSharp.Portable;
-using RestSharp.Portable.Authenticators.OAuth2;
-using RestSharp.Portable.Authenticators.OAuth2.Configuration;
-using RestSharp.Portable.Authenticators.OAuth2.Infrastructure;
-using RestSharp.Portable.Authenticators.OAuth2.Models;
+﻿using System;
+using RestSharp.Portable;
+using RestSharp.Portable.OAuth2;
+using RestSharp.Portable.OAuth2.Configuration;
+using RestSharp.Portable.OAuth2.Infrastructure;
+using RestSharp.Portable.OAuth2.Models;
 
 namespace HealthGraphNet.RestSharp
 {
@@ -48,7 +49,7 @@ namespace HealthGraphNet.RestSharp
             get { return "runkeeper"; }
         }
 
-        protected override global::RestSharp.Portable.Authenticators.OAuth2.Models.UserInfo ParseUserInfo(string content)
+        protected override UserInfo ParseUserInfo(IRestResponse response)
         {
             // cannot return null
             return new UserInfo();

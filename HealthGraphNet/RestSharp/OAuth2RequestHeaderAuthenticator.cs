@@ -3,7 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using RestSharp.Portable;
-using RestSharp.Portable.Authenticators;
+using RestSharp.Portable.OAuth2;
 
 namespace HealthGraphNet.RestSharp
 {

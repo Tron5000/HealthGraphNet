@@ -20,7 +20,12 @@ namespace HealthGraphNet.Tests.Integration
         {
             get
             {
-                return ConfigurationManager.AppSettings["AccessToken"];
+                const string VariableName = "HEALTHGRAPH_ACCESS_TOKEN";
+                var accessToken = Environment.GetEnvironmentVariable(VariableName);
+                if (accessToken == null)
+                    throw new Exception($"In order to run integration tests, you have to set your access token into environment variable {VariableName}");
+
+                return accessToken;
             }
         }
 
@@ -33,11 +38,6 @@ namespace HealthGraphNet.Tests.Integration
         [OneTimeSetUp]
         public void Init()
         {
-            if (string.IsNullOrEmpty(AccessToken))
-            {
-                throw new ArgumentException("In order to run integration tests, AccessToken in the app.config file!");
-            }
-
             var authenticator = new StaticAuthenticator() { AccessToken = AccessToken };
             TokenManager = new Client(authenticator);
         }
