@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>1dfab556-6818-415f-ae78-5d7b093b602c</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>HealthGraphNet</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Client.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\BackgroundActivitiesEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\CommentThreadsEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\DiabetesMeasurementsEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\EndPointBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\FitnessActivitiesEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\GeneralMeasurementsEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\Interfaces\IBackgroundActivitiesEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\Interfaces\ICommentThreadsEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\Interfaces\IDiabetesMeasurementsEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\Interfaces\IFitnessActivitiesEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\Interfaces\IGeneralMeasurementsEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\Interfaces\INutritionEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\Interfaces\IProfileEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\Interfaces\IRecordsEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\Interfaces\ISettingsEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\Interfaces\ISleepEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\Interfaces\IStreetTeamEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\Interfaces\IStrengthTrainingActivitiesEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\Interfaces\IUsersEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\Interfaces\IWeightEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\NutritionEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\ProfileEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\RecordsEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\SettingsEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\SleepEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\StreetTeamEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\StrengthTrainingActivitiesEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\UsersEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Endpoints\WeightEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HealthGraphException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\AccessTokenModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\BackgroundActivities\BackgroundActivitiesFeedItemModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\BackgroundActivities\BackgroundActivitiesModelBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\BackgroundActivities\BackgroundActivitiesNewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\BackgroundActivities\BackgroundActivitiesPastModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\BackgroundActivities\BackgroundActivitiesType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\CommentThreads\CommentsModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\CommentThreads\CommentsNewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\CommentThreads\CommentThreadsModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\DiabetesMeasurements\DiabetesMeasurementsFeedItemModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\DiabetesMeasurements\DiabetesMeasurementsModelBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\DiabetesMeasurements\DiabetesMeasurementsNewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\DiabetesMeasurements\DiabetesMeasurementsPastModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\DiabetesMeasurements\DiabetesMeasurementsType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\FeedModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\FitnessActivities\CaloriesModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\FitnessActivities\DistanceModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\FitnessActivities\FitnessActivitiesFeedItemModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\FitnessActivities\FitnessActivitiesNewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\FitnessActivities\FitnessActivitiesPastModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\FitnessActivities\FitnessActivityType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\FitnessActivities\HeartRateModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\FitnessActivities\IFitnessActivitiesModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\FitnessActivities\ImageModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\FitnessActivities\PathModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\GeneralMeasurements\GeneralMeasurementsFeedItemModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\GeneralMeasurements\GeneralMeasurementsModelBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\GeneralMeasurements\GeneralMeasurementsNewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\GeneralMeasurements\GeneralMeasurementsPastModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\GeneralMeasurements\GeneralMeasurementsType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\IFeedModelItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Nutrition\NutritionFeedItemModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Nutrition\NutritionModelBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Nutrition\NutritionNewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Nutrition\NutritionPastModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Nutrition\NutritionType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Profile\ProfileModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Records\RecordsFeedItemModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Records\StatModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Settings\SettingsModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Sleep\SleepFeedItemModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Sleep\SleepModelBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Sleep\SleepNewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Sleep\SleepPastModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Sleep\SleepType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\StreetTeam\StreetTeamFeedItemModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\StreetTeam\StreetTeamInvitationsModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\StreetTeam\StreetTeamModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\StrengthTrainingActivities\ExercisesModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\StrengthTrainingActivities\IStrengthTrainingActivitiesModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\StrengthTrainingActivities\SetsModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\StrengthTrainingActivities\StrengthTrainingActivitiesFeedItemModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\StrengthTrainingActivities\StrengthTrainingActivitiesNewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\StrengthTrainingActivities\StrengthTrainingActivitiesPastModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\UsersModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Weight\WeightFeedItemModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Weight\WeightModelBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Weight\WeightNewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Weight\WeightPastModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Weight\WeightType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Properties\AssemblyInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RestSharp\AdjustToUniversalIsoDateTimeConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RestSharp\ExtensionHelpers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RestSharp\HealthGraphClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RestSharp\JsonNETDeserializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RestSharp\JsonNETSerializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RestSharp\OAuth2RequestHeaderAuthenticator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RestSharp\StaticAuthenticator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RestSharp\ValidateHelper.cs" />
+  </ItemGroup>
+</Project>

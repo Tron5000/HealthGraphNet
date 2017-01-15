@@ -3,7 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using RestSharp;
+using RestSharp.Portable;
 using Moq;
 using HealthGraphNet.RestSharp;
 
@@ -20,7 +20,7 @@ namespace HealthGraphNet.Tests.Unit.RestSharp
 
         #region Tests
 
-        [Test()]
+        [Test]
         public void IsValueValid_ValueIsInValidValueList_DoesNotThrowArgumentException()
         {
             //Arrange
@@ -29,7 +29,7 @@ namespace HealthGraphNet.Tests.Unit.RestSharp
             Assert.DoesNotThrow(() => { ValidateHelper.IsValueValid<string>(validValue, ValidValues, "Fruit"); });
         }
 
-        [Test()]
+        [Test]
         public void IsValueValid_ValueIsNotInValidValueList_ArgumentException()
         {
             //Arrange

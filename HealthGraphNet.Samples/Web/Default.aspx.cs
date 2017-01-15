@@ -7,16 +7,30 @@ using System.Web.UI.WebControls;
 using System.Configuration;
 using HealthGraphNet;
 using HealthGraphNet.Models;
+using System.Threading.Tasks;
+using HealthGraphNet.RestSharp;
 
 namespace HealthGraphNet.Samples.Web
 {
     public partial class _Default : System.Web.UI.Page
     {
+        public WebAuthenticator Authenticator
+        {
+            get
+            {
+                return Session["Authenticator"] as WebAuthenticator;
+            }
+            set
+            {
+                Session["Authenticator"] = value;
+            }
+        }
+
         #region Fields and Properties
 
-        public string ClientId 
-        { 
-            get 
+        public string ClientId
+        {
+            get
             {
                 return ConfigurationManager.AppSettings["ClientId"];
             }
@@ -30,92 +44,99 @@ namespace HealthGraphNet.Samples.Web
             }
         }
 
-        public string RequestUri
+        public string RedirectUri
         {
             get
             {
-            
-                return ConfigurationManager.AppSettings["RequestUri"];
+                return HttpContext.Current.Request.Url.AbsoluteUri;
+                //return ConfigurationManager.AppSettings["RedirectUri"];
             }
         }
 
-		/// <summary>
-		/// Gets the auth code from the url string.
-		/// </summary>
-		/// <value>
-		/// The code.
-		/// </value>
-        public string Code 
+        /// <summary>
+        /// Gets the auth code from the url string.
+        /// </summary>
+        /// <value>
+        /// The code.
+        /// </value>
+        public string Code
         {
-            get 
+            get
             {
                 return Request.QueryString["Code"];
             }
         }
 
-		/// <summary>
-		/// Gets or sets the access token as a session variable.
-		/// </summary>
-		/// <value>
-		/// The access token.
-		/// </value>
-		public AccessTokenModel Token
-		{
-			get
-			{
-                return Session["Token"] as AccessTokenModel;
-			}
-			set
-			{
-				Session["Token"] = value;
-			}
-		}
+        /// <summary>
+        /// Gets or sets the access token as a session variable.
+        /// </summary>
+        /// <value>
+        /// The access token.
+        /// </value>
+        //public AccessTokenModel Token
+        //{
+        //    get
+        //    {
+        //        return Session["Token"] as AccessTokenModel;
+        //    }
+        //    set
+        //    {
+        //        Session["Token"] = value;
+        //    }
+        //}
 
         protected AccessTokenManager TokenManager { get; set; }
 
         #endregion
 
-		#region Events and Overrides
+        #region Events and Overrides
 
-        protected void Page_Load(object sender, EventArgs e)
+        protected async void Page_Load(object sender, EventArgs e)
         {
-			//Setup the auth url
-			string authUrl = "https://runkeeper.com/apps/authorize?client_id=" + ClientId + "&redirect_uri=" + HttpUtility.UrlEncode(RequestUri) + "&response_type=code";
-			AAuthAnchor.HRef = authUrl;
+            //Setup the auth url
+            //string authUrl = "https://runkeeper.com/apps/authorize?client_id=" + ClientId + "&redirect_uri=" + HttpUtility.UrlEncode(RedirectUri) + "&response_type=code";
+            //AAuthAnchor.HRef = authUrl;
 
-			//Initialize the healthgraph api - get a token or use an existing one saved to session
-			TokenManager = new AccessTokenManager(ClientId, ClientSecret, RequestUri);
-			if (string.IsNullOrEmpty(Code) == false)
+            if (Authenticator == null)
+                Authenticator = new WebAuthenticator(HealthGraphClient.Create(ClientId, ClientSecret, RedirectUri));
+            AAuthAnchor.HRef = await Authenticator.Client.GetLoginLinkUri();
+            TokenManager = new AccessTokenManager(Authenticator);
+
+            await Authenticator.OnPageLoaded(HttpContext.Current.Request.Url);
+
+            //Initialize the healthgraph api - get a token or use an existing one saved to session
+            //TokenManager = new AccessTokenManager(ClientId, ClientSecret, RedirectUri);
+            //if (string.IsNullOrEmpty(Code) == false)
+            //{
+            //    //If we set the code in the url string, get a new access token and save it to the session       
+            //    await TokenManager.InitAccessToken(Code);
+            //    Token = TokenManager.Token;
+            //}
+            //else if (Token != null)
+            //{
+            //    //Otherwise, if the access code saved in session is present we'll attempt to use that
+            //    TokenManager.Token = Token;
+            //}
+
+            if (Authenticator.AccessToken != null)
             {
-				//If we set the code in the url string, get a new access token and save it to the session       
-                TokenManager.InitAccessToken(Code);
-				Token = TokenManager.Token;
+                await DisplayHealthGraphSamples();
             }
-			else if (Token != null)
-			{
-				//Otherwise, if the access code saved in session is present we'll attempt to use that
-                TokenManager.Token = Token;
-			}
-
-			if (Token != null)
-			{
-				DisplayHealthGraphSamples();
-			}
         }
 
-		#endregion
+        #endregion
 
-		#region Helper Methods
+        #region Helper Methods
 
-		protected void DisplayHealthGraphSamples()
-		{
-			PnlTokenSamples.Visible = true;
-            LblAccessToken.Text = Token.AccessToken;
-            LblAccessType.Text = Token.TokenType;
+        protected async Task DisplayHealthGraphSamples()
+        {
+            PnlTokenSamples.Visible = true;
+            LblAccessToken.Text = Authenticator.Client.AccessToken;
+            LblAccessType.Text = Authenticator.Client.TokenType;
 
             //User Uri example
             var userRequest = new UsersEndpoint(TokenManager);
-            var user = userRequest.GetUser();
+            var user = await userRequest.GetUser();
             LblUserId.Text = user.UserID.ToString();
             LblUserStrengthTrainingActivities.Text = user.StrengthTrainingActivities;
             LblUserWeight.Text = user.Weight;
@@ -132,7 +153,7 @@ namespace HealthGraphNet.Samples.Web
 
             //Get user profile
             var profileRequest = new ProfileEndpoint(TokenManager, user);
-            var profile = profileRequest.GetProfile();
+            var profile = await profileRequest.GetProfile();
             //Optionally change and update it here
             //profile.AthleteType = "Hiker";
             //profile.AthleteType = "Hiker";
@@ -293,8 +314,8 @@ namespace HealthGraphNet.Samples.Web
             weightDetail = weightRequest.UpdateWeight(weightDetail);
             */
             //weightRequest.DeleteWeight(weightItem.Uri);
-            
-        
+
+
             //var activitiesRequest = new FitnessActivitiesEndpoint(TokenManager, user);
             /*
             var newActivity = new FitnessActivitiesNewModel
@@ -310,8 +331,8 @@ namespace HealthGraphNet.Samples.Web
             //if (activitiesItem != null)
             //{
             //    var activitiesDetail = activitiesRequest.GetActivity(activitiesItem.Uri);                 
-                
-                //Get associated comments
+
+            //Get associated comments
             //    var commentRequest = new CommentThreadsEndpoint(TokenManager);
             //    var commentThread = commentRequest.GetCommentThread(activitiesDetail.Comments);
 
@@ -320,28 +341,28 @@ namespace HealthGraphNet.Samples.Web
             //        Comment = "Here we go!"
             //    };
             //    commentRequest.CreateComment(newComment, activitiesDetail.Comments);
-                //commentRequest.CreateCommentAsync(() => { }, (ex) => { }, newComment, activitiesDetail.Comments);
+            //commentRequest.CreateCommentAsync(() => { }, (ex) => { }, newComment, activitiesDetail.Comments);
 
             //    commentThread = commentRequest.GetCommentThread(activitiesDetail.Comments);
 
-                //Retrieve and update an activity
-                //var activitiesDetail = activitiesRequest.GetActivity(activitiesItem.Uri);               
-                //activitiesDetail.Type = "Running";
-                //activitiesDetail.Equipment = "None";
-                //activitiesDetail.AverageHeartRate = null;
-                //activitiesDetail.Notes = "Testing is fun.";                
-                //activitiesRequest.UpdateActivity(activitiesDetail);
+            //Retrieve and update an activity
+            //var activitiesDetail = activitiesRequest.GetActivity(activitiesItem.Uri);               
+            //activitiesDetail.Type = "Running";
+            //activitiesDetail.Equipment = "None";
+            //activitiesDetail.AverageHeartRate = null;
+            //activitiesDetail.Notes = "Testing is fun.";                
+            //activitiesRequest.UpdateActivity(activitiesDetail);
 
-                //Delete the activity
-                //activitiesRequest.DeleteActivity(activitiesDetail.Uri);
-           // }
-            
+            //Delete the activity
+            //activitiesRequest.DeleteActivity(activitiesDetail.Uri);
+            // }
+
 
             //var recordsRequest = new RecordsEndpoint(TokenManager, user);
             //var items = recordsRequest.GetRecordsFeed();
             //int test = 4;
         }
 
-		#endregion
+        #endregion
     }
 }

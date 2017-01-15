@@ -9,7 +9,7 @@ namespace HealthGraphNet.Models
     /// </summary>
     internal interface IFitnessActivitiesModel
     {
-        string Type { get; set; }
+        FitnessActivityType Type { get; set; }
 
         string SecondaryType { get; set; }
 

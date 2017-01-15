@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
-using RestSharp;
-using RestSharp.Validation;
-using RestSharp.Serializers;
+using RestSharp.Portable;
+using RestSharp.Portable.Serializers;
 using HealthGraphNet.Models;
 using HealthGraphNet.RestSharp;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace HealthGraphNet
 {
@@ -16,103 +17,60 @@ namespace HealthGraphNet
     {
         #region Fields and Properties
 
-        private AccessTokenManagerBase _tokenManager;
+        private Client _tokenManager;
         private UsersModel _user;
 
-        #endregion    
+        #endregion
 
         #region Constructors
 
-        public SleepEndpoint(AccessTokenManagerBase tokenManager, UsersModel user)
+        public SleepEndpoint(Client tokenManager, UsersModel user)
         {
             _tokenManager = tokenManager;
             _user = user;
         }
 
-        #endregion     
-    
+        #endregion
+
         #region ISleepEndpoint
 
-        public FeedModel<SleepFeedItemModel> GetFeedPage(int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
+        public async Task<FeedModel<SleepFeedItemModel>> GetFeedPage(int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
         {
-            var request = new RestRequest();
-            request.PrepareFeedPageRequest(_user.Sleep, pageIndex, pageSize, noEarlierThan, noLaterThan, modifiedNoEarlierThan, modifiedNoLaterThan);
-            return _tokenManager.Execute<FeedModel<SleepFeedItemModel>>(request);
+            var request = ExtensionHelpers.CreateFeedPageRequest(_user.Sleep, pageIndex, pageSize, noEarlierThan, noLaterThan, modifiedNoEarlierThan, modifiedNoLaterThan);
+            return await _tokenManager.Execute<FeedModel<SleepFeedItemModel>>(request);
         }
 
-        public void GetFeedPageAsync(Action<FeedModel<SleepFeedItemModel>> success, Action<HealthGraphException> failure, int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
-        {
-            var request = new RestRequest();
-            request.PrepareFeedPageRequest(_user.Sleep, pageIndex, pageSize, noEarlierThan, noLaterThan, modifiedNoEarlierThan, modifiedNoLaterThan);
-            _tokenManager.ExecuteAsync<FeedModel<SleepFeedItemModel>>(request, success, failure); 
-        }
-
-        public SleepPastModel GetSleep(string uri)
+        public async Task<SleepPastModel> GetSleep(string uri)
         {
             if (uri.Contains(_user.Sleep) == false)
             {
                 throw new ArgumentException("The uri must identify a resource on or below the " + _user.Sleep + " endpoint.");
             }
-            var request = new RestRequest(Method.GET);
-            request.Resource = uri;
-            return _tokenManager.Execute<SleepPastModel>(request);
+            var request = new RestRequest(uri, Method.GET);
+            return await _tokenManager.Execute<SleepPastModel>(request);
         }
 
-        public void GetSleepAsync(Action<SleepPastModel> success, Action<HealthGraphException> failure, string uri)
-        {
-            if (uri.Contains(_user.Sleep) == false)
-            {
-                throw new ArgumentException("The uri must identify a resource on or below the " + _user.Sleep + " endpoint.");
-            }
-            var request = new RestRequest(Method.GET);
-            request.Resource = uri;
-            _tokenManager.ExecuteAsync<SleepPastModel>(request, success, failure);
-        }
-
-        public SleepPastModel UpdateSleep(SleepPastModel sleepToUpdate)
+        public async Task<SleepPastModel> UpdateSleep(SleepPastModel sleepToUpdate)
         {
             var request = PrepareSleepUpdateRequest(sleepToUpdate);
-            return _tokenManager.Execute<SleepPastModel>(request);
+            return await _tokenManager.Execute<SleepPastModel>(request);
         }
 
-        public void UpdateSleepAsync(Action<SleepPastModel> success, Action<HealthGraphException> failure, SleepPastModel sleepToUpdate)
-        {
-            var request = PrepareSleepUpdateRequest(sleepToUpdate);
-            _tokenManager.ExecuteAsync<SleepPastModel>(request, success, failure);
-        }
-
-        public string CreateSleep(SleepNewModel sleepToCreate)
+        public async Task<string> CreateSleep(SleepNewModel sleepToCreate)
         {
             var request = PrepareSleepCreateRequest(sleepToCreate);
-            return _tokenManager.ExecuteCreate(request);
+            return await _tokenManager.ExecuteCreate(request);
         }
 
-        public void CreateSleepAsync(Action<string> success, Action<HealthGraphException> failure, SleepNewModel sleepToCreate)
-        {
-            var request = PrepareSleepCreateRequest(sleepToCreate);
-            _tokenManager.ExecuteCreateAsync(request, success, failure);
-        }
-
-        public void DeleteSleep(string uri)
+        public async Task DeleteSleep(string uri)
         {
             if (uri.Contains(_user.Sleep) == false)
             {
                 throw new ArgumentException("The uri must identify a resource on or below the " + _user.Sleep + " endpoint.");
             }
-            var request = new RestRequest(Method.DELETE);
+            var request = new RestRequest(uri, Method.DELETE);
             request.Resource = uri;
-            _tokenManager.Execute(request, expectedStatusCode: HttpStatusCode.NoContent);
-        }
-
-        public void DeleteSleepAsync(Action success, Action<HealthGraphException> failure, string uri)
-        {
-            if (uri.Contains(_user.Sleep) == false)
-            {
-                throw new ArgumentException("The uri must identify a resource on or below the " + _user.Sleep + " endpoint.");
-            }
-            var request = new RestRequest(Method.DELETE);
-            request.Resource = uri;
-            _tokenManager.ExecuteAsync(request, success, failure, expectedStatusCode: HttpStatusCode.NoContent);
+            await _tokenManager.Execute(request, expectedStatusCode: HttpStatusCode.NoContent);
         }
 
         #endregion
@@ -138,9 +96,7 @@ namespace HealthGraphNet
         /// <returns></returns>
         private IRestRequest PrepareSleepCreateRequest(SleepNewModel sleepToCreate)
         {
-            var request = new RestRequest(Method.POST);
-            request.Resource = _user.Sleep;
-
+            var request = new RestRequest(_user.Sleep, Method.POST);
             ValidateModel(sleepToCreate);
 
             //Add body to the request
@@ -166,8 +122,7 @@ namespace HealthGraphNet
         /// <returns></returns>
         private IRestRequest PrepareSleepUpdateRequest(SleepPastModel sleepToUpdate)
         {
-            var request = new RestRequest(Method.PUT);
-            request.Resource = sleepToUpdate.Uri;
+            var request = new RestRequest(sleepToUpdate.Uri, Method.PUT);
 
             ValidateModel(sleepToUpdate);
 

@@ -22,10 +22,10 @@ namespace HealthGraphNet.Models
         public int UserID { get; internal set; }
 
         /// <summary>
-        /// The type of activity, as one of the following values: Running, Cycling, Mountain Biking, Walking, Hiking, Downhill Skiing, Cross-Country Skiing, Snowboarding, Skating, Swimming, Wheelchair, Rowing, Elliptical, Other.
+        /// The type of activity.
         /// </summary>
         [JsonProperty(PropertyName = "type")]                        
-        public string Type { get; set; }
+        public FitnessActivityType Type { get; set; }
 
         /// <summary>
         /// The secondary type of the activity, as a free-form string (max. 64 characters). This field is used only if the type field is Other."

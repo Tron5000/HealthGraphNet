@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
-using RestSharp;
-using RestSharp.Validation;
-using RestSharp.Serializers;
+using RestSharp.Portable;
+using RestSharp.Portable.Serializers;
 using HealthGraphNet.Models;
 using HealthGraphNet.RestSharp;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace HealthGraphNet
 {
@@ -16,14 +17,14 @@ namespace HealthGraphNet
     {
         #region Fields and Properties
 
-        private AccessTokenManagerBase _tokenManager;
+        private Client _tokenManager;
         private UsersModel _user;
 
         #endregion    
     
         #region Constructors
 
-        public DiabetesMeasurementsEndpoint(AccessTokenManagerBase tokenManager, UsersModel user)
+        public DiabetesMeasurementsEndpoint(Client tokenManager, UsersModel user)
         {
             _tokenManager = tokenManager;
             _user = user;
@@ -33,86 +34,42 @@ namespace HealthGraphNet
 
         #region IDiabetesMeasurementsEndpoint
 
-        public FeedModel<DiabetesMeasurementsFeedItemModel> GetFeedPage(int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
+        public async Task< FeedModel<DiabetesMeasurementsFeedItemModel>> GetFeedPage(int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
         {
-            var request = new RestRequest();
-            request.PrepareFeedPageRequest(_user.Diabetes, pageIndex, pageSize, noEarlierThan, noLaterThan, modifiedNoEarlierThan, modifiedNoLaterThan);
-            return _tokenManager.Execute<FeedModel<DiabetesMeasurementsFeedItemModel>>(request);
+            var request = ExtensionHelpers.CreateFeedPageRequest(_user.Diabetes, pageIndex, pageSize, noEarlierThan, noLaterThan, modifiedNoEarlierThan, modifiedNoLaterThan);
+            return await _tokenManager.Execute<FeedModel<DiabetesMeasurementsFeedItemModel>>(request);
         }
 
-        public void GetFeedPageAsync(Action<FeedModel<DiabetesMeasurementsFeedItemModel>> success, Action<HealthGraphException> failure, int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
-        {
-            var request = new RestRequest();
-            request.PrepareFeedPageRequest(_user.Diabetes, pageIndex, pageSize, noEarlierThan, noLaterThan, modifiedNoEarlierThan, modifiedNoLaterThan);
-            _tokenManager.ExecuteAsync<FeedModel<DiabetesMeasurementsFeedItemModel>>(request, success, failure);
-        }
-
-        public DiabetesMeasurementsPastModel GetMeasurement(string uri)
+        public async Task<DiabetesMeasurementsPastModel> GetMeasurement(string uri)
         {
             if (uri.Contains(_user.Diabetes) == false)
             {
                 throw new ArgumentException("The uri must identify a resource on or below the " + _user.Diabetes + " endpoint.");
             }
-            var request = new RestRequest(Method.GET);
-            request.Resource = uri;
-            return _tokenManager.Execute<DiabetesMeasurementsPastModel>(request);
+            var request = new RestRequest(uri, Method.GET);
+            return await _tokenManager.Execute<DiabetesMeasurementsPastModel>(request);
         }
 
-        public void GetMeasurementAsync(Action<DiabetesMeasurementsPastModel> success, Action<HealthGraphException> failure, string uri)
-        {
-            if (uri.Contains(_user.Diabetes) == false)
-            {
-                throw new ArgumentException("The uri must identify a resource on or below the " + _user.Diabetes + " endpoint.");
-            }
-            var request = new RestRequest(Method.GET);
-            request.Resource = uri;
-            _tokenManager.ExecuteAsync<DiabetesMeasurementsPastModel>(request, success, failure);
-        }
-
-        public DiabetesMeasurementsPastModel UpdateMeasurement(DiabetesMeasurementsPastModel measurementToUpdate)
+        public async Task<DiabetesMeasurementsPastModel> UpdateMeasurement(DiabetesMeasurementsPastModel measurementToUpdate)
         {
             var request = PrepareMeasurementUpdateRequest(measurementToUpdate);
-            return _tokenManager.Execute<DiabetesMeasurementsPastModel>(request);
+            return await _tokenManager.Execute<DiabetesMeasurementsPastModel>(request);
         }
 
-        public void UpdateMeasurementAsync(Action<DiabetesMeasurementsPastModel> success, Action<HealthGraphException> failure, DiabetesMeasurementsPastModel measurementToUpdate)
-        {
-            var request = PrepareMeasurementUpdateRequest(measurementToUpdate);
-            _tokenManager.ExecuteAsync<DiabetesMeasurementsPastModel>(request, success, failure);
-        }
-
-        public string CreateMeasurement(DiabetesMeasurementsNewModel measurementToCreate)
+        public async Task<string> CreateMeasurement(DiabetesMeasurementsNewModel measurementToCreate)
         {
             var request = PrepareMeasurementCreateRequest(measurementToCreate);
-            return _tokenManager.ExecuteCreate(request);
+            return await _tokenManager.ExecuteCreate(request);
         }
 
-        public void CreateMeasurementAsync(Action<string> success, Action<HealthGraphException> failure, DiabetesMeasurementsNewModel measurementToCreate)
-        {
-            var request = PrepareMeasurementCreateRequest(measurementToCreate);
-            _tokenManager.ExecuteCreateAsync(request, success, failure);
-        }
-
-        public void DeleteMeasurement(string uri)
+        public async Task DeleteMeasurement(string uri)
         {
             if (uri.Contains(_user.Diabetes) == false)
             {
                 throw new ArgumentException("The uri must identify a resource on or below the " + _user.Diabetes + " endpoint.");
             }
-            var request = new RestRequest(Method.DELETE);
-            request.Resource = uri;
-            _tokenManager.Execute(request, expectedStatusCode: HttpStatusCode.NoContent);
-        }
-
-        public void DeleteMeasurementAsync(Action success, Action<HealthGraphException> failure, string uri)
-        {
-            if (uri.Contains(_user.Diabetes) == false)
-            {
-                throw new ArgumentException("The uri must identify a resource on or below the " + _user.Diabetes + " endpoint.");
-            }
-            var request = new RestRequest(Method.DELETE);
-            request.Resource = uri;
-            _tokenManager.ExecuteAsync(request, success, failure, expectedStatusCode: HttpStatusCode.NoContent);
+            var request = new RestRequest(uri, Method.DELETE);
+            await _tokenManager.Execute(request, expectedStatusCode: HttpStatusCode.NoContent);
         }
 
         #endregion
@@ -138,8 +95,7 @@ namespace HealthGraphNet
         /// <returns></returns>
         private IRestRequest PrepareMeasurementCreateRequest(DiabetesMeasurementsNewModel measurementToCreate)
         {
-            var request = new RestRequest(Method.POST);
-            request.Resource = _user.Diabetes;
+            var request = new RestRequest(_user.Diabetes, Method.POST);
 
             ValidateModel(measurementToCreate);
 
@@ -167,8 +123,7 @@ namespace HealthGraphNet
         /// <returns></returns>
         private IRestRequest PrepareMeasurementUpdateRequest(DiabetesMeasurementsPastModel measurementToUpdate)
         {
-            var request = new RestRequest(Method.PUT);
-            request.Resource = measurementToUpdate.Uri;
+            var request = new RestRequest(measurementToUpdate.Uri, Method.PUT);
 
             ValidateModel(measurementToUpdate);
 

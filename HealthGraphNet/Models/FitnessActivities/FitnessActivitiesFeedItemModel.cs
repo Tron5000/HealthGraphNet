@@ -10,10 +10,10 @@ namespace HealthGraphNet.Models
     public class FitnessActivitiesFeedItemModel : IFeedModelItem
     {
         /// <summary>
-        /// The type of activity, as one of the following values: Running, Cycling, Mountain Biking, Walking, Hiking, Downhill Skiing, Cross-Country Skiing, Snowboarding, Skating, Swimming, Wheelchair, Rowing, Elliptical, Other. Read only.
+        /// The type of activity.
         /// </summary>
         [JsonProperty(PropertyName = "type")]
-        public string Type { get; internal set; }
+        public FitnessActivityType Type { get; internal set; }
         
         /// <summary>
         /// The starting time for the activity (e.g., Sat, 1 Jan 2011 00:00:00).  Read only.

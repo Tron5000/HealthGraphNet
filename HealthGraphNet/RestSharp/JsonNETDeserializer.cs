@@ -6,8 +6,8 @@ using System.IO;
 using System.Globalization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using RestSharp;
-using RestSharp.Deserializers;
+using RestSharp.Portable;
+using RestSharp.Portable.Deserializers;
 
 namespace HealthGraphNet.RestSharp
 {
@@ -39,7 +39,8 @@ namespace HealthGraphNet.RestSharp
                 DefaultValueHandling = DefaultValueHandling.Include,
                 NullValueHandling = NullValueHandling.Ignore
             };
-            return JsonConvert.DeserializeObject<T>(response.Content, jsonSettings);
+            var responseAsString = Encoding.UTF8.GetString(response.RawBytes, 0, response.RawBytes.Length);
+            return JsonConvert.DeserializeObject<T>(responseAsString, jsonSettings);
         }
 
         #endregion

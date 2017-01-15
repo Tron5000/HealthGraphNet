@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
-using RestSharp;
-using RestSharp.Validation;
-using RestSharp.Serializers;
+using RestSharp.Portable;
+using RestSharp.Portable.Serializers;
 using HealthGraphNet.Models;
 using HealthGraphNet.RestSharp;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace HealthGraphNet
 {
@@ -16,14 +17,14 @@ namespace HealthGraphNet
     {
         #region Fields and Properties
 
-        private AccessTokenManagerBase _tokenManager;
+        private Client _tokenManager;
         private UsersModel _user;
 
         #endregion
         
         #region Constructors
 
-        public BackgroundActivitiesEndpoint(AccessTokenManagerBase tokenManager, UsersModel user)
+        public BackgroundActivitiesEndpoint(Client tokenManager, UsersModel user)
         {
             _tokenManager = tokenManager;
             _user = user;
@@ -33,86 +34,43 @@ namespace HealthGraphNet
         
         #region IBackgroundActivitiesEndpoint
 
-        public FeedModel<BackgroundActivitiesFeedItemModel> GetFeedPage(int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
+        public async Task<FeedModel<BackgroundActivitiesFeedItemModel>> GetFeedPage(int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
         {
-            var request = new RestRequest();
-            request.PrepareFeedPageRequest(_user.BackgroundActivities, pageIndex, pageSize, noEarlierThan, noLaterThan, modifiedNoEarlierThan, modifiedNoLaterThan);
-            return _tokenManager.Execute<FeedModel<BackgroundActivitiesFeedItemModel>>(request);
+            var request = ExtensionHelpers.CreateFeedPageRequest(_user.BackgroundActivities, pageIndex, pageSize, noEarlierThan, noLaterThan, modifiedNoEarlierThan, modifiedNoLaterThan);
+            return await _tokenManager.Execute<FeedModel<BackgroundActivitiesFeedItemModel>>(request);
         }
 
-        public void GetFeedPageAsync(Action<FeedModel<BackgroundActivitiesFeedItemModel>> success, Action<HealthGraphException> failure, int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
-        {
-            var request = new RestRequest();
-            request.PrepareFeedPageRequest(_user.BackgroundActivities, pageIndex, pageSize, noEarlierThan, noLaterThan, modifiedNoEarlierThan, modifiedNoLaterThan);
-            _tokenManager.ExecuteAsync<FeedModel<BackgroundActivitiesFeedItemModel>>(request, success, failure);
-        }
-
-        public BackgroundActivitiesPastModel GetActivity(string uri)
+        public async Task<BackgroundActivitiesPastModel> GetActivity(string uri)
         {
             if (uri.Contains(_user.BackgroundActivities) == false)
             {
                 throw new ArgumentException("The uri must identify a resource on or below the " + _user.BackgroundActivities + " endpoint.");
             }
-            var request = new RestRequest(Method.GET);
+            var request = new RestRequest(uri, Method.GET);
             request.Resource = uri;
-            return _tokenManager.Execute<BackgroundActivitiesPastModel>(request);
+            return await _tokenManager.Execute<BackgroundActivitiesPastModel>(request);
         }
 
-        public void GetActivityAsync(Action<BackgroundActivitiesPastModel> success, Action<HealthGraphException> failure, string uri)
-        {
-            if (uri.Contains(_user.BackgroundActivities) == false)
-            {
-                throw new ArgumentException("The uri must identify a resource on or below the " + _user.BackgroundActivities + " endpoint.");
-            }
-            var request = new RestRequest(Method.GET);
-            request.Resource = uri;
-            _tokenManager.ExecuteAsync<BackgroundActivitiesPastModel>(request, success, failure);
-        }
-
-        public BackgroundActivitiesPastModel UpdateActivity(BackgroundActivitiesPastModel activityToUpdate)
+        public async Task<BackgroundActivitiesPastModel> UpdateActivity(BackgroundActivitiesPastModel activityToUpdate)
         {
             var request = PrepareActivityUpdateRequest(activityToUpdate);
-            return _tokenManager.Execute<BackgroundActivitiesPastModel>(request);
+            return await _tokenManager.Execute<BackgroundActivitiesPastModel>(request);
         }
 
-        public void UpdateActivityAsync(Action<BackgroundActivitiesPastModel> success, Action<HealthGraphException> failure, BackgroundActivitiesPastModel activityToUpdate)
-        {
-            var request = PrepareActivityUpdateRequest(activityToUpdate);
-            _tokenManager.ExecuteAsync<BackgroundActivitiesPastModel>(request, success, failure);
-        }
-
-        public string CreateActivity(BackgroundActivitiesNewModel activityToCreate)
+        public async Task<string> CreateActivity(BackgroundActivitiesNewModel activityToCreate)
         {
             var request = PrepareActivityCreateRequest(activityToCreate);
-            return _tokenManager.ExecuteCreate(request);
+            return await _tokenManager.ExecuteCreate(request);
         }
 
-        public void CreateActivityAsync(Action<string> success, Action<HealthGraphException> failure, BackgroundActivitiesNewModel activityToCreate)
-        {
-            var request = PrepareActivityCreateRequest(activityToCreate);
-            _tokenManager.ExecuteCreateAsync(request, success, failure);
-        }
-
-        public void DeleteActivity(string uri)
+        public async Task DeleteActivity(string uri)
         {
             if (uri.Contains(_user.BackgroundActivities) == false)
             {
                 throw new ArgumentException("The uri must identify a resource on or below the " + _user.BackgroundActivities + " endpoint.");
             }
-            var request = new RestRequest(Method.DELETE);
-            request.Resource = uri;
-            _tokenManager.Execute(request, expectedStatusCode: HttpStatusCode.NoContent);
-        }
-
-        public void DeleteActivityAsync(Action success, Action<HealthGraphException> failure, string uri)
-        {
-            if (uri.Contains(_user.BackgroundActivities) == false)
-            {
-                throw new ArgumentException("The uri must identify a resource on or below the " + _user.BackgroundActivities + " endpoint.");
-            }
-            var request = new RestRequest(Method.DELETE);
-            request.Resource = uri;
-            _tokenManager.ExecuteAsync(request, success, failure, expectedStatusCode: HttpStatusCode.NoContent);
+            var request = new RestRequest(uri, Method.DELETE);
+            await _tokenManager.Execute(request, expectedStatusCode: HttpStatusCode.NoContent);
         }
 
         #endregion
@@ -138,8 +96,7 @@ namespace HealthGraphNet
         /// <returns></returns>
         private IRestRequest PrepareActivityCreateRequest(BackgroundActivitiesNewModel activityToCreate)
         {
-            var request = new RestRequest(Method.POST);
-            request.Resource = _user.BackgroundActivities;
+            var request = new RestRequest(_user.BackgroundActivities, Method.POST);
 
             ValidateModel(activityToCreate);
 
@@ -162,8 +119,7 @@ namespace HealthGraphNet
         /// <returns></returns>
         private IRestRequest PrepareActivityUpdateRequest(BackgroundActivitiesPastModel activityToUpdate)
         {
-            var request = new RestRequest(Method.PUT);
-            request.Resource = activityToUpdate.Uri;
+            var request = new RestRequest(activityToUpdate.Uri, Method.PUT);
 
             ValidateModel(activityToUpdate);
 

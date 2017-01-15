@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
+﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" Async="true"
     CodeBehind="Default.aspx.cs" Inherits="HealthGraphNet.Samples.Web._Default" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
@@ -7,8 +7,8 @@
     <ol>   
 	    <li>Create an application in the <a href="http://runkeeper.com/partner/applications" target="_blank">HealthGraph Applications Portal</a>.  
         Add the application's ClientId, ClientSecret and RequestUri to the Web.config.</li>
-        <li style="padding-top: 8px;">Next, get an auth code from the <a href="" runat="server" ID="AAuthAnchor" target="_blank">HealthGraph Authorization Endpoint</a>.</li>
-	    <li style="padding-top: 8px;">Then, to generate an access token and start using HealthGraphNet, hit your current url with the auth code from step 2 (<em>/?Code=AUTH_CODE</em>)</li>
+        <li style="padding-top: 8px;">Next, let's authorize at <a href="" runat="server" ID="AAuthAnchor" target="_blank">HealthGraph Authorization Endpoint</a>.</li>
+	    <%--<li style="padding-top: 8px;">Then, to generate an access token and start using HealthGraphNet, hit your current url with the auth code from step 2 (<em>/?Code=AUTH_CODE</em>)</li>--%>
     </ol>
     <hr />
     <asp:Panel ID="PnlTokenSamples" runat="server" Visible="false"> 

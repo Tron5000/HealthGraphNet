@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>HealthGraphNet</id>
+    <title>HealthGraphNet</title>
+    <authors>Mark Brady</authors>
+    <licenseUrl>https://github.com/Tron5000/HealthGraphNet/master/LICENSE.txt</licenseUrl>
+    <projectUrl>https://github.com/Tron5000/HealthGraphNet/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A .NET library for interacting with RunKeeper's HealthGraph API.</description>
+    <language>en-US</language>
+    <copyright>Copyright - Mark Brady © 2012-2017</copyright>
+    <tags>healthgraph runkeeper</tags>
+    <dependencies>
+      <group targetFramework="portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10">
+        <dependency id="Newtonsoft.Json" version="9.0.1" />
+        <dependency id="FubarCoder.RestSharp.Portable.Core" version="4.0.7" />
+        <dependency id="FubarCoder.RestSharp.Portable.HttpClient" version="4.0.7" />
+        <dependency id="FubarCoder.RestSharp.Portable.OAuth2" version="4.0.7" />
+        <dependency id="Portable.BouncyCastle" version="1.8.1" />
+      </group>
+      <group targetFramework="Xamarin.iOS10">
+        <dependency id="Newtonsoft.Json" version="9.0.1" />
+        <dependency id="FubarCoder.RestSharp.Portable.Core" version="4.0.7" />
+        <dependency id="FubarCoder.RestSharp.Portable.HttpClient" version="4.0.7" />
+        <dependency id="FubarCoder.RestSharp.Portable.OAuth2" version="4.0.7" />
+      </group>
+      <group targetFramework="MonoAndroid70">
+        <dependency id="Newtonsoft.Json" version="9.0.1" />
+        <dependency id="FubarCoder.RestSharp.Portable.Core" version="4.0.7" />
+        <dependency id="FubarCoder.RestSharp.Portable.HttpClient" version="4.0.7" />
+        <dependency id="FubarCoder.RestSharp.Portable.OAuth2" version="4.0.7" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <!-- Portable -->
+    <file src="../HealthGraphNet.PCL/bin/Release/HealthGraphNet.dll" target="lib/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10" />
+    <!-- Xamarin.iOS -->
+    <file src="../HealthGraphNet.iOS/bin/Release/HealthGraphNet.dll" target="lib/Xamarin.iOS10" />
+    <!-- Xamarin.Android -->
+    <file src="../HealthGraphNet.Droid/bin/Release/HealthGraphNet.dll" target="lib/MonoAndroid70" />
+  </files>
+</package>

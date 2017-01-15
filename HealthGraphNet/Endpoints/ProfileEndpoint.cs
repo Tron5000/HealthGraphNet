@@ -1,93 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
-using RestSharp;
-using RestSharp.Serializers;
+using RestSharp.Portable;
+using RestSharp.Portable.Serializers;
 using HealthGraphNet.Models;
 using HealthGraphNet.RestSharp;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace HealthGraphNet
 {
     /// <summary>
     /// Endpoint for retrieving and updating a user's profile. http://runkeeper.com/developer/healthgraph/profile
     /// </summary>
-    public class ProfileEndpoint : IProfileEndpoint
+    public class ProfileEndpoint : EndPointBase, IProfileEndpoint
     {
         #region Fields and Properties
 
         public static readonly List<string> ValidAthleteType = new List<string> { "Athlete", "Runner", "Marathoner", "Ultra Marathoner", "Cyclist", "Tri-Athlete, Walker", "Hiker", "Skier", "Snowboarder", "Skater", "Swimmer", "Rower", null };
-        
-        private AccessTokenManagerBase _tokenManager;
-        private UsersModel _user;
 
-        #endregion        
-        
+        #endregion
+
         #region Constructors
 
-        public ProfileEndpoint(AccessTokenManagerBase tokenManager, UsersModel user)
+        public ProfileEndpoint(Client client, UsersModel user) : base(client, user)
         {
-            _tokenManager = tokenManager;
-            _user = user;
         }
 
-        #endregion        
-        
-        #region IProfileEndpoint
-
-        public ProfileModel GetProfile()
+        public ProfileEndpoint(Client client, Func<Task<UsersModel>> functionGetUser) : base(client, functionGetUser)
         {
-            var request = new RestRequest(Method.GET);
-            request.Resource = _user.Profile;
-            return _tokenManager.Execute<ProfileModel>(request);
-        }
-
-        public void GetProfileAsync(Action<ProfileModel> success, Action<HealthGraphException> failure)
-        {
-            var request = new RestRequest(Method.GET);
-            request.Resource = _user.Profile;
-            _tokenManager.ExecuteAsync<ProfileModel>(request, success, failure);
-        }
-
-		public ProfileModel UpdateProfile(ProfileModel profileToUpdate)
-		{
-            var request = PrepareUpdateRequest(profileToUpdate);
-            return _tokenManager.Execute<ProfileModel>(request);
-		}
-
-        public ProfileModel UpdateProfile(string athleteType)
-        {
-            return UpdateProfile(new ProfileModel { AthleteType = athleteType });
-        }
-
-		public void UpdateProfileAsync(Action<ProfileModel> success, Action<HealthGraphException> failure, ProfileModel profileToUpdate)
-		{
-            var request = PrepareUpdateRequest(profileToUpdate);
-            _tokenManager.ExecuteAsync<ProfileModel>(request, success, failure);
-		}
-
-        public void UpdateProfileAsync(Action<ProfileModel> success, Action<HealthGraphException> failure, string athleteType)
-        {
-            UpdateProfileAsync(success, failure, new ProfileModel { AthleteType = athleteType });
         }
 
         #endregion
 
-        #region Helper Methods
+        #region IProfileEndpoint
 
-        /// <summary>
-        /// Prepares the request object to be updated.
-        /// </summary>
-        /// <param name="profileToUpdate"></param>
-        /// <returns></returns>
-        private IRestRequest PrepareUpdateRequest(ProfileModel profileToUpdate)
+        public async Task<ProfileModel> GetProfile()
         {
-            var request = new RestRequest(Method.PUT);
-            request.Resource = _user.Profile;
-            ValidateHelper.IsValueValid<string>(profileToUpdate.AthleteType, ValidAthleteType, "AthleteType");
-            request.AddParameter(ProfileModel.ContentType, _tokenManager.DefaultJsonSerializer.Serialize(new 
-            { 
-                athlete_type = profileToUpdate.AthleteType 
-            }), ParameterType.RequestBody);          
-            return request;
+            var user = await GetUser();
+            var request = new RestRequest(user.Profile, Method.GET);
+            return await Client.Execute<ProfileModel>(request);
         }
 
         #endregion

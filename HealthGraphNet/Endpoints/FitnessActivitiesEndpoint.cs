@@ -1,122 +1,93 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
-using RestSharp;
-using RestSharp.Validation;
-using RestSharp.Serializers;
+using RestSharp.Portable;
+using RestSharp.Portable.Serializers;
 using HealthGraphNet.Models;
 using HealthGraphNet.RestSharp;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace HealthGraphNet
 {
     /// <summary>
     /// For  http://developer.runkeeper.com/healthgraph/fitness-activities
     /// </summary>
-    public class FitnessActivitiesEndpoint : IFitnessActivitiesEndpoint
+    public class FitnessActivitiesEndpoint : EndPointBase, IFitnessActivitiesEndpoint
     {
         #region Fields and Properties
 
-        public static readonly List<string> ValidType = new List<string> { "Running", "Cycling", "Mountain Biking", "Walking", "Hiking", "Downhill Skiing", "Cross-Country Skiing", "Snowboarding", "Skating", "Swimming", "Wheelchair", "Rowing", "Elliptical", "Other" };
+        //public static readonly List<string> ValidType = new List<string> { "Running", "Cycling", "Mountain Biking", "Walking", "Hiking", "Downhill Skiing", "Cross-Country Skiing", "Snowboarding", "Skating", "Swimming", "Wheelchair", "Rowing", "Elliptical", "Other" };
         public static readonly List<string> ValidEquipment = new List<string> { "None", "Treadmill", "Stationary Bike", "Elliptical", "Row Machine" };
         public static readonly List<string> ValidPathType = new List<string> { "start", "end", "gps", "pause", "resume", "manual" };
 
-        private AccessTokenManagerBase _tokenManager;
-        private UsersModel _user;
+        #endregion
 
-        #endregion        
-        
         #region Constructors
 
-        public FitnessActivitiesEndpoint(AccessTokenManagerBase tokenManager, UsersModel user)
+        public FitnessActivitiesEndpoint(Client client, UsersModel user) : base(client, user)
         {
-            _tokenManager = tokenManager;
-            _user = user;
+        }
+
+        public FitnessActivitiesEndpoint(Client client, Func<Task<UsersModel>> functionGetUser) : base(client, functionGetUser)
+        {
         }
 
         #endregion
 
         #region IFitnessActivitiesEndpoint
 
-        public FeedModel<FitnessActivitiesFeedItemModel> GetFeedPage(int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
+        /// <summary>
+        /// Retrieve user's activity history
+        /// </summary>
+        /// <param name="pageIndex">Zero based index of the desired page.</param>
+        /// <param name="pageSize"></param>
+        /// <param name="noEarlierThan"></param>
+        /// <param name="noLaterThan"></param>
+        /// <param name="modifiedNoEarlierThan"></param>
+        /// <param name="modifiedNoLaterThan"></param>
+        /// <returns></returns>
+        public async Task<FeedModel<FitnessActivitiesFeedItemModel>> GetFeedPage(int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
         {
-            var request = new RestRequest();
-            request.PrepareFeedPageRequest(_user.FitnessActivities, pageIndex, pageSize, noEarlierThan, noLaterThan, modifiedNoEarlierThan, modifiedNoLaterThan);
-            return _tokenManager.Execute<FeedModel<FitnessActivitiesFeedItemModel>>(request);
+            var user = await GetUser();
+            var request = ExtensionHelpers.CreateFeedPageRequest(user.FitnessActivities, pageIndex, pageSize, noEarlierThan, noLaterThan, modifiedNoEarlierThan, modifiedNoLaterThan);
+            return await Client.Execute<FeedModel<FitnessActivitiesFeedItemModel>>(request);
         }
 
-        public void GetFeedPageAsync(Action<FeedModel<FitnessActivitiesFeedItemModel>> success, Action<HealthGraphException> failure, int? pageIndex = null, int? pageSize = null, DateTime? noEarlierThan = null, DateTime? noLaterThan = null, DateTime? modifiedNoEarlierThan = null, DateTime? modifiedNoLaterThan = null)
+        public async Task<FitnessActivitiesPastModel> GetActivity(string uri)
         {
-            var request = new RestRequest();
-            request.PrepareFeedPageRequest(_user.FitnessActivities, pageIndex, pageSize, noEarlierThan, noLaterThan, modifiedNoEarlierThan, modifiedNoLaterThan);
-            _tokenManager.ExecuteAsync<FeedModel<FitnessActivitiesFeedItemModel>>(request, success, failure);
-        }
-
-        public FitnessActivitiesPastModel GetActivity(string uri)
-        {
-            if (uri.Contains(_user.FitnessActivities) == false)
+            var user = await GetUser();
+            if (uri.Contains(user.FitnessActivities) == false)
             {
-                throw new ArgumentException("The uri must identify a resource on or below the " + _user.FitnessActivities + " endpoint.");
+                throw new ArgumentException("The uri must identify a resource on or below the " + user.FitnessActivities + " endpoint.");
             }
-            var request = new RestRequest(Method.GET);
+            var request = new RestRequest(uri, Method.GET);
             request.Resource = uri;
-            return _tokenManager.Execute<FitnessActivitiesPastModel>(request);
+            return await Client.Execute<FitnessActivitiesPastModel>(request);
         }
 
-        public void GetActivityAsync(Action<FitnessActivitiesPastModel> success, Action<HealthGraphException> failure, string uri)
-        {
-            if (uri.Contains(_user.FitnessActivities) == false)
-            {
-                throw new ArgumentException("The uri must identify a resource on or below the " + _user.FitnessActivities + " endpoint.");
-            }            
-            var request = new RestRequest(Method.GET);
-            request.Resource = uri;
-            _tokenManager.ExecuteAsync<FitnessActivitiesPastModel>(request, success, failure);
-        }
-
-        public FitnessActivitiesPastModel UpdateActivity(FitnessActivitiesPastModel activityToUpdate)
+        public async Task<FitnessActivitiesPastModel> UpdateActivity(FitnessActivitiesPastModel activityToUpdate)
         {
             var request = PrepareActivitiesUpdateRequest(activityToUpdate);
-            return _tokenManager.Execute<FitnessActivitiesPastModel>(request);
+            return await Client.Execute<FitnessActivitiesPastModel>(request);
         }
 
-        public void UpdateActivityAsync(Action<FitnessActivitiesPastModel> success, Action<HealthGraphException> failure, FitnessActivitiesPastModel activityToUpdate)
+        public async Task<string> CreateActivity(FitnessActivitiesNewModel activityToCreate)
         {
-            var request = PrepareActivitiesUpdateRequest(activityToUpdate);
-            _tokenManager.ExecuteAsync<FitnessActivitiesPastModel>(request, success, failure);
+            var user = await GetUser();
+            var request = PrepareActivitiesCreateRequest(activityToCreate, user);
+            return await Client.ExecuteCreate(request);
         }
 
-        public string CreateActivity(FitnessActivitiesNewModel activityToCreate)
+        public async Task DeleteActivity(string uri)
         {
-            var request = PrepareActivitiesCreateRequest(activityToCreate);
-            return _tokenManager.ExecuteCreate(request);
-        }
-
-        public void CreateActivityAsync(Action<string> success, Action<HealthGraphException> failure, FitnessActivitiesNewModel activityToCreate)
-        {
-            var request = PrepareActivitiesCreateRequest(activityToCreate);
-            _tokenManager.ExecuteCreateAsync(request, success, failure);
-        }
-
-        public void DeleteActivity(string uri)
-        {
-            if (uri.Contains(_user.FitnessActivities) == false)
+            var user = await GetUser();
+            if (uri.Contains(user.FitnessActivities) == false)
             {
-                throw new ArgumentException("The uri must identify a resource on or below the " + _user.FitnessActivities + " endpoint.");
-            }            
-            var request = new RestRequest(Method.DELETE);
-            request.Resource = uri;
-            _tokenManager.Execute(request, expectedStatusCode: HttpStatusCode.NoContent);
-        }
-
-        public void DeleteActivityAsync(Action success, Action<HealthGraphException> failure, string uri)
-        {
-            if (uri.Contains(_user.FitnessActivities) == false)
-            {
-                throw new ArgumentException("The uri must identify a resource on or below the " + _user.FitnessActivities + " endpoint.");
-            }            
-            var request = new RestRequest(Method.DELETE);
-            request.Resource = uri;
-            _tokenManager.ExecuteAsync(request, success, failure, expectedStatusCode: HttpStatusCode.NoContent);
+                throw new ArgumentException("The uri must identify a resource on or below the " + user.FitnessActivities + " endpoint.");
+            }
+            var request = new RestRequest(uri, Method.DELETE);
+            await Client.Execute(request, expectedStatusCode: HttpStatusCode.NoContent);
         }
 
         #endregion
@@ -130,8 +101,8 @@ namespace HealthGraphNet
         private void ValidateModel(IFitnessActivitiesModel activityToValidate)
         {
             //Validate the activityToValidate properties
-            ValidateHelper.IsValueValid<string>(activityToValidate.Type, ValidType, "Type");
-            if (activityToValidate.Type != "Other")
+            //ValidateHelper.IsValueValid<string>(activityToValidate.Type, ValidType, "Type");
+            if (activityToValidate.Type != FitnessActivityType.Other)
             {
                 activityToValidate.SecondaryType = null;
             }
@@ -163,15 +134,14 @@ namespace HealthGraphNet
         /// </summary>
         /// <param name="activityToCreate"></param>
         /// <returns></returns>
-        private IRestRequest PrepareActivitiesCreateRequest(FitnessActivitiesNewModel activityToCreate)
+        private IRestRequest PrepareActivitiesCreateRequest(FitnessActivitiesNewModel activityToCreate, UsersModel user)
         {
-            var request = new RestRequest(Method.POST);
-            request.Resource = _user.FitnessActivities;
+            var request = new RestRequest(user.FitnessActivities, Method.POST);
 
             ValidateModel(activityToCreate);
 
             //Add body to the request
-            request.AddParameter(FitnessActivitiesNewModel.ContentType, _tokenManager.DefaultJsonSerializer.Serialize(new
+            request.AddParameter(FitnessActivitiesNewModel.ContentType, Client.DefaultJsonSerializer.Serialize(new
             {
                 type = activityToCreate.Type,
                 secondary_type = activityToCreate.SecondaryType,
@@ -198,13 +168,12 @@ namespace HealthGraphNet
         /// <returns></returns>
         private IRestRequest PrepareActivitiesUpdateRequest(FitnessActivitiesPastModel activityToUpdate)
         {
-            var request = new RestRequest(Method.PUT);
-            request.Resource = activityToUpdate.Uri;
+            var request = new RestRequest(activityToUpdate.Uri, Method.PUT);
 
             ValidateModel(activityToUpdate);
 
             //Add body to the request
-            request.AddParameter(FitnessActivitiesPastModel.ContentType, _tokenManager.DefaultJsonSerializer.Serialize(new
+            request.AddParameter(FitnessActivitiesPastModel.ContentType, Client.DefaultJsonSerializer.Serialize(new
             {
                 type = activityToUpdate.Type,
                 secondary_type = activityToUpdate.SecondaryType,
@@ -216,7 +185,7 @@ namespace HealthGraphNet
                 heart_rate = activityToUpdate.HeartRate,
                 total_calories = activityToUpdate.TotalCalories,
                 notes = activityToUpdate.Notes,
-                path = ((activityToUpdate.Path != null) && (activityToUpdate.Path.Count == 0)) ? null : activityToUpdate.Path                
+                path = ((activityToUpdate.Path != null) && (activityToUpdate.Path.Count == 0)) ? null : activityToUpdate.Path
             }), ParameterType.RequestBody);
             return request;
         }

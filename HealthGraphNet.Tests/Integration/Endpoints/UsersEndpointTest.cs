@@ -5,21 +5,22 @@ using System.Text;
 using NUnit.Framework;
 using HealthGraphNet;
 using HealthGraphNet.Models;
+using System.Threading.Tasks;
 
 namespace HealthGraphNet.Tests.Integration
 {
     [TestFixture()]
-    public class UsersEndpointTest : AccessTokenManagerSetupBase
+    public class UsersEndpointTest : ClientSetupBase
     {        
         #region Tests
 
-        [Test()]
-        public void GetUser_NotOptionalProperiesPresent()
+        [Test]
+        public async Task GetUser_NotOptionalProperiesPresent()
         {
             //Arrange
             var userRequest = new UsersEndpoint(TokenManager);
             //Act
-            var user = userRequest.GetUser();
+            var user = await userRequest.GetUser();
             //Assert
             Assert.IsTrue(user.UserID != default(int));
             Assert.IsTrue(!string.IsNullOrEmpty(user.Profile));

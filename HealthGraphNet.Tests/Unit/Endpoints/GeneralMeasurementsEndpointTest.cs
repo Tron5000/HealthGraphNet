@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
 using Moq;
 using HealthGraphNet;
 using HealthGraphNet.Models;
+using System;
 
 namespace HealthGraphNet.Tests.Unit
 {
@@ -39,110 +39,65 @@ namespace HealthGraphNet.Tests.Unit
 
         #region Tests
 
-        [Test()]
+        [Test]
         public void GetMeasurement_UriValid_DoesNotThrowArgumentException()
         {
             //Arrange
             var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            Mock<ClientStub> tokenManager = new Mock<ClientStub>();
             GeneralMeasurementsEndpoint measurementRequest = new GeneralMeasurementsEndpoint(tokenManager.Object, new UsersModel { GeneralMeasurements = validPath });
             //Act and Assert
-            Assert.DoesNotThrow(() => { measurementRequest.GetMeasurement(validPath); });
+            Assert.DoesNotThrowAsync(async() => { await measurementRequest.GetMeasurement(validPath); });
         }
 
-        [Test()]
+        [Test]
         public void GetMeasurement_UriNotValid_ArgumentException()
         {
             //Arrange
             var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            Mock<ClientStub> tokenManager = new Mock<ClientStub>();
             GeneralMeasurementsEndpoint measurementRequest = new GeneralMeasurementsEndpoint(tokenManager.Object, new UsersModel { GeneralMeasurements = validPath });
             //Act and Assert
-            Assert.Throws(typeof(ArgumentException), () => { measurementRequest.GetMeasurement("Not validPath."); });
+            Assert.ThrowsAsync(typeof(ArgumentException), async() => { await measurementRequest.GetMeasurement("Not validPath."); });
         }
 
-        [Test()]
-        public void GetMeasurementAsync_UriValid_DoesNotThrowArgumentException()
-        {
-            //Arrange
-            var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            GeneralMeasurementsEndpoint measurementRequest = new GeneralMeasurementsEndpoint(tokenManager.Object, new UsersModel { GeneralMeasurements = validPath });
-            //Act and Assert
-            Assert.DoesNotThrow(() => { measurementRequest.GetMeasurementAsync((m) => { }, (ex) => { }, validPath); });
-        }
-
-        [Test()]
-        public void GetMeasurementAsync_UriNotValid_ArgumentException()
-        {
-            //Arrange
-            var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            GeneralMeasurementsEndpoint measurementRequest = new GeneralMeasurementsEndpoint(tokenManager.Object, new UsersModel { GeneralMeasurements = validPath });
-            //Act and Assert
-            Assert.Throws(typeof(ArgumentException), () => { measurementRequest.GetMeasurementAsync((m) => { }, (ex) => { }, "Not validPath."); });
-        }
-
-
-        [Test()]
+        [Test]
         public void DeleteMeasurement_UriValid_DoesNotThrowArgumentException()
         {
             //Arrange
             var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            Mock<ClientStub> tokenManager = new Mock<ClientStub>();
             GeneralMeasurementsEndpoint measurementRequest = new GeneralMeasurementsEndpoint(tokenManager.Object, new UsersModel { GeneralMeasurements = validPath });
             //Act and Assert
-            Assert.DoesNotThrow(() => { measurementRequest.DeleteMeasurement(validPath); });
+            Assert.DoesNotThrowAsync(async() => { await measurementRequest.DeleteMeasurement(validPath); });
         }
 
-        [Test()]
+        [Test]
         public void DeleteMeasurement_UriNotValid_ArgumentException()
         {
             //Arrange
             var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            Mock<ClientStub> tokenManager = new Mock<ClientStub>();
             GeneralMeasurementsEndpoint measurementRequest = new GeneralMeasurementsEndpoint(tokenManager.Object, new UsersModel { GeneralMeasurements = validPath });
             //Act and Assert
-            Assert.Throws(typeof(ArgumentException), () => { measurementRequest.DeleteMeasurement("Not validPath."); });
+            Assert.ThrowsAsync(typeof(ArgumentException), async() => { await measurementRequest.DeleteMeasurement("Not validPath."); });
         }
 
-        [Test()]
-        public void DeleteMeasurementAsync_UriValid_DoesNotThrowArgumentException()
-        {
-            //Arrange
-            var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            GeneralMeasurementsEndpoint measurementRequest = new GeneralMeasurementsEndpoint(tokenManager.Object, new UsersModel { GeneralMeasurements = validPath });
-            //Act and Assert
-            Assert.DoesNotThrow(() => { measurementRequest.DeleteMeasurementAsync(() => { }, (ex) => { }, validPath); });
-        }
-
-        [Test()]
-        public void DeleteMeasurementAsync_UriNotValid_ArgumentException()
-        {
-            //Arrange
-            var validPath = "/test/";
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
-            GeneralMeasurementsEndpoint measurementRequest = new GeneralMeasurementsEndpoint(tokenManager.Object, new UsersModel { GeneralMeasurements = validPath });
-            //Act and Assert
-            Assert.Throws(typeof(ArgumentException), () => { measurementRequest.DeleteMeasurementAsync(() => { }, (ex) => { }, "Not validPath."); });
-        }
-
-        [Test()]
+        [Test]
         public void UpdateMeasurement_AllPropertiesValid_DoesNotThrowArgumentException()
         {
             //Arrange
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            Mock<ClientStub> tokenManager = new Mock<ClientStub>();
             GeneralMeasurementsEndpoint measurementRequest = new GeneralMeasurementsEndpoint(tokenManager.Object, new UsersModel());
             //Act and Assert
-            Assert.DoesNotThrow(() => { measurementRequest.UpdateMeasurement(ValidMeasurement); });
+            Assert.DoesNotThrowAsync(async() => { await measurementRequest.UpdateMeasurement(ValidMeasurement); });
         }
 
-        [Test()]
+        [Test]
         public void UpdateMeasurement_AllMeasurementsNull_ArgumentException()
         {
             //Arrange
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            Mock<ClientStub> tokenManager = new Mock<ClientStub>();
             GeneralMeasurementsEndpoint measurementRequest = new GeneralMeasurementsEndpoint(tokenManager.Object, new UsersModel());
             //Act            
             ValidMeasurement.BloodCalcium = null;
@@ -170,24 +125,24 @@ namespace HealthGraphNet.Tests.Unit
             ValidMeasurement.VitaminD = null;
             ValidMeasurement.WhiteCellCount = null;
             //Assert
-            Assert.Throws(typeof(ArgumentException), () => { measurementRequest.UpdateMeasurement(ValidMeasurement); });
+            Assert.ThrowsAsync(typeof(ArgumentException), async () => { await measurementRequest.UpdateMeasurement(ValidMeasurement); });
         }
 
-        [Test()]
+        [Test]
         public void CreateMeasurement_AllPropertiesValid_DoesNotThrowArgumentException()
         {
             //Arrange
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            Mock<ClientStub> tokenManager = new Mock<ClientStub>();
             GeneralMeasurementsEndpoint measurementRequest = new GeneralMeasurementsEndpoint(tokenManager.Object, new UsersModel());
             //Act and Assert
-            Assert.DoesNotThrow(() => { measurementRequest.CreateMeasurement(ValidMeasurementNew); });
+            Assert.DoesNotThrowAsync(async () => { await measurementRequest.CreateMeasurement(ValidMeasurementNew); });
         }
 
-        [Test()]
+        [Test]
         public void CreateMeasurement_AllMeasurementsNull_ArgumentException()
         {
             //Arrange
-            Mock<AccessTokenManagerBaseStub> tokenManager = new Mock<AccessTokenManagerBaseStub>();
+            Mock<ClientStub> tokenManager = new Mock<ClientStub>();
             GeneralMeasurementsEndpoint measurementRequest = new GeneralMeasurementsEndpoint(tokenManager.Object, new UsersModel());
             //Act            
             ValidMeasurementNew.BloodCalcium = null;
@@ -215,7 +170,7 @@ namespace HealthGraphNet.Tests.Unit
             ValidMeasurementNew.VitaminD = null;
             ValidMeasurementNew.WhiteCellCount = null;
             //Assert
-            Assert.Throws(typeof(ArgumentException), () => { measurementRequest.CreateMeasurement(ValidMeasurementNew); });
+            Assert.ThrowsAsync(typeof(ArgumentException), async () => { await measurementRequest.CreateMeasurement(ValidMeasurementNew); });
         }
 
         #endregion
