@@ -5,16 +5,10 @@ using Newtonsoft.Json.Converters;
 
 namespace HealthGraphNet.Models
 {
-    public class FitnessActivitiesNewModel : IFitnessActivitiesModel
+    public class FitnessActivitiesNewModel : FitnessActivitiesItemModel, IFitnessActivitiesModel
     {
         internal const string ContentType = "application/vnd.com.runkeeper.NewFitnessActivity+json";
 
-        /// <summary>
-        /// The type of activity.
-        /// </summary>
-        [JsonProperty(PropertyName = "type")]     
-        public FitnessActivityType Type { get; set; }
-    
         /// <summary>
         /// The secondary type of the activity, as a free-form string (max. 64 characters). This field is used only if the type field is "Other."
         /// </summary>
@@ -26,24 +20,6 @@ namespace HealthGraphNet.Models
         /// </summary>
         [JsonProperty(PropertyName = "equipment")]                
         public string Equipment { get; set; }
-
-        /// <summary>
-        /// The starting time for the activity (e.g., Sat, 1 Jan 2011 00:00:00).
-        /// </summary>
-        [JsonProperty(PropertyName = "start_time")]
-        public DateTime StartTime { get; set; }
-
-        /// <summary>
-        /// The total distance traveled, in meters (optional).
-        /// </summary>
-        [JsonProperty(PropertyName = "total_distance")]                
-        public double TotalDistance { get; set; }
-
-        /// <summary>
-        /// The duration of the activity, in seconds
-        /// </summary>
-        [JsonProperty(PropertyName = "duration")]                
-        public double Duration { get; set; }
 
         /// <summary>
         /// The user’s average heart rate, in beats per minute (optional).

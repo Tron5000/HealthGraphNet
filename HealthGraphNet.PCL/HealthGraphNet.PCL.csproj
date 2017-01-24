@@ -77,7 +77,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <Import Project="..\HealthGraphNet\HealthGraphNet_.projitems" Label="Shared" Condition="Exists('..\HealthGraphNet\HealthGraphNet_.projitems')" />
+  <Import Project="..\HealthGraphNet\HealthGraphNet.projitems" Label="Shared" Condition="Exists('..\HealthGraphNet\HealthGraphNet.projitems')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

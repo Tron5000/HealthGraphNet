@@ -1,0 +1,16 @@
+﻿{
+  "settings": "/settings",
+  "records": "/records",
+  "profile": "/profile",
+  "change_log": "/changeLog",
+  "strength_training_activities": "/strengthTrainingActivities",
+  "weight": "/weight",
+  "fitness_activities": "/fitnessActivities",
+  "background_activities": "/backgroundActivities",
+  "team": "/team",
+  "userID": 42240902,
+  "sleep": "/sleep",
+  "nutrition": "/nutrition",
+  "general_measurements": "/generalMeasurements",
+  "diabetes": "/diabetes"
+}

@@ -24,11 +24,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E61F1D
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		HealthGraphNet\HealthGraphNet_.projitems*{1dfab556-6818-415f-ae78-5d7b093b602c}*SharedItemsImports = 13
-		HealthGraphNet\HealthGraphNet_.projitems*{616cd761-d77c-446d-9f9a-6cdbab4df8f7}*SharedItemsImports = 4
-		HealthGraphNet\HealthGraphNet_.projitems*{6bc608fa-30e3-4097-ac5b-3043d8c09834}*SharedItemsImports = 4
-		HealthGraphNet\HealthGraphNet_.projitems*{d92bd45b-e133-4f5f-8da5-ea60588a8965}*SharedItemsImports = 4
-		HealthGraphNet\HealthGraphNet_.projitems*{e3c06b77-752e-4167-adc8-a6d587c4d3b6}*SharedItemsImports = 4
+		HealthGraphNet\HealthGraphNet.projitems*{1dfab556-6818-415f-ae78-5d7b093b602c}*SharedItemsImports = 13
+		HealthGraphNet\HealthGraphNet.projitems*{616cd761-d77c-446d-9f9a-6cdbab4df8f7}*SharedItemsImports = 4
+		HealthGraphNet\HealthGraphNet.projitems*{6bc608fa-30e3-4097-ac5b-3043d8c09834}*SharedItemsImports = 4
+		HealthGraphNet\HealthGraphNet.projitems*{d92bd45b-e133-4f5f-8da5-ea60588a8965}*SharedItemsImports = 4
+		HealthGraphNet\HealthGraphNet.projitems*{e3c06b77-752e-4167-adc8-a6d587c4d3b6}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU

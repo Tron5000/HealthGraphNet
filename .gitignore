@@ -105,3 +105,4 @@ Backup*/
 UpgradeLog*.XML
 *.userprefs
 tools
+.vs/

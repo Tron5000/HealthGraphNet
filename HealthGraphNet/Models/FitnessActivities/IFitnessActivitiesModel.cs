@@ -9,24 +9,24 @@ namespace HealthGraphNet.Models
     /// </summary>
     internal interface IFitnessActivitiesModel
     {
-        FitnessActivityType Type { get; set; }
+        FitnessActivityType Type { get; }
 
         string SecondaryType { get; set; }
 
         string Equipment { get; set; }
 
-        DateTime StartTime { get; set; }
+        DateTime StartTime { get; }
 
-        double TotalDistance { get; set; }
+        double TotalDistance { get; }
 
-        double Duration { get; set; }
+        double Duration { get; }
 
-        int? AverageHeartRate { get; set; }
+        int? AverageHeartRate { get; }
 
-        List<HeartRateModel> HeartRate { get; set; }
+        List<HeartRateModel> HeartRate { get; }
 
-        string Notes { get; set; }
+        string Notes { get; }
 
-        List<PathModel> Path { get; set; }
+        List<PathModel> Path { get; }
     }
 }

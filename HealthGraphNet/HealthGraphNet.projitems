@@ -58,6 +58,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\FitnessActivities\CaloriesModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\FitnessActivities\DistanceModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\FitnessActivities\FitnessActivitiesFeedItemModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\FitnessActivities\FitnessActivitiesItemModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\FitnessActivities\FitnessActivitiesNewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\FitnessActivities\FitnessActivitiesPastModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\FitnessActivities\FitnessActivityType.cs" />
